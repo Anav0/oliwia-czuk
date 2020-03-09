@@ -1,37 +1,20 @@
-import React from "react"
-import PropTypes from "prop-types"
-import { StaticQuery, graphql } from "gatsby"
-import { GlobalStyle } from "./globalStyle"
-import { MainWrapper } from "./layoutComponents"
-import Header from "./header"
-import Footer from "./footer"
+import React from "react";
+import PropTypes from "prop-types";
+import styled, { ThemeProvider } from "styled-components";
+import breakpoints from "src/styles/breakpoints";
 
-const Layout = ({ children }) => (
-  <StaticQuery
-    query={graphql`
-      query SiteTitleQuery {
-        site {
-          siteMetadata {
-            title
-          }
-        }
-      }
-    `}
-    render={data => (
-      <>
-        <GlobalStyle />
-        <MainWrapper>
-          <Header siteTitle={data.site.siteMetadata.title} />
-          <main>{children}</main>
-          <Footer />
-        </MainWrapper>
-      </>
-    )}
-  />
-)
+const MyGrid = styled.div``;
+
+const Layout = ({ children }) => {
+  return (
+    <ThemeProvider theme={breakpoints}>
+      <MyGrid>{children}</MyGrid>
+    </ThemeProvider>
+  );
+};
 
 Layout.propTypes = {
-  children: PropTypes.node.isRequired,
-}
+  children: PropTypes.node.isRequired
+};
 
-export default Layout
+export default Layout;
