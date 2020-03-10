@@ -1,3 +1,3 @@
 import Bhavuka from "./BhavukaRegular400.ttf";
-
-export { Bhavuka };
+import Srisakdi from "./SrisakdiRegular.ttf";
+export { Bhavuka, Srisakdi };

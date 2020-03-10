@@ -3,7 +3,7 @@ import colors from "src/styles/colors";
 import * as fonts from "src/styles/fonts";
 
 export default createGlobalStyle`
-    @import url('https://fonts.googleapis.com/css?family=Advent+Pro:400,500,600,700|Srisakdi&display=swap');
+    @import url('https://fonts.googleapis.com/css?family=Advent+Pro:400,500,600,700&display=swap');
 
     @font-face {
         font-family: 'Bhavuka';
@@ -12,12 +12,22 @@ export default createGlobalStyle`
         src: local('Bhavuka'), url(${fonts.Bhavuka}) format('truetype');
     }
 
+    @font-face {
+        font-family: 'Srisakdi';
+        font-style: normal;
+        font-weight: 400;
+        src: local('Srisakdi'), url(${fonts.Srisakdi}) format('truetype');
+    }
+
     *,html{
         margin: 0;
         box-sizing: border-box;
-        font-size:14px;
+        font-size: 14px;
         color: ${colors.softBlack};
-        background-color: ${colors.wheat};
         font-family: 'Bhavuka';
     }
+    html{
+        background-color: ${colors.wheat};
+    }
+
 `;
