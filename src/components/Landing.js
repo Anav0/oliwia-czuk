@@ -1,8 +1,11 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
 import flowerVideo from "src/video/flower.mp4";
 import Img from "gatsby-image";
 import { graphql, useStaticQuery } from "gatsby";
+import { TimelineMax, Power4, Power3 } from "gsap";
+import * as ScrollMagic from "scrollmagic";
+import { ScrollMagicPluginGsap } from "scrollmagic-plugin-gsap";
 
 const LandingWrapper = styled.div`
   position: relative;
@@ -48,7 +51,7 @@ const LandingHeader = styled.h1`
   white-space: nowrap;
   position: absolute;
   top: 48.5%;
-  left: 10%;
+  left: -36%;
   transform: translate(-50%, 0) rotate(-90deg);
 
   @media (min-width: ${({ theme }) => theme.breakpoints.sm}) {
@@ -64,16 +67,15 @@ const LandingHeader = styled.h1`
   }
 `;
 
-const LandingVideo = styled.video`
-  border: 5px solid ${({ theme }) => theme.colors.pink};
+const LandingVideoWrapper = styled.div`
   height: 60vh;
   width: 70%;
-  object-fit: cover;
   max-width: 700px;
-
+  background-color: white;
+  border: 5px solid ${({ theme }) => theme.colors.pink};
+  box-sizing: content-box;
   @media (min-width: ${({ theme }) => theme.breakpoints.sm}) {
     border-width: 10px;
-    box-shadow: 0px 0px 50px rgba(0, 0, 0, 0.25);
   }
 
   @media (min-width: ${({ theme }) => theme.breakpoints.md}) {
@@ -86,7 +88,83 @@ const LandingVideo = styled.video`
   }
 `;
 
+const LandingVideo = styled.video`
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+`;
+
 export default () => {
+  const wrapperRef = React.createRef();
+  const videoRef = React.createRef();
+  const videoWrapperRef = React.createRef();
+  const headerRef = React.createRef();
+
+  useEffect(() => {
+    const { current: wrapper } = wrapperRef;
+    const { current: video } = videoRef;
+    const { current: videoWrapper } = videoWrapperRef;
+    const { current: header } = headerRef;
+    const image = document.querySelector(".landingImage");
+
+    ScrollMagicPluginGsap(ScrollMagic, TimelineMax);
+
+    let timeline = new TimelineMax();
+    let controller = new ScrollMagic.Controller();
+
+    timeline
+      .fromTo(
+        videoWrapper,
+        1,
+        { translateY: "-100%" },
+        { translateY: "0", duration: 0.75, ease: "back.out(2)" }
+      )
+      .fromTo(
+        videoWrapper,
+        0.75,
+        { scaleY: 0.01 },
+        { scaleY: 1, transformOrigin: "center", ease: Power4 }
+      )
+      .fromTo(
+        videoWrapper,
+        0.75,
+        { scaleX: 0.015 },
+        { scaleX: 1, transformOrigin: "center", ease: Power4 }
+      )
+      .fromTo(
+        videoWrapper,
+        0.5,
+        { boxShadow: "none", borderWidth: "0px" },
+        {
+          boxShadow: "0px 0px 50px rgba(0, 0, 0, 0.25)",
+          borderWidth: window.innerWidth > 600 ? "10px" : "5px",
+          ease: Power4
+        },
+        "-=0.2"
+      )
+      .fromTo(video, 0.75, { opacity: 0 }, { opacity: 1, ease: Power3 })
+      .fromTo(
+        header,
+        0.75,
+        { opacity: 0 },
+        { opacity: 1, ease: Power3 },
+        "-=0.5"
+      )
+      .fromTo(
+        header,
+        0.4,
+        { translateX: "100px" },
+        { translateX: 0, ease: Power3 },
+        "-=0.5"
+      )
+      .fromTo(image, 1, { opacity: 0 }, { opacity: 1, ease: Power4 });
+
+    new ScrollMagic.Scene({
+      triggerElement: wrapper
+    })
+      .setTween(timeline)
+      .addTo(controller);
+  });
   const data = useStaticQuery(graphql`
     query Images {
       image: file(relativePath: { eq: "lady-xl.png" }) {
@@ -100,9 +178,19 @@ export default () => {
     }
   `);
   return (
-    <LandingWrapper>
-      <LandingHeader>Oliwia Czuk - Landscape Engineer</LandingHeader>
-      <LandingVideo loop muted autoPlay src={flowerVideo}></LandingVideo>
+    <LandingWrapper ref={wrapperRef}>
+      <LandingHeader ref={headerRef}>
+        Oliwia Czuk - Landscape Engineer
+      </LandingHeader>
+      <LandingVideoWrapper ref={videoWrapperRef}>
+        <LandingVideo
+          ref={videoRef}
+          loop
+          muted
+          autoPlay
+          src={flowerVideo}
+        ></LandingVideo>
+      </LandingVideoWrapper>
       <Img className="landingImage" fluid={data.image.childImageSharp.fluid} />
     </LandingWrapper>
   );
