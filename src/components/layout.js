@@ -15,7 +15,7 @@ const MyGrid = styled.div`
     position: absolute;
     left: 20px;
     top: 30px;
-
+    z-index: 10;
     path {
       fill: ${({ theme }) => theme.colors.softBlack};
     }
