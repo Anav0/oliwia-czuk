@@ -3,16 +3,18 @@ import PropTypes from "prop-types";
 import styled, { ThemeProvider } from "styled-components";
 import breakpoints from "src/styles/breakpoints";
 import colors from "src/styles/colors";
+import Copyright from "src/components/Copyright";
 
 const global = {
   breakpoints,
   colors
 };
+
 const MyGrid = styled.div`
   .landing-logo {
     width: 25px;
     height: auto;
-    position: absolute;
+    position: fixed;
     left: 20px;
     top: 30px;
     z-index: 10;
@@ -43,7 +45,10 @@ const MyGrid = styled.div`
 const Layout = ({ children }) => {
   return (
     <ThemeProvider theme={global}>
-      <MyGrid>{children}</MyGrid>
+      <MyGrid>
+        {children}
+        <Copyright />
+      </MyGrid>
     </ThemeProvider>
   );
 };

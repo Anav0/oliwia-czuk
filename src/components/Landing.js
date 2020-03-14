@@ -166,7 +166,7 @@ export default () => {
       .addTo(controller);
   });
   const data = useStaticQuery(graphql`
-    query Images {
+    query {
       image: file(relativePath: { eq: "lady-xl.png" }) {
         id
         childImageSharp {
