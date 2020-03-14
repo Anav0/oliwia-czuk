@@ -3,7 +3,6 @@ import PropTypes from "prop-types";
 import styled, { ThemeProvider } from "styled-components";
 import breakpoints from "src/styles/breakpoints";
 import colors from "src/styles/colors";
-import Copyright from "src/components/Copyright";
 
 const global = {
   breakpoints,
@@ -45,10 +44,7 @@ const MyGrid = styled.div`
 const Layout = ({ children }) => {
   return (
     <ThemeProvider theme={global}>
-      <MyGrid>
-        {children}
-        <Copyright />
-      </MyGrid>
+      <MyGrid>{children}</MyGrid>
     </ThemeProvider>
   );
 };
