@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
-import { TimelineMax } from "gsap";
+import { TimelineMax, Power4 } from "gsap";
 import Img from "gatsby-image";
 import { graphql, useStaticQuery } from "gatsby";
 
@@ -89,7 +89,10 @@ const MenuItem = styled.h1`
     opacity: 1;
   }
 `;
-
+const MenuImagesContent = styled.div`
+  width: 100%;
+  height: 100%;
+`;
 const MenuCover = styled.div`
   position: fixed;
   left: 0;
@@ -112,29 +115,17 @@ const MenuImagesWrapper = styled.div`
     justify-content: center;
     align-items: center;
   }
-`;
-const MenuImages = styled.div`
-  width: 70%;
-  height: 70%;
-  background-color: white;
-  position: relative;
-  overflow: hidden;
-  @media (min-width: ${({ theme }) => theme.breakpoints.md}) {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
   .gatsby-image-wrapper {
     object-fit: cover;
-    width: 100%;
-    height: 100%;
+    width: 60%;
+    height: 60%;
     position: absolute !important;
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
-    opacity: 0;
   }
 `;
+
 const MenuItems = styled.div`
   width: 100%;
   height: 80%;
@@ -142,16 +133,6 @@ const MenuItems = styled.div`
   @media (min-width: ${({ theme }) => theme.breakpoints.md}) {
     width: 50%;
   }
-`;
-
-const MenuImagesOverlay = styled.div`
-  width: 100%;
-  height: 100%;
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  background-color: ${({ theme }) => theme.colors.pink};
 `;
 
 function animateIn(menu, timeline, coverElements) {
@@ -198,7 +179,7 @@ function Hamburger() {
           }
         }
       }
-      projectImage: file(relativePath: { eq: "landscape.jpg" }) {
+      projectImage: file(relativePath: { eq: "project-image.jpg" }) {
         id
         childImageSharp {
           fluid(maxWidth: 1920) {
@@ -208,78 +189,46 @@ function Hamburger() {
       }
     }
   `);
-
-  function generateTimeline(index) {
-    let menuImage = document.querySelectorAll(".menu-image")[index];
-
-    return new TimelineMax({ paused: true }).to(menuImage, 0, { autoAlpha: 1 });
-  }
-
   var menuItems = {
     home: { image: data.homeImage },
     projects: { image: data.projectImage },
     contact: { image: data.contactImage }
   };
 
-  var prevItem = null;
-  var currentItem = null;
-  var overlayAnimation = null;
-  var isBack = false;
-  function changeImage(item) {
-    prevItem = currentItem;
-    currentItem = item;
-
-    if (currentItem === prevItem) return;
-
-    const imageOverlay = document.getElementById("menu-image-overlay");
-
-    if (!overlayAnimation)
-      overlayAnimation = new TimelineMax({
-        paused: true,
-        onReverseComplete: () => {
-          overlayAnimation.restart();
-        }
-      }).fromTo(
-        imageOverlay,
-        1,
-        { skewX: 30, scale: 2 },
-        { skewX: 0, xPercent: 100 }
-      );
-
-    let currentImageTimeline = menuItems[item].timeline;
-    if (prevItem) {
-      var prevImageTimeline = menuItems[prevItem].timeline;
-    }
-    if (overlayAnimation.isActive()) {
-      if (overlayAnimation.reversed()) overlayAnimation.play();
-      else overlayAnimation.reverse();
-    } else {
-      if (!overlayAnimation.reversed()) overlayAnimation.reverse();
-      else overlayAnimation.play();
-    }
-  }
-
-  const [isOpen, setIsOpen] = useState(undefined);
+  const [isOpen, setIsOpen] = useState(false);
+  const [displayedImage, setDisplayedImage] = useState(
+    menuItems[Object.keys(menuItems)[0]].image.childImageSharp.fluid
+  );
   const menuRef = React.createRef();
+  const imageRef = React.createRef();
 
-  useEffect(() => {
+  function changeImage(item) {
+    const { current: image } = imageRef;
+    new TimelineMax({
+      repeat: 1,
+      yoyo: true,
+      onRepeat: () => {
+        setDisplayedImage(menuItems[item].image.childImageSharp.fluid);
+      }
+    }).fromTo(
+      image,
+      0.5,
+      { opacity: 1, ease: Power4 },
+      { opacity: 0, ease: Power4 }
+    );
+  }
+  function toggleMenu() {
+    setIsOpen(!isOpen);
     const menuTimeline = new TimelineMax();
     const { current: menu } = menuRef;
-
     const coverElements = document.querySelectorAll(".menu-cover");
-
-    if (isOpen) animateIn(menu, menuTimeline, coverElements);
-    else if (isOpen === false) animateOut(menu, menuTimeline, coverElements);
-
-    Object.keys(menuItems).map((item, index) => {
-      menuItems[item].timeline = generateTimeline(index);
-    });
-  });
-
+    if (!isOpen) animateIn(menu, menuTimeline, coverElements);
+    else animateOut(menu, menuTimeline, coverElements);
+  }
   return (
     <>
       <HamburgerWrapper
-        onClick={() => setIsOpen(!isOpen)}
+        onClick={() => toggleMenu()}
         className={isOpen ? "open" : ""}
       ></HamburgerWrapper>
       {covers.map((color, i) => (
@@ -298,19 +247,10 @@ function Hamburger() {
             ))}
           </Menu>
         </MenuItems>
-        <MenuImagesWrapper id="menu-image-wrapper">
-          <MenuImages>
-            {Object.keys(menuItems).map((item, index) => {
-              return (
-                <Img
-                  className="menu-image"
-                  key={menuItems[item].image.id}
-                  fluid={menuItems[item].image.childImageSharp.fluid}
-                />
-              );
-            })}
-            <MenuImagesOverlay id="menu-image-overlay" />
-          </MenuImages>
+        <MenuImagesWrapper>
+          <MenuImagesContent ref={imageRef}>
+            <Img fluid={displayedImage} />
+          </MenuImagesContent>
         </MenuImagesWrapper>
       </MenuWrapper>
     </>
