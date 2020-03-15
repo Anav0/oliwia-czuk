@@ -4,7 +4,9 @@ import styled from "styled-components";
 import Layout from "src/components/Layout";
 import LeftArrow from "src/images/arrow-left.svg";
 import RightArrow from "src/images/arrow-right.svg";
+import Postcard from "src/images/postcard.svg";
 import { TimelineMax, Power4 } from "gsap";
+import axios from "axios";
 
 const FormWrapper = styled.div`
   display: flex;
@@ -151,6 +153,20 @@ const ErrorMessage = styled.span`
   }
 `;
 
+const PostcardWrapper = styled.div`
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  display: flex;
+  left: 0;
+  top: 0;
+  justify-content: center;
+  align-content: center;
+  svg {
+    width: 25%;
+  }
+`;
+
 export default class ContactPage extends React.Component {
   constructor(props) {
     super(props);
@@ -204,10 +220,57 @@ export default class ContactPage extends React.Component {
     const arrows = document.getElementById("form-arrows");
     const input = document.getElementById("form-input");
     const header = document.getElementById("form-header");
-    new TimelineMax()
-      .fromTo(header, 0.5, { autoAlpha: 0 }, { autoAlpha: 1, ease: Power4 })
-      .fromTo(input, 0.5, { autoAlpha: 0 }, { autoAlpha: 1, ease: Power4 })
-      .fromTo(arrows, 0.5, { autoAlpha: 0 }, { autoAlpha: 1, ease: Power4 });
+    new TimelineMax({ delay: 0.5 })
+      .fromTo(header, 0.75, { autoAlpha: 0 }, { autoAlpha: 1, ease: Power4 })
+      .fromTo(input, 0.75, { autoAlpha: 0 }, { autoAlpha: 1, ease: Power4 })
+      .fromTo(arrows, 0.75, { autoAlpha: 0 }, { autoAlpha: 1, ease: Power4 });
+
+    this.playAfterSuccessAnimation();
+  }
+
+  playAfterSuccessAnimation() {
+    const formContent = document.getElementById("form-content");
+    const postcard = document.getElementById("postcard");
+    const postcardWriting = postcard.getElementById("postcard-writing");
+    const postcardBorder = postcard.getElementById("postcard-border");
+    const postcardMiddle = postcard.getElementById("postcard-middle");
+    const postcardStempelBorder = postcard.getElementById(
+      "postcard-stempel-border"
+    );
+    const postcardStempelMiddle = postcard.getElementById(
+      "postcard-stempel-middle"
+    );
+
+    const duration = 0.35;
+    new TimelineMax({ delay: 4 })
+      .fromTo(formContent, 1, { y: 0 }, { y: "-150%", ease: "back.in(1.7)" })
+      .fromTo(formContent, 0.35, { autoAlpha: 1 }, { autoAlpha: 0 }, "-=0.25")
+      .fromTo(
+        postcard,
+        1,
+        { autoAlpha: 0, y: "-100%" },
+        { y: 0, autoAlpha: 1, ease: "back.out(1.7)" }
+      )
+      .fromTo(
+        postcardStempelBorder,
+        duration,
+        { autoAlpha: 0 },
+        { autoAlpha: 1 }
+      )
+      .fromTo(
+        postcardStempelMiddle,
+        duration,
+        { autoAlpha: 0 },
+        { autoAlpha: 1 },
+        "-=0.15"
+      )
+      .fromTo(postcardMiddle, duration, { autoAlpha: 0 }, { autoAlpha: 1 })
+      .fromTo(
+        postcardWriting.children,
+        duration,
+        { autoAlpha: 0 },
+        { autoAlpha: 1, stagger: 0.1 }
+      );
   }
 
   next() {
@@ -217,10 +280,21 @@ export default class ContactPage extends React.Component {
       );
       if (this.state.activeStep + 1 === this.state.steps.length)
         return this.submit();
-      this.setState({
-        activeStep: this.state.activeStep + 1,
-        error: ""
-      });
+
+      new TimelineMax({
+        repeat: 1,
+        onRepeat: () =>
+          this.setState({
+            activeStep: this.state.activeStep + 1,
+            error: ""
+          }),
+        yoyo: true
+      }).fromTo(
+        ".form-element",
+        0.4,
+        { y: "0", autoAlpha: 1, ease: Power4 },
+        { y: "100%", autoAlpha: 0, ease: Power4, stagger: 0.2 }
+      );
     } catch (error) {
       this.setState({
         error
@@ -230,15 +304,45 @@ export default class ContactPage extends React.Component {
 
   back() {
     if (this.state.activeStep - 1 < 0) return;
-    this.setState({
-      activeStep: this.state.activeStep - 1,
-      error: ""
-    });
+
+    new TimelineMax({
+      repeat: 1,
+      onRepeat: () =>
+        this.setState({
+          activeStep: this.state.activeStep - 1,
+          error: ""
+        }),
+      yoyo: true
+    }).fromTo(
+      ".form-element",
+      0.4,
+      { y: "0", autoAlpha: 1, ease: Power4 },
+      { y: "100%", autoAlpha: 0, ease: Power4, stagger: 0.2 }
+    );
   }
 
-  submit() {
+  async submit() {
     if (this.state.activeStep === this.state.steps.length - 1) {
-      console.log("Submited");
+      const dataToSend = {
+        from: this.state.steps[1].anwser.trim(),
+        to: `${process.env.GATSBY_RECIVING_EMAIL}`,
+        subject: "Biznes - Oliwia Czuk",
+        text: this.state.steps
+          .map(step => step.question + "\n" + step.anwser + "\n\n")
+          .join("")
+      };
+
+      try {
+        // const response = await axios.post(
+        //   process.env.GATSBY_EMAIL_URL,
+        //   dataToSend
+        // );
+        // console.log(response);
+
+        this.playAfterSuccessAnimation();
+      } catch (error) {
+        console.log(error);
+      }
     }
   }
 
@@ -247,12 +351,13 @@ export default class ContactPage extends React.Component {
       <Layout>
         <SEO title="Contact" keywords={["landscape", "contact", "greenery"]} />
         <FormWrapper>
-          <FormContent onSubmit={e => e.preventDefault()}>
-            <FormHeader id="form-header">
+          <FormContent id="form-content" onSubmit={e => e.preventDefault()}>
+            <FormHeader id="form-header" className="form-element">
               {this.state.steps[this.state.activeStep].question}
             </FormHeader>
             <FormInputWrapper
               id="form-input"
+              className="form-element"
               isFocused={this.state.isInputFocused}
             >
               <FormInput
@@ -286,7 +391,7 @@ export default class ContactPage extends React.Component {
             <ErrorMessage className={this.state.error ? "show" : ""}>
               {this.state.error}
             </ErrorMessage>
-            <NavigationArrows id="form-arrows">
+            <NavigationArrows className="form-element" id="form-arrows">
               <LeftArrow
                 className={this.state.activeStep === 0 ? "disactive" : ""}
                 onClick={() => this.back()}
@@ -305,6 +410,10 @@ export default class ContactPage extends React.Component {
             </NavigationArrows>
           </FormContent>
         </FormWrapper>
+
+        <PostcardWrapper>
+          <Postcard id="postcard" />
+        </PostcardWrapper>
       </Layout>
     );
   }

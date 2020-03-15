@@ -164,7 +164,7 @@ export default () => {
     })
       .setTween(timeline)
       .addTo(controller);
-  });
+  }, []);
   const data = useStaticQuery(graphql`
     query {
       image: file(relativePath: { eq: "lady-xl.png" }) {
