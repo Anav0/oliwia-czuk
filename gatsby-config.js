@@ -5,6 +5,7 @@ module.exports = {
     author: `Igor Motyka <igormotyka6@gmail.com>`
   },
   plugins: [
+    `gatsby-plugin-transition-link`,
     "gatsby-plugin-react-svg",
     `gatsby-plugin-react-helmet`,
     {

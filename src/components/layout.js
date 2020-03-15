@@ -3,6 +3,9 @@ import PropTypes from "prop-types";
 import styled, { ThemeProvider } from "styled-components";
 import breakpoints from "src/styles/breakpoints";
 import colors from "src/styles/colors";
+import Logo from "src/images/logo.svg";
+import Hamburger from "src/components/Hamburger";
+import GlobalStyle from "src/styles/global";
 
 const global = {
   breakpoints,
@@ -10,6 +13,7 @@ const global = {
 };
 
 const MyGrid = styled.div`
+  min-height: 100vh;
   .landing-logo {
     width: 25px;
     height: auto;
@@ -44,7 +48,12 @@ const MyGrid = styled.div`
 const Layout = ({ children }) => {
   return (
     <ThemeProvider theme={global}>
-      <MyGrid>{children}</MyGrid>
+      <GlobalStyle />
+      <MyGrid>
+        <Hamburger />
+        <Logo className="landing-logo" />
+        {children}
+      </MyGrid>
     </ThemeProvider>
   );
 };

@@ -2,7 +2,9 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import { TimelineMax, Power4 } from "gsap";
 import Img from "gatsby-image";
-import { graphql, useStaticQuery } from "gatsby";
+import { graphql, useStaticQuery, Link } from "gatsby";
+import TransitionLink from "gatsby-plugin-transition-link";
+import AniLink from "gatsby-plugin-transition-link/AniLink";
 
 const HamburgerWrapper = styled.div`
   position: fixed;
@@ -70,21 +72,25 @@ const Menu = styled.div`
 `;
 
 const MenuItem = styled.h1`
-  font-size: 2rem;
   cursor: pointer;
-  font-family: "Srisakdi", cursive;
   transition: opacity 0.25s ease-in-out;
   opacity: 0.55;
   text-transform: capitalize;
 
-  @media (min-width: ${({ theme }) => theme.breakpoints.sm}) {
-    font-size: 4.25rem;
-  }
+  a {
+    text-decoration: none;
+    color: inherit;
+    font-size: 2rem;
+    font-family: "Srisakdi", cursive;
 
-  @media (min-width: ${({ theme }) => theme.breakpoints.md}) {
-    font-size: 3rem;
-  }
+    @media (min-width: ${({ theme }) => theme.breakpoints.sm}) {
+      font-size: 4.25rem;
+    }
 
+    @media (min-width: ${({ theme }) => theme.breakpoints.md}) {
+      font-size: 3rem;
+    }
+  }
   &:hover {
     opacity: 1;
   }
@@ -190,9 +196,9 @@ function Hamburger() {
     }
   `);
   var menuItems = {
-    home: { image: data.homeImage },
-    projects: { image: data.projectImage },
-    contact: { image: data.contactImage }
+    home: { image: data.homeImage, link: "/" },
+    projects: { image: data.projectImage, link: "projects" },
+    contact: { image: data.contactImage, link: "contact" }
   };
 
   const [isOpen, setIsOpen] = useState(false);
@@ -242,7 +248,9 @@ function Hamburger() {
                 onMouseEnter={() => changeImage(item)}
                 key={item + index}
               >
-                {item}
+                <AniLink paintDrip hex={covers[1]} to={menuItems[item].link}>
+                  {item}
+                </AniLink>
               </MenuItem>
             ))}
           </Menu>
