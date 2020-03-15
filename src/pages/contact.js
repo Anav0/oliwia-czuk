@@ -1,9 +1,10 @@
-import React, { useState } from "react";
+import React from "react";
 import SEO from "src/components/seo";
 import styled from "styled-components";
 import Layout from "src/components/Layout";
 import LeftArrow from "src/images/arrow-left.svg";
 import RightArrow from "src/images/arrow-right.svg";
+import { TimelineMax, Power4 } from "gsap";
 
 const FormWrapper = styled.div`
   display: flex;
@@ -84,8 +85,6 @@ const FormInputWrapper = styled.div`
     bottom: -10px;
     left: 0;
     width: 100%;
-    /* transform: ${props =>
-      props.isFocused ? `scaleX(1)` : `scaleX(0.8)`}; */
     height: 1px;
     background-color: ${({ theme }) => theme.colors.softBlack};
   }
@@ -113,7 +112,7 @@ const NavigationArrows = styled.div`
   }
 `;
 
-const SubmitBtn = styled.button`
+const SubmitBtn = styled.span`
   background-color: transparent;
   border: none;
   cursor: pointer;
@@ -152,110 +151,161 @@ const ErrorMessage = styled.span`
   }
 `;
 
-const ContactPage = () => {
-  const [isInputFocused, setIsInputFocused] = useState(false);
-  const [activeStep, setActiveStep] = useState(0);
-  const [error, setError] = useState("");
-
-  const initSteps = [
-    {
-      question: "What's your name?",
-      anwser: "",
-      isValid: anwser => {
-        if (anwser) return true;
-        else throw "Don't be shy";
-      }
-    },
-    {
-      question: "What's your email?",
-      anwser: "",
-      isValid: anwser => {
-        if (
-          /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(
-            anwser
+export default class ContactPage extends React.Component {
+  constructor(props) {
+    super(props);
+    const initSteps = [
+      {
+        question: "What's your name?",
+        anwser: "",
+        isValid: anwser => {
+          if (anwser) return true;
+          else throw "Don't be shy";
+        }
+      },
+      {
+        question: "What's your email?",
+        anwser: "",
+        isValid: anwser => {
+          if (
+            /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(
+              anwser
+            )
           )
-        )
-          return true;
-        else throw "Invalid email format";
+            return true;
+          else throw "Invalid email format";
+        }
+      },
+      {
+        question: "What type of project do you have in mind?",
+        anwser: "",
+        isValid: anwser => {
+          if (anwser) return true;
+          else throw "Please tell me about your project";
+        }
+      },
+      {
+        question: "Tell me about budget limitations?",
+        anwser: "",
+        isValid: anwser => {
+          if (anwser) return true;
+          else throw "Please tell me about your budget";
+        }
       }
-    },
-    {
-      question: "What type of project do you have in mind?",
-      anwser: "",
-      isValid: anwser => {
-        if (anwser) return true;
-        else throw "Please tell me about your project";
-      }
-    },
-    {
-      question: "Tell me about budget limitations?",
-      anwser: "",
-      isValid: anwser => {
-        if (anwser) return true;
-        else throw "Please tell me about your budget";
-      }
-    }
-  ];
-  const [steps, setSteps] = useState(initSteps);
+    ];
+    this.state = {
+      isInputFocused: false,
+      activeStep: 0,
+      steps: initSteps,
+      error: ""
+    };
+  }
+  componentDidMount() {
+    const arrows = document.getElementById("form-arrows");
+    const input = document.getElementById("form-input");
+    const header = document.getElementById("form-header");
+    new TimelineMax()
+      .fromTo(header, 0.5, { autoAlpha: 0 }, { autoAlpha: 1, ease: Power4 })
+      .fromTo(input, 0.5, { autoAlpha: 0 }, { autoAlpha: 1, ease: Power4 })
+      .fromTo(arrows, 0.5, { autoAlpha: 0 }, { autoAlpha: 1, ease: Power4 });
+  }
 
-  function next() {
+  next() {
     try {
-      steps[activeStep].isValid(steps[activeStep].anwser);
-
-      if (activeStep + 1 > steps.length - 1) return;
-      setActiveStep(activeStep + 1);
-      setError("");
+      this.state.steps[this.state.activeStep].isValid(
+        this.state.steps[this.state.activeStep].anwser
+      );
+      if (this.state.activeStep + 1 === this.state.steps.length)
+        return this.submit();
+      this.setState({
+        activeStep: this.state.activeStep + 1,
+        error: ""
+      });
     } catch (error) {
-      setError(error);
+      this.setState({
+        error
+      });
     }
   }
 
-  function back() {
-    if (activeStep - 1 < 0) return;
-    setActiveStep(activeStep - 1);
-    setError("");
+  back() {
+    if (this.state.activeStep - 1 < 0) return;
+    this.setState({
+      activeStep: this.state.activeStep - 1,
+      error: ""
+    });
   }
 
-  return (
-    <Layout>
-      <SEO title="Contact" keywords={["landscape", "contact", "greenery"]} />
-      <FormWrapper>
-        <FormContent>
-          <FormHeader>{steps[activeStep].question}</FormHeader>
-          <FormInputWrapper isFocused={isInputFocused}>
-            <FormInput
-              onFocus={() => setIsInputFocused(true)}
-              onBlur={() => setIsInputFocused(false)}
-              onChange={event => {
-                let changedSteps = [...steps];
-                let element = { ...steps[activeStep] };
-                element.anwser = event.target.value;
-                changedSteps[activeStep] = element;
-                setSteps(changedSteps);
-              }}
-              value={steps[activeStep].anwser}
-            ></FormInput>
-          </FormInputWrapper>
-          <ErrorMessage className={error ? "show" : ""}>{error}</ErrorMessage>
-          <NavigationArrows
-            className={activeStep === steps.length - 1 ? "wider" : ""}
-          >
-            <LeftArrow
-              className={activeStep === 0 ? "disactive" : ""}
-              onClick={() => back()}
-            />
-            {activeStep === steps.length - 1 ? (
-              <SubmitBtn>Submit</SubmitBtn>
-            ) : null}
-            <RightArrow
-              className={activeStep === steps.length - 1 ? "hidden" : ""}
-              onClick={() => next()}
-            />
-          </NavigationArrows>
-        </FormContent>
-      </FormWrapper>
-    </Layout>
-  );
-};
+  submit() {
+    if (this.state.activeStep === this.state.steps.length - 1) {
+      console.log("Submited");
+    }
+  }
 
-export default ContactPage;
+  render() {
+    return (
+      <Layout>
+        <SEO title="Contact" keywords={["landscape", "contact", "greenery"]} />
+        <FormWrapper>
+          <FormContent onSubmit={e => e.preventDefault()}>
+            <FormHeader id="form-header">
+              {this.state.steps[this.state.activeStep].question}
+            </FormHeader>
+            <FormInputWrapper
+              id="form-input"
+              isFocused={this.state.isInputFocused}
+            >
+              <FormInput
+                onKeyDown={event => {
+                  if (event.key == "Enter") {
+                    this.next();
+                  }
+                }}
+                onFocus={() =>
+                  this.setState({
+                    isInputFocused: true
+                  })
+                }
+                onBlur={() =>
+                  this.setState({
+                    isInputFocused: false
+                  })
+                }
+                onChange={event => {
+                  let changedSteps = [...this.state.steps];
+                  let element = { ...this.state.steps[this.state.activeStep] };
+                  element.anwser = event.target.value;
+                  changedSteps[this.state.activeStep] = element;
+                  this.setState({
+                    steps: changedSteps
+                  });
+                }}
+                value={this.state.steps[this.state.activeStep].anwser}
+              ></FormInput>
+            </FormInputWrapper>
+            <ErrorMessage className={this.state.error ? "show" : ""}>
+              {this.state.error}
+            </ErrorMessage>
+            <NavigationArrows id="form-arrows">
+              <LeftArrow
+                className={this.state.activeStep === 0 ? "disactive" : ""}
+                onClick={() => this.back()}
+              />
+              {this.state.activeStep === this.state.steps.length - 1 ? (
+                <SubmitBtn>Submit</SubmitBtn>
+              ) : null}
+              <RightArrow
+                className={
+                  this.state.activeStep === this.state.steps.length - 1
+                    ? "hidden"
+                    : ""
+                }
+                onClick={() => this.next()}
+              />
+            </NavigationArrows>
+          </FormContent>
+        </FormWrapper>
+      </Layout>
+    );
+  }
+}
