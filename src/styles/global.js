@@ -29,5 +29,14 @@ export default createGlobalStyle`
     html{
         background-color: ${colors.wheat};
     }
+    .disactive {
+      opacity: 0.55;
+    }
+    .hidden{
+        opacity:0;
+    }
+    .show{
+        opacity:1;
+    }
 
 `;

@@ -3,7 +3,6 @@ import styled from "styled-components";
 import { TimelineMax, Power4 } from "gsap";
 import Img from "gatsby-image";
 import { graphql, useStaticQuery, Link } from "gatsby";
-import TransitionLink from "gatsby-plugin-transition-link";
 import AniLink from "gatsby-plugin-transition-link/AniLink";
 
 const HamburgerWrapper = styled.div`
@@ -24,6 +23,7 @@ const HamburgerWrapper = styled.div`
     top: 56px;
     right: 50px;
   }
+
   &.open {
     &:after {
       transform: scaleX(0.65);
@@ -56,10 +56,13 @@ const MenuWrapper = styled.div`
   width: 100%;
   height: 100%;
   z-index: 9;
-  display: flex;
+  display: none;
   align-items: center;
   justify-content: space-evenly;
   opacity: 0;
+  &.open {
+    display: flex;
+  }
 `;
 
 const Menu = styled.div`
@@ -106,7 +109,7 @@ const MenuCover = styled.div`
   width: 100%;
   height: 100%;
   background-color: ${props => props.bg};
-  z-index: 8;
+  z-index: -1;
   opacity: 0;
 `;
 
@@ -143,7 +146,7 @@ const MenuItems = styled.div`
 
 function animateIn(menu, timeline, coverElements) {
   timeline
-    .to(coverElements, 0, { opacity: 1 })
+    .to(coverElements, 0, { opacity: 1, zIndex: 8 })
     .fromTo(
       coverElements,
       0.5,
@@ -161,7 +164,8 @@ function animateOut(menu, timeline, coverElements) {
       0.5,
       { y: 0, x: 0 },
       { y: "-100%", x: "100%", stagger: 0.2 }
-    );
+    )
+    .to(coverElements, 0, { zIndex: -1 });
 }
 
 const covers = ["#FFEDED", "#FFFAFA", "#FFF3DB"];
@@ -240,7 +244,7 @@ function Hamburger() {
       {covers.map((color, i) => (
         <MenuCover className="menu-cover" key={color + i} bg={color} />
       ))}
-      <MenuWrapper ref={menuRef}>
+      <MenuWrapper ref={menuRef} className={isOpen ? "open" : ""}>
         <MenuItems>
           <Menu>
             {Object.keys(menuItems).map((item, index) => (
