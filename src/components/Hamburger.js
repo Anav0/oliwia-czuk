@@ -170,7 +170,7 @@ function animateOut(menu, timeline, coverElements) {
 
 const covers = ["#FFEDED", "#FFFAFA", "#FFF3DB"];
 
-function Hamburger() {
+const Hamburger = () => {
   const data = useStaticQuery(graphql`
     query {
       homeImage: file(relativePath: { eq: "home-image.png" }) {
@@ -267,6 +267,6 @@ function Hamburger() {
       </MenuWrapper>
     </>
   );
-}
+};
 
 export default Hamburger;

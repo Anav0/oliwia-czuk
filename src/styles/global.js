@@ -33,10 +33,10 @@ export default createGlobalStyle`
       opacity: 0.55;
     }
     .hidden{
-        opacity:0;
+        opacity: 0;
     }
     .show{
-        opacity:1;
+        opacity: 1 !important;
     }
 
 `;

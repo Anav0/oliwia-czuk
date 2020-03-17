@@ -35,6 +35,7 @@ const FormContent = styled.form`
   width: 100%;
   margin-top: 35%;
   position: relative;
+  z-index: 7;
   @media (min-width: ${({ theme }) => theme.breakpoints.sm}) {
     margin-top: 25%;
     height: 45%;
@@ -79,6 +80,8 @@ const FormInput = styled.input`
 const FormInputWrapper = styled.div`
   position: relative;
   width: 100%;
+  display: flex;
+
   :after {
     transition: transform 0.5s ease-in-out;
     transform-origin: left;
@@ -136,10 +139,10 @@ const ErrorMessage = styled.span`
   font-size: 1rem;
   width: 100%;
   transition: opacity 1s ease-in-out;
-  opacity: 0;
   position: absolute;
   bottom: 26%;
   left: 0px;
+  opacity: 0;
   @media (min-width: ${({ theme }) => theme.breakpoints.sm}) {
     font-size: 1.75rem;
     bottom: 28%;
@@ -153,7 +156,7 @@ const ErrorMessage = styled.span`
   }
 `;
 
-const PostcardWrapper = styled.div`
+const SuccessfullEmailWrapper = styled.div`
   width: 100%;
   height: 100%;
   position: fixed;
@@ -162,8 +165,55 @@ const PostcardWrapper = styled.div`
   top: 0;
   justify-content: center;
   align-content: center;
+  z-index: 6;
   svg {
-    width: 25%;
+    width: 50%;
+    @media (min-width: ${({ theme }) => theme.breakpoints.md}) {
+      width: 35%;
+    }
+    @media (min-width: ${({ theme }) => theme.breakpoints.xl}) {
+      width: 25%;
+    }
+  }
+`;
+
+const SuccessfullMessageContent = styled.div`
+  width: 100%;
+  height: 100%;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+`;
+
+const SuccessfullMessageText = styled.h1`
+  font-size: 2rem;
+  padding: 0 20px;
+  text-align: center;
+
+  @media (min-width: ${({ theme }) => theme.breakpoints.sm}) {
+    font-size: 3rem;
+  }
+  @media (min-width: ${({ theme }) => theme.breakpoints.xl}) {
+    font-size: 3.5rem;
+  }
+`;
+
+const Loader = styled.div`
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: ${({ theme }) => theme.colors.softBlack};
+  animation: orbit 0.75s linear infinite;
+  @keyframes orbit {
+    from {
+      transform: rotate(0deg) translateX(10px) rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg) translateX(10px) rotate(-360deg);
+    }
   }
 `;
 
@@ -201,7 +251,7 @@ export default class ContactPage extends React.Component {
         }
       },
       {
-        question: "Tell me about budget limitations?",
+        question: "What budget you have in mind?",
         anwser: "",
         isValid: anwser => {
           if (anwser) return true;
@@ -213,7 +263,8 @@ export default class ContactPage extends React.Component {
       isInputFocused: false,
       activeStep: 0,
       steps: initSteps,
-      error: ""
+      error: "",
+      isLoading: false
     };
   }
   componentDidMount() {
@@ -224,25 +275,23 @@ export default class ContactPage extends React.Component {
       .fromTo(header, 0.75, { autoAlpha: 0 }, { autoAlpha: 1, ease: Power4 })
       .fromTo(input, 0.75, { autoAlpha: 0 }, { autoAlpha: 1, ease: Power4 })
       .fromTo(arrows, 0.75, { autoAlpha: 0 }, { autoAlpha: 1, ease: Power4 });
-
-    this.playAfterSuccessAnimation();
   }
 
   playAfterSuccessAnimation() {
     const formContent = document.getElementById("form-content");
     const postcard = document.getElementById("postcard");
-    const postcardWriting = postcard.getElementById("postcard-writing");
-    const postcardBorder = postcard.getElementById("postcard-border");
-    const postcardMiddle = postcard.getElementById("postcard-middle");
-    const postcardStempelBorder = postcard.getElementById(
+    const postcardWriting = document.getElementById("postcard-writing");
+    const postcardMiddle = document.getElementById("postcard-middle");
+    const successfullText = document.getElementById("successfull-text");
+    const postcardStempelBorder = document.getElementById(
       "postcard-stempel-border"
     );
-    const postcardStempelMiddle = postcard.getElementById(
+    const postcardStempelMiddle = document.getElementById(
       "postcard-stempel-middle"
     );
 
     const duration = 0.35;
-    new TimelineMax({ delay: 4 })
+    new TimelineMax()
       .fromTo(formContent, 1, { y: 0 }, { y: "-150%", ease: "back.in(1.7)" })
       .fromTo(formContent, 0.35, { autoAlpha: 1 }, { autoAlpha: 0 }, "-=0.25")
       .fromTo(
@@ -270,11 +319,15 @@ export default class ContactPage extends React.Component {
         duration,
         { autoAlpha: 0 },
         { autoAlpha: 1, stagger: 0.1 }
-      );
+      )
+      .fromTo(successfullText, 2, { autoAlpha: 0 }, { autoAlpha: 1 });
   }
 
   next() {
     try {
+      this.setState({
+        error: ""
+      });
       this.state.steps[this.state.activeStep].isValid(
         this.state.steps[this.state.activeStep].anwser
       );
@@ -296,6 +349,7 @@ export default class ContactPage extends React.Component {
         { y: "100%", autoAlpha: 0, ease: Power4, stagger: 0.2 }
       );
     } catch (error) {
+      console.error(error);
       this.setState({
         error
       });
@@ -333,15 +387,20 @@ export default class ContactPage extends React.Component {
       };
 
       try {
-        // const response = await axios.post(
-        //   process.env.GATSBY_EMAIL_URL,
-        //   dataToSend
-        // );
-        // console.log(response);
-
+        this.setState({
+          error: "",
+          isLoading: true
+        });
+        await axios.post(process.env.GATSBY_EMAIL_URL, dataToSend);
         this.playAfterSuccessAnimation();
       } catch (error) {
-        console.log(error);
+        this.setState({
+          error: "Something went wrong, please try sending message again"
+        });
+      } finally {
+        this.setState({
+          isLoading: false
+        });
       }
     }
   }
@@ -391,29 +450,38 @@ export default class ContactPage extends React.Component {
             <ErrorMessage className={this.state.error ? "show" : ""}>
               {this.state.error}
             </ErrorMessage>
-            <NavigationArrows className="form-element" id="form-arrows">
-              <LeftArrow
-                className={this.state.activeStep === 0 ? "disactive" : ""}
-                onClick={() => this.back()}
-              />
-              {this.state.activeStep === this.state.steps.length - 1 ? (
-                <SubmitBtn>Submit</SubmitBtn>
-              ) : null}
-              <RightArrow
-                className={
-                  this.state.activeStep === this.state.steps.length - 1
-                    ? "hidden"
-                    : ""
-                }
-                onClick={() => this.next()}
-              />
-            </NavigationArrows>
+            {!this.state.isLoading ? (
+              <NavigationArrows className="form-element" id="form-arrows">
+                <LeftArrow
+                  className={this.state.activeStep === 0 ? "disactive" : ""}
+                  onClick={() => this.back()}
+                />
+                {this.state.activeStep === this.state.steps.length - 1 ? (
+                  <SubmitBtn>Submit</SubmitBtn>
+                ) : null}
+                <RightArrow
+                  className={
+                    this.state.activeStep === this.state.steps.length - 1
+                      ? "hidden"
+                      : ""
+                  }
+                  onClick={() => this.next()}
+                />
+              </NavigationArrows>
+            ) : (
+              <Loader />
+            )}
           </FormContent>
         </FormWrapper>
 
-        <PostcardWrapper>
-          <Postcard id="postcard" />
-        </PostcardWrapper>
+        <SuccessfullEmailWrapper>
+          <SuccessfullMessageContent id="postcard">
+            <Postcard />
+            <SuccessfullMessageText id="successfull-text">
+              Thanks! I will contact you as soon as possible.
+            </SuccessfullMessageText>
+          </SuccessfullMessageContent>
+        </SuccessfullEmailWrapper>
       </Layout>
     );
   }
