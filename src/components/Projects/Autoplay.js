@@ -6,8 +6,17 @@ const AutoplayWrapper = styled.div`
   display: flex;
   align-items: center;
   position: absolute;
-  top: 63px;
-  right: 211px;
+  top: 22px;
+  left: 50%;
+  transform: translateX(-50%);
+
+  @media (min-width: ${({ theme }) => theme.breakpoints.sm}) {
+    top: 46px;
+    right: 140px;
+    left: auto;
+    transform: none;
+  }
+
   .progress-ring__circle {
     transition: 0.35s stroke-dashoffset;
     transform: rotate(-90deg);
@@ -18,13 +27,16 @@ const AutoplayWrapper = styled.div`
     top: 0;
   }
 `;
+
 const AutoplayText = styled.span`
   font-size: 1.5rem;
   margin-right: 20px;
 `;
+
 const AutoplayIconWrapper = styled.div`
   position: relative;
 `;
+
 const FingersWrapper = styled.div`
   width: 100%;
   height: 50%;
@@ -42,6 +54,7 @@ const FingersWrapper = styled.div`
     margin-left: 1px;
   }
 `;
+
 const Finger = styled.div`
   height: 55%;
   width: 2px;
@@ -52,6 +65,7 @@ const Finger = styled.div`
 export default class Autoplay extends Component {
   constructor(props) {
     super(props);
+
     this.state = {
       initialPercentage: props.initialPercentage || 0,
       totalTime: props.totalTime || 3000,
@@ -61,24 +75,40 @@ export default class Autoplay extends Component {
   }
 
   async componentDidMount() {
+    let { circumference, circle } = this.setCircleSize(
+      this.props.size,
+      this.props.stroke
+    );
+    await this.reset(circle, circumference);
+    this.startCounting(circle, circumference);
+  }
+
+  async reset(circle, circumference) {
+    this.setProgress(this.state.initialPercentage, circle, circumference);
+
+    await this.setState({
+      initialPercentage: this.props.initialPercentage || 0,
+      totalTime: this.props.totalTime || 3000,
+      isPlaying: true
+    });
+
     await this.setState({
       chunk:
         ((100 - this.state.initialPercentage) / this.state.totalTime) * 1000,
       timeLeft: this.state.totalTime / 1000
     });
 
-    var { circumference, circle } = this.setCircleSize(
-      this.props.size,
-      this.props.stroke
-    );
-
-    this.setProgress(this.state.initialPercentage, circle, circumference);
-    this.startCounting(circle, circumference);
+    if (this.props.onRestart) this.props.onRestart();
   }
+
   startCounting(circle, circumference) {
     var interval = 1000;
     setInterval(async () => {
-      if (this.state.initialPercentage >= 100 || !this.state.isPlaying) return;
+      if (!this.state.isPlaying) return;
+      if (this.state.initialPercentage >= 100) {
+        if (this.props.autoReset) await this.reset(circle, circumference);
+        else return;
+      }
       await this.setState((state, props) => {
         let newPercent = this.state.initialPercentage + this.state.chunk;
         this.setProgress(newPercent, circle, circumference);
@@ -87,8 +117,10 @@ export default class Autoplay extends Component {
           timeLeft: state.timeLeft - interval / 1000
         };
       });
+      if (this.props.onTick) this.props.onTick(this.state.timeLeft);
     }, interval);
   }
+
   setCircleSize(size, strokeWidth) {
     let r = size / 2 - strokeWidth * 2;
     let middle = size / 2;
@@ -115,15 +147,18 @@ export default class Autoplay extends Component {
 
     return { circle, circumference };
   }
+
   setProgress(percent, circle, circumference) {
     const offset = circumference - (percent / 100) * circumference;
     circle.style.strokeDashoffset = offset;
   }
+
   togglePlay() {
     this.setState({
       isPlaying: !this.state.isPlaying
     });
   }
+
   render() {
     return (
       <AutoplayWrapper>
