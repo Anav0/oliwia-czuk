@@ -11,6 +11,7 @@ date: 2020-03-21T17:31:26.460Z
 location: 'Wroclav, Poland'
 status: in progress
 title: Wroclav Main Square
+tags: wroclav poland town square roses garden
 desc: >-
   Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur commodo,
   diam sed varius ultrices, lacus massa feugiat ligula, sed facilisis diam odio
