@@ -1,3 +1,4 @@
 import Bhavuka from "./BhavukaRegular400.ttf";
 import Srisakdi from "./SrisakdiRegular.ttf";
-export { Bhavuka, Srisakdi };
+import Sacramento from "./SacramentoRegular.ttf";
+export { Bhavuka, Srisakdi,Sacramento };

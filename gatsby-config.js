@@ -8,6 +8,8 @@ module.exports = {
     author: `Igor Motyka <igormotyka6@gmail.com>`
   },
   plugins: [
+    `gatsby-transformer-remark`,
+    `gatsby-plugin-netlify-cms`,
     `gatsby-plugin-transition-link`,
     "gatsby-plugin-react-svg",
     `gatsby-plugin-react-helmet`,
@@ -16,6 +18,13 @@ module.exports = {
       options: {
         name: `images`,
         path: `${__dirname}/src/images`
+      }
+    },
+    {
+      resolve: `gatsby-source-filesystem`,
+      options: {
+        name: `markdown-pages`,
+        path: `${__dirname}/project`
       }
     },
     `gatsby-transformer-sharp`,

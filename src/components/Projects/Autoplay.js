@@ -22,7 +22,7 @@ const AutoplayWrapper = styled.div`
     transform: rotate(-90deg);
     transform-origin: 50% 50%;
     stroke: ${({ theme }) => theme.colors.darkerPink};
-    position: absolute;
+    position: absolute;  
     left: 0;
     top: 0;
   }
@@ -153,7 +153,9 @@ export default class Autoplay extends Component {
     circle.style.strokeDashoffset = offset;
   }
 
+
   togglePlay() {
+
     this.setState({
       isPlaying: !this.state.isPlaying
     });
