@@ -38,11 +38,30 @@ export default ({ data }) => {
 export const pageQuery = graphql`
   query($path: String!) {
     markdownRemark(fields: { slug: { eq: $path } }) {
-      html
-      frontmatter {
-        date(formatString: "MMMM DD, YYYY")
-        title
+      fields {
+        slug
       }
+      frontmatter {
+        date(formatString: "DD MMMM YYYY")
+        desc
+        fullImage {
+          desc
+          image
+        }
+        hightlights {
+          desc
+          firstImage
+          firstImageDesc
+          secondImage
+          secondImageDesc
+        }
+        location
+        mainImage
+        status
+        title
+        tags
+      }
+      id
     }
   }
 `;

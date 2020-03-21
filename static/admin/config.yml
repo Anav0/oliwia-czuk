@@ -11,7 +11,29 @@ collections:
     folder: project
     create: true
     fields:
-      - { name: date, label: Date, widget: datetime }
+      - { name: location, label: Location, widget: string }
+      - {
+          name: status,
+          label: Status,
+          widget: select,
+          options: ["in progress", "done"],
+        }
       - { name: title, label: Title }
-      - { name: body, label: Body, widget: markdown }
+      - { name: tags, label: Tags, widget: string }
+      - { name: desc, label: Desc, widget: string }
       - { name: mainImage, label: MainImage, widget: image }
+      - label: FullImage
+        name: fullImage
+        widget: list
+        fields:
+          - { label: Image, name: image, widget: image }
+          - { name: desc, label: Desc, widget: string }
+      - label: Hightlights
+        name: hightlights
+        widget: list
+        fields:
+          - { label: FirstImage, name: firstImage, widget: image }
+          - { label: FirstImageDesc, name: firstImageDesc, widget: string }
+          - { label: SecondImage, name: secondImage, widget: image }
+          - { label: SecondImageDesc, name: secondImageDesc, widget: string }
+          - { name: desc, label: Desc, widget: string }

@@ -37,14 +37,6 @@ export default ({
         ]}
       />
       <ProjectsWrapper>
-        {/*<Autoplay*/}
-        {/*  totalTime={5000}*/}
-        {/*  stroke={1}*/}
-        {/*  size={32}*/}
-        {/*  onTick={secondsLeft => console.log(`End in ${secondsLeft}`)}*/}
-        {/*  onRestart={() => console.log("restart")}*/}
-        {/*  autoReset={true}*/}
-        {/*/>*/}
         <ProjectShowcase projects={projects} />
       </ProjectsWrapper>
     </Layout>
@@ -60,9 +52,7 @@ export const pageQuery = graphql`
           fields {
             slug
           }
-          excerpt(pruneLength: 25)
           frontmatter {
-            date(formatString: "DD MMMM YYYY")
             title
             mainImage
           }
