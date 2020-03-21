@@ -20,7 +20,7 @@ export default ({
   }
 }) => {
   const projects = edges.map(({ node }) => {
-    return { ...node.frontmatter, id: node.id };
+    return { ...node.frontmatter, id: node.id, path: node.fields.slug };
   });
   console.log(projects);
   return (
@@ -57,10 +57,12 @@ export const pageQuery = graphql`
       edges {
         node {
           id
+          fields {
+            slug
+          }
           excerpt(pruneLength: 25)
           frontmatter {
             date(formatString: "DD MMMM YYYY")
-            path
             title
             mainImage
           }
