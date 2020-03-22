@@ -13,7 +13,6 @@ exports.onCreateWebpackConfig = ({ stage, loaders, actions }) => {
   }
 };
 const path = require(`path`);
-
 exports.createPages = ({ actions, graphql }) => {
   const { createPage } = actions;
 
@@ -52,8 +51,10 @@ exports.createPages = ({ actions, graphql }) => {
 };
 
 const { createFilePath } = require(`gatsby-source-filesystem`);
+const { fmImagesToRelative } = require("gatsby-remark-relative-images");
 
 exports.onCreateNode = ({ node, getNode, actions }) => {
+  fmImagesToRelative(node);
   const { createNodeField } = actions;
   if (node.internal.type === `MarkdownRemark`) {
     const slug = createFilePath({ node, getNode });

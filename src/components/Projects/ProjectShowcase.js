@@ -95,11 +95,10 @@ const ProjectShowcase = props => {
       { autoAlpha: 1, stagger: 0.25, ease: Power4 }
     );
   }, []);
-
   return (
     <ShowcaseWrapper ref={projectsWrapperRef}>
       {props.projects.map(project => (
-        <ProjectTitle bg={`url(${project.mainImage})`} key={project.id}>
+        <ProjectTitle key={project.id} bg={`url(${project.mainImage})`}>
           <AniLink paintDrip hex={"#FFEDED"} to={project.path}>
             {project.title}
           </AniLink>

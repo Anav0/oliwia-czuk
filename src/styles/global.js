@@ -3,8 +3,7 @@ import colors from "src/styles/colors";
 import * as fonts from "src/styles/fonts";
 
 export default createGlobalStyle`
-    @import url('https://fonts.googleapis.com/css?family=Advent+Pro:400,500,600,700&display=swap');
-    
+
     @font-face {
         font-family: 'Bhavuka';
         font-style: normal;
@@ -18,7 +17,7 @@ export default createGlobalStyle`
         font-weight: 400;
         src: local('Srisakdi'), url(${fonts.Srisakdi}) format('truetype');
     }
-    
+
     @font-face {
         font-family: 'Sacramento';
         font-style: normal;

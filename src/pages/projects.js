@@ -1,7 +1,6 @@
 import React from "react";
 import SEO from "src/components/seo";
 import Layout from "src/components/Layout";
-import Autoplay from "src/components/Projects/Autoplay";
 import styled from "styled-components";
 import ProjectShowcase from "src/components/Projects/ProjectShowcase";
 import { graphql } from "gatsby";
@@ -54,7 +53,13 @@ export const pageQuery = graphql`
           }
           frontmatter {
             title
-            mainImage
+            mainImage {
+              childImageSharp {
+                fluid(maxWidth: 1920) {
+                  ...GatsbyImageSharpFluid
+                }
+              }
+            }
           }
         }
       }
