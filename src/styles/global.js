@@ -24,7 +24,6 @@ export default createGlobalStyle`
         font-weight: 400;
         src: local('Sacramento'), url(${fonts.Sacramento}) format('truetype');
     }
-
     *,html{
         margin: 0;
         box-sizing: border-box;
@@ -34,6 +33,10 @@ export default createGlobalStyle`
     }
     html{
         background-color: ${colors.wheat};
+    }
+
+    .tl-edges{
+        overflow: visible !important;
     }
     .disactive {
       opacity: 0.55;

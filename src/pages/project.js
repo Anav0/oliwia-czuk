@@ -5,9 +5,10 @@ import styled from "styled-components";
 import { graphql } from "gatsby";
 import Img from "gatsby-image";
 import Lines from "src/components/Lines";
+import Hightlights from "src/components/Hightlights";
 
 const ProjectWrapper = styled.div`
-  height: 100vh;
+  height: 100%;
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -16,6 +17,12 @@ const ProjectWrapper = styled.div`
   * {
     font-family: "Advent pro", sans-serif;
   }
+`;
+
+const MainWrapper = styled.div`
+  width: 100%;
+  height: 100vh;
+  position: relative;
 `;
 
 const MainImageWrapper = styled.div`
@@ -40,11 +47,7 @@ const MainImageWrapper = styled.div`
     height: 640px;
   }
 
-  @media (min-width: ${({ theme }) => theme.breakpoints.lg}) {
-    height: 700px;
-  }
-
-  @media (min-width: ${({ theme }) => theme.breakpoints.lg}) {
+  @media (min-width: ${({ theme }) => theme.breakpoints.xl}) {
     height: 82%;
   }
 `;
@@ -73,15 +76,18 @@ const MainTitle = styled.h1`
     right: -0px;
     top: 530px;
   }
-
   @media (min-width: ${({ theme }) => theme.breakpoints.lg}) {
-    right: 55px;
+    right: -10px;
     top: 580px;
     font-size: 5.1rem;
   }
+  @media (min-width: ${({ theme }) => theme.breakpoints.xl}) {
+    right: 55px;
+    top: 580px;
+  }
 `;
 
-const ProjectStatus = styled.div`
+const MainStatus = styled.div`
   display: flex;
   flex-direction: column;
   position: absolute;
@@ -93,17 +99,15 @@ const ProjectStatus = styled.div`
 
   @media (min-width: ${({ theme }) => theme.breakpoints.md}) {
     top: 680px;
-  }
-
-  @media (min-width: ${({ theme }) => theme.breakpoints.lg}) {
-    top: 800px;
+    left: 60px;
   }
 
   @media (min-width: ${({ theme }) => theme.breakpoints.xl}) {
     top: 820px;
   }
 `;
-const StatusHeader = styled.h2`
+
+const MainStatusHeader = styled.h2`
   font-weight: 400;
   font-size: 1.25rem;
   color: black;
@@ -112,13 +116,40 @@ const StatusHeader = styled.h2`
     font-size: 1.7rem;
   }
 `;
-const Status = styled.h3`
+
+const MainStatusLocation = styled.h3`
   font-weight: 700;
   font-size: 1.7rem;
   color: black;
 
   @media (min-width: ${({ theme }) => theme.breakpoints.lg}) {
     font-size: 2.3rem;
+  }
+`;
+
+const MainDescriptionWrapper = styled.div`
+  height: 100vh;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
+const MainDescription = styled.p`
+  width: 100%;
+  text-align: justify;
+  margin: 0 20px;
+  line-height: 20px;
+  @media (min-width: ${({ theme }) => theme.breakpoints.sm}) {
+    margin: 0;
+    width: 75%;
+    line-height: 40px;
+    font-size: 1.7rem;
+  }
+  @media (min-width: ${({ theme }) => theme.breakpoints.lg}) {
+    width: 50%;
+    line-height: 60px;
+    font-size: 2.2rem;
   }
 `;
 
@@ -134,15 +165,30 @@ export default ({ data }) => {
     <Layout>
       <SEO title={frontmatter.title} keywords={frontmatter.tags.split(" ")} />
       <ProjectWrapper>
-        <MainImageWrapper>
-          <MainImage fluid={frontmatter.mainImage.childImageSharp.fluid} />
-          <Lines className="lines" number={25} />
-        </MainImageWrapper>
-        <MainTitle>{frontmatter.title}</MainTitle>
-        <ProjectStatus>
-          <StatusHeader>{statusTexts[frontmatter.status]}</StatusHeader>
-          <Status>{frontmatter.location}</Status>
-        </ProjectStatus>
+        <MainWrapper>
+          <MainImageWrapper>
+            <MainImage fluid={frontmatter.mainImage.childImageSharp.fluid} />
+            <Lines className="lines" number={25} />
+          </MainImageWrapper>
+          <MainTitle>{frontmatter.title}</MainTitle>
+          <MainStatus>
+            <MainStatusHeader>
+              {statusTexts[frontmatter.status]}
+            </MainStatusHeader>
+            <MainStatusLocation>{frontmatter.location}</MainStatusLocation>
+          </MainStatus>
+        </MainWrapper>
+        <MainDescriptionWrapper>
+          <MainDescription>{frontmatter.desc}</MainDescription>
+        </MainDescriptionWrapper>
+
+        {frontmatter.hightlights.map((highlight, index) => (
+          <Hightlights
+            key={highlight.firstImageDesc + index}
+            {...highlight}
+            countFrom={index}
+          />
+        ))}
       </ProjectWrapper>
     </Layout>
   );
