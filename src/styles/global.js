@@ -35,6 +35,17 @@ export default createGlobalStyle`
         background-color: ${colors.wheat};
     }
 
+    .project-section{
+        margin: 100px 20px;
+        @media (min-width: ${({ theme }) => theme.breakpoints.sm}) {
+            margin: 150px 20px;
+        }
+
+        @media (min-width: ${({ theme }) => theme.breakpoints.lg}) {
+            margin: 20% 20px;
+        }
+
+    }
     .tl-edges{
         overflow: visible !important;
     }

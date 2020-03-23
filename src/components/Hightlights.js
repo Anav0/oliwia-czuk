@@ -48,7 +48,7 @@ const HighlightsDesc = styled.p`
 
 const Hightlights = props => {
   return (
-    <HightlightsWrapper>
+    <HightlightsWrapper className={props.className}>
       <ImageHightlight
         className="firstImage"
         fluid={props.firstImage.childImageSharp.fluid}

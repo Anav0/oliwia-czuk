@@ -25,10 +25,16 @@ const HightlightImageDesc = styled.div`
   right: -25px;
   bottom: 30px;
   display: flex;
-
+  @media (min-width: ${({ theme }) => theme.breakpoints.lg}) {
+    right: -40px;
+    bottom: 35px;
+  }
   span,
   strong {
     font-size: 1.15rem;
+    @media (min-width: ${({ theme }) => theme.breakpoints.lg}) {
+      font-size: 1.43rem;
+    }
   }
   strong {
     margin-right: 5px;

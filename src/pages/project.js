@@ -6,6 +6,7 @@ import { graphql } from "gatsby";
 import Img from "gatsby-image";
 import Lines from "src/components/Lines";
 import Hightlights from "src/components/Hightlights";
+import FullImage from "src/components/FullImage";
 
 const ProjectWrapper = styled.div`
   height: 100%;
@@ -13,6 +14,7 @@ const ProjectWrapper = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
+  padding-bottom: 100px;
   align-items: center;
   * {
     font-family: "Advent pro", sans-serif;
@@ -60,7 +62,7 @@ const MainImage = styled(Img)`
 const MainTitle = styled.h1`
   font-weight: 700;
   position: absolute;
-  right: -55px;
+  right: -80px;
   top: 350px;
   transform: rotate(-90deg);
   font-size: 2.2rem;
@@ -128,7 +130,7 @@ const MainStatusLocation = styled.h3`
 `;
 
 const MainDescriptionWrapper = styled.div`
-  height: 100vh;
+  height: 125vh;
   width: 100%;
   display: flex;
   justify-content: center;
@@ -160,10 +162,13 @@ export default ({ data }) => {
     "in progress": "Would be seen in:",
     done: "Can be seen in:"
   };
-
   return (
     <Layout>
-      <SEO title={frontmatter.title} keywords={frontmatter.tags.split(" ")} />
+      <SEO
+        title={frontmatter.title}
+        description={frontmatter.desc}
+        keywords={frontmatter.tags.split(" ")}
+      />
       <ProjectWrapper>
         <MainWrapper>
           <MainImageWrapper>
@@ -184,9 +189,17 @@ export default ({ data }) => {
 
         {frontmatter.hightlights.map((highlight, index) => (
           <Hightlights
+            className={"project-section"}
             key={highlight.firstImageDesc + index}
             {...highlight}
             countFrom={index}
+          />
+        ))}
+        {frontmatter.fullImage.map((fullImage, index) => (
+          <FullImage
+            className={"project-section"}
+            {...fullImage}
+            key={fullImage.desc + index}
           />
         ))}
       </ProjectWrapper>
