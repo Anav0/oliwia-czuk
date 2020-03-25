@@ -7,6 +7,7 @@ import Img from "gatsby-image";
 import Lines from "src/components/Lines";
 import Hightlights from "src/components/Hightlights";
 import FullImage from "src/components/FullImage";
+import NextProject from "src/components/NextProject";
 
 const ProjectWrapper = styled.div`
   height: 100%;
@@ -14,7 +15,6 @@ const ProjectWrapper = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding-bottom: 100px;
   align-items: center;
   * {
     font-family: "Advent pro", sans-serif;
@@ -157,11 +157,23 @@ const MainDescription = styled.p`
 
 export default ({ data }) => {
   const { frontmatter } = data.markdownRemark;
-
+  const currentPorjectId = data.markdownRemark.id;
+  const { edges: allPagesData } = data.allMarkdownRemark;
+  const nextNode = allPagesData.find(({ node }) => node.id == currentPorjectId);
   const statusTexts = {
     "in progress": "Would be seen in:",
     done: "Can be seen in:"
   };
+  let nextProjectData = undefined;
+  if (nextNode.next)
+    nextProjectData = {
+      slug: nextNode.next.fields.slug,
+      ...nextNode.next.frontmatter
+    };
+
+  let contentToRender = [];
+  let i = 0;
+  let j = 1;
   return (
     <Layout>
       <SEO
@@ -187,21 +199,29 @@ export default ({ data }) => {
           <MainDescription>{frontmatter.desc}</MainDescription>
         </MainDescriptionWrapper>
 
-        {frontmatter.hightlights.map((highlight, index) => (
-          <Hightlights
-            className={"project-section"}
-            key={highlight.firstImageDesc + index}
-            {...highlight}
-            countFrom={index}
-          />
-        ))}
-        {frontmatter.fullImage.map((fullImage, index) => (
-          <FullImage
-            className={"project-section"}
-            {...fullImage}
-            key={fullImage.desc + index}
-          />
-        ))}
+        {frontmatter.hightlights.map((highlight, index) => {
+          contentToRender[i] = (
+            <Hightlights
+              className={"project-section"}
+              key={highlight.firstImageDesc + index}
+              {...highlight}
+              countFrom={index}
+            />
+          );
+          i += 2;
+        })}
+        {frontmatter.fullImage.map((fullImage, index) => {
+          contentToRender[j] = (
+            <FullImage
+              className={"project-section"}
+              {...fullImage}
+              key={fullImage.desc + index}
+            />
+          );
+          j += 2;
+        })}
+        {contentToRender}
+        {nextProjectData ? <NextProject {...nextProjectData} /> : ""}
       </ProjectWrapper>
     </Layout>
   );
@@ -209,6 +229,22 @@ export default ({ data }) => {
 
 export const pageQuery = graphql`
   query($path: String!) {
+    allMarkdownRemark {
+      edges {
+        next {
+          id
+          fields {
+            slug
+          }
+          frontmatter {
+            title
+          }
+        }
+        node {
+          id
+        }
+      }
+    }
     markdownRemark(fields: { slug: { eq: $path } }) {
       fields {
         slug

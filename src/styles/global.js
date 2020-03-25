@@ -46,8 +46,8 @@ export default createGlobalStyle`
         }
 
     }
-    .tl-edges{
-        overflow: visible !important;
+    .tl-wrapper{
+        transform: none !important;
     }
     .disactive {
       opacity: 0.55;
