@@ -1,8 +1,10 @@
 ---
-mainImage: /assets/landscape.jpg
+mainImage: /assets/joel-filipe-ju9vazdgmzs-unsplash.jpg
 fullImage:
   - image: /assets/marisa-morton-tvdxczwp4qy-unsplash.jpg
-    desc: Fountain
+    desc: >-
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur
+      commodo, diam sed varius ultrices, lacus massa feugiat
   - image: /assets/landscape.jpg
     desc: >-
       Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur
