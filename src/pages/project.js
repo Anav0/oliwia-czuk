@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import SEO from "src/components/seo";
 import Layout from "src/components/Layout";
+import PrevLayout from "src/components/PrevLayout";
 import styled from "styled-components";
 import { graphql } from "gatsby";
 import Img from "gatsby-image";
@@ -8,6 +9,9 @@ import Lines from "src/components/Lines";
 import Hightlights from "src/components/Hightlights";
 import FullImage from "src/components/FullImage";
 import NextProject from "src/components/NextProject";
+import { TimelineMax, Power4, Power3 } from "gsap";
+import * as ScrollMagic from "scrollmagic";
+import { ScrollMagicPluginGsap } from "scrollmagic-plugin-gsap";
 
 const ProjectWrapper = styled.div`
   height: 100%;
@@ -59,6 +63,12 @@ const MainImage = styled(Img)`
   height: 100%;
 `;
 
+const PreviewMainImage = styled.img`
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+`;
+
 const MainTitle = styled.h1`
   font-weight: 700;
   position: absolute;
@@ -69,19 +79,23 @@ const MainTitle = styled.h1`
   color: black;
 
   @media (min-width: ${({ theme }) => theme.breakpoints.sm}) {
-    right: -35px;
+    right: -55px;
     top: 630px;
     font-size: 3.4rem;
   }
 
   @media (min-width: ${({ theme }) => theme.breakpoints.md}) {
-    right: -0px;
+    right: -20px;
     top: 530px;
   }
   @media (min-width: ${({ theme }) => theme.breakpoints.lg}) {
-    right: -10px;
-    top: 580px;
+    right: -80px;
+    top: 520px;
     font-size: 5.1rem;
+  }
+  @media (min-width: ${({ theme }) => theme.breakpoints["lg+"]}) {
+    right: -50px;
+    top: 520px;
   }
   @media (min-width: ${({ theme }) => theme.breakpoints.xl}) {
     right: 55px;
@@ -155,8 +169,91 @@ const MainDescription = styled.p`
   }
 `;
 
+export const ProjectTemplate = ({ data }) => {
+  const statusTexts = {
+    "in progress": "Would be seen in:",
+    done: "Can be seen in:"
+  };
+
+  let contentToRender = [];
+  let i = 0;
+  let j = 1;
+  return (
+    <PrevLayout>
+      <ProjectWrapper>
+        <MainWrapper>
+          <MainImageWrapper>
+            <PreviewMainImage src={data.mainImage} />
+            <Lines className="lines" number={25} />
+          </MainImageWrapper>
+          <MainTitle>{data.title}</MainTitle>
+          <MainStatus>
+            <MainStatusHeader>{statusTexts[data.status]}</MainStatusHeader>
+            <MainStatusLocation>{data.location}</MainStatusLocation>
+          </MainStatus>
+        </MainWrapper>
+        <MainDescriptionWrapper>
+          <MainDescription>{data.desc}</MainDescription>
+        </MainDescriptionWrapper>
+
+        {data.hightlights.map((highlight, index) => {
+          contentToRender[i] = (
+            <Hightlights
+              className={"project-section"}
+              key={highlight.firstImageDesc + index}
+              {...highlight}
+              countFrom={index + 1}
+              prev={true}
+            />
+          );
+          i += 2;
+        })}
+        {data.fullImage.map((fullImage, index) => {
+          contentToRender[j] = (
+            <FullImage
+              className={"project-section"}
+              {...fullImage}
+              image={fullImage.image}
+              key={fullImage.desc + index}
+              prev={true}
+            />
+          );
+          j += 2;
+        })}
+        {contentToRender}
+      </ProjectWrapper>
+    </PrevLayout>
+  );
+};
+
 export default ({ data }) => {
+  const mainTitleRef = useRef();
+  const mainDescRef = useRef();
+  const mainStatusRef = useRef();
+  useEffect(() => {
+    const { current: mainTitle } = mainTitleRef;
+    const { current: mainStatus } = mainStatusRef;
+
+    const timeline = new TimelineMax();
+
+    timeline
+      .fromTo(
+        mainTitle,
+        1,
+        { autoAlpha: 0, scale: 2, x: "10%", y: "60%" },
+        { autoAlpha: 1, scale: 1, y: 0, x: 0, ease: Power4 }
+      )
+      .fromTo(
+        mainStatus,
+        1,
+        { autoAlpha: 0, scale: 2, x: "-10%", y: "60%" },
+        { autoAlpha: 1, scale: 1, y: 0, x: 0, ease: Power4 },
+        "-=0.75"
+      );
+  }, []);
+
   const { frontmatter } = data.markdownRemark;
+  console.log(frontmatter);
   const currentPorjectId = data.markdownRemark.id;
   const { edges: allPagesData } = data.allMarkdownRemark;
   const nextNode = allPagesData.find(({ node }) => node.id == currentPorjectId);
@@ -187,8 +284,8 @@ export default ({ data }) => {
             <MainImage fluid={frontmatter.mainImage.childImageSharp.fluid} />
             <Lines className="lines" number={25} />
           </MainImageWrapper>
-          <MainTitle>{frontmatter.title}</MainTitle>
-          <MainStatus>
+          <MainTitle ref={mainTitleRef}>{frontmatter.title}</MainTitle>
+          <MainStatus ref={mainStatusRef}>
             <MainStatusHeader>
               {statusTexts[frontmatter.status]}
             </MainStatusHeader>
@@ -196,7 +293,9 @@ export default ({ data }) => {
           </MainStatus>
         </MainWrapper>
         <MainDescriptionWrapper>
-          <MainDescription>{frontmatter.desc}</MainDescription>
+          <MainDescription ref={mainDescRef}>
+            {frontmatter.desc}
+          </MainDescription>
         </MainDescriptionWrapper>
 
         {frontmatter.hightlights.map((highlight, index) => {
@@ -205,7 +304,8 @@ export default ({ data }) => {
               className={"project-section"}
               key={highlight.firstImageDesc + index}
               {...highlight}
-              countFrom={index}
+              countFrom={index + 1}
+              prev={false}
             />
           );
           i += 2;
@@ -216,6 +316,7 @@ export default ({ data }) => {
               className={"project-section"}
               {...fullImage}
               key={fullImage.desc + index}
+              prev={false}
             />
           );
           j += 2;

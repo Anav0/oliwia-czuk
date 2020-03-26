@@ -21,7 +21,6 @@ export default ({
   const projects = edges.map(({ node }) => {
     return { ...node.frontmatter, id: node.id, path: node.fields.slug };
   });
-  console.log(projects);
   return (
     <Layout>
       <SEO

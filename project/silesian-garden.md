@@ -8,7 +8,7 @@ fullImage:
       Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur
       commodo, diam sed varius ultrices, lacus massa feugiat
 date: 2020-03-21T17:31:26.460Z
-location: 'Katowice, Poland'
+location: "Katowice, Poland"
 status: done
 title: Silesian Garden
 tags: silesia poland katowice garden renovation landscape greenery
@@ -28,4 +28,3 @@ hightlights:
       Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur
       commodo, diam sed varius ultrices, lacus massa feugiat
 ---
-adwadadadadawdawd

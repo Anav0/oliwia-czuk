@@ -31,6 +31,14 @@ const Image = styled(Img)`
   height: 100%;
   width: 100%;
   z-index: 4;
+  object-fit: cover;
+`;
+
+const PrevImage = styled.img`
+  height: 100%;
+  width: 100%;
+  z-index: 4;
+  object-fit: cover;
 `;
 
 const ImageDesc = styled.p`
@@ -57,7 +65,12 @@ const FullImage = props => {
   return (
     <FullImageWrapper className={props.className}>
       <Overlay></Overlay>
-      <Image fluid={props.image.childImageSharp.fluid}></Image>
+      {props.prev ? (
+        <PrevImage src={props.image} />
+      ) : (
+        <Image fluid={props.image.childImageSharp.fluid}></Image>
+      )}
+
       <ImageDesc>{props.desc}</ImageDesc>
     </FullImageWrapper>
   );

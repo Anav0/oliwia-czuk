@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 
 const LinesWrapper = styled.div`
-  width: 70px;
+  min-width: 70px;
   height: 100%;
   display: flex;
   flex-direction: column;

@@ -61,7 +61,7 @@ module.exports = {
         path: `${__dirname}/project`
       }
     },
-    `gatsby-plugin-netlify-cms`,
+
     `gatsby-plugin-transition-link`,
     "gatsby-plugin-react-svg",
     `gatsby-plugin-react-helmet`,
@@ -83,6 +83,16 @@ module.exports = {
         theme_color: `#663399`,
         display: `minimal-ui`,
         icon: `src/images/logo.svg` // This path is relative to the root of the site.
+      }
+    },
+    {
+      resolve: `gatsby-plugin-netlify-cms`,
+      options: {
+        /**
+         * One convention is to place your Netlify CMS customization code in a
+         * `src/cms` directory.
+         */
+        modulePath: `${__dirname}/src/cms/cms.js`
       }
     },
     `gatsby-plugin-styled-components`

@@ -18,6 +18,12 @@ const HighlightImage = styled(Img)`
   box-shadow: -5px 4px 10px rgba(0, 0, 0, 0.5);
 `;
 
+const PreviewHighlightImage = styled.img`
+  width: 100%;
+  height: 100%;
+  box-shadow: -5px 4px 10px rgba(0, 0, 0, 0.5);
+`;
+
 const HightlightImageDesc = styled.div`
   transform: rotate(-90deg);
   overflow: visible;
@@ -40,10 +46,15 @@ const HightlightImageDesc = styled.div`
     margin-right: 5px;
   }
 `;
+
 const ImageHightlight = props => {
   return (
     <ImageHightlightWrapper className={props.className}>
-      <HighlightImage fluid={props.fluid} />
+      {props.prev ? (
+        <PreviewHighlightImage src={props.fluid} />
+      ) : (
+        <HighlightImage fluid={props.fluid} />
+      )}
       <HightlightImageDesc>
         <strong>{props.number}</strong>
         <span>{props.desc}</span>

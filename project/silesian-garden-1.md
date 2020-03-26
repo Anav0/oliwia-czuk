@@ -10,7 +10,7 @@ fullImage:
       Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur
       commodo, diam sed varius ultrices, lacus massa feugiat
 date: 2020-03-21T17:31:26.460Z
-location: 'Wroclav, Poland'
+location: "Wroclav, Poland"
 status: in progress
 title: Wroclav Main Square
 tags: wroclav poland town square roses garden
@@ -30,4 +30,3 @@ hightlights:
       Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur
       commodo, diam sed varius ultrices, lacus massa feugiat
 ---
-adwadadadadawdawd

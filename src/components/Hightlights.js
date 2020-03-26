@@ -47,20 +47,32 @@ const HighlightsDesc = styled.p`
 `;
 
 const Hightlights = props => {
+  let firstImage = "";
+  let secondImage = "";
+  if (props.prev) {
+    firstImage = props.firstImage;
+    secondImage = props.secondImage;
+  } else {
+    firstImage = props.firstImage.childImageSharp.fluid;
+    secondImage = props.secondImage.childImageSharp.fluid;
+  }
+
   return (
     <HightlightsWrapper className={props.className}>
       <ImageHightlight
         className="firstImage"
-        fluid={props.firstImage.childImageSharp.fluid}
+        fluid={firstImage}
         desc={props.firstImageDesc}
         number={props.countFrom}
+        prev={props.prev}
       />
       <HighlightsDesc>{props.desc}</HighlightsDesc>
       <ImageHightlight
         className="secondImage"
-        fluid={props.secondImage.childImageSharp.fluid}
+        fluid={secondImage}
         desc={props.secondImageDesc}
         number={props.countFrom + 1}
+        prev={props.prev}
       />
     </HightlightsWrapper>
   );
