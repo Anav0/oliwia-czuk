@@ -22,7 +22,7 @@ desc: >-
 hightlights:
   - firstImage: /assets/liana-mikah-iktdocshqqc-unsplash.jpg
     firstImageDesc: Pink roses
-    secondImage: /assets/joel-filipe-ju9vazdgmzs-unsplash.jpg
+    secondImage: /assets/luca-bravo-srjztxsk3os-unsplash-1-.jpg
     secondImageDesc: Office building
     desc: >-
       Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur
