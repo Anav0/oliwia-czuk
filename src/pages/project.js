@@ -72,34 +72,33 @@ const PreviewMainImage = styled.img`
 const MainTitle = styled.h1`
   font-weight: 700;
   position: absolute;
-  right: -80px;
-  top: 350px;
-  transform: rotate(-90deg);
+  right: 30px;
+  bottom: 10%;
+  transform: rotate(-90deg) translate(100%, 0);
+  transform-origin: right bottom;
   font-size: 2.2rem;
   color: black;
 
   @media (min-width: ${({ theme }) => theme.breakpoints.sm}) {
-    right: -55px;
-    top: 630px;
+    right: 90px;
+    bottom: 15%;
     font-size: 3.4rem;
   }
 
   @media (min-width: ${({ theme }) => theme.breakpoints.md}) {
-    right: -20px;
-    top: 530px;
+    right: 125px;
+    bottom: 10%;
   }
   @media (min-width: ${({ theme }) => theme.breakpoints.lg}) {
-    right: -80px;
-    top: 520px;
+    right: 150px;
     font-size: 5.1rem;
   }
   @media (min-width: ${({ theme }) => theme.breakpoints["lg+"]}) {
-    right: -50px;
-    top: 520px;
+    right: 150px;
+    bottom: 5%;
   }
   @media (min-width: ${({ theme }) => theme.breakpoints.xl}) {
-    right: 55px;
-    top: 580px;
+    right: 250px;
   }
 `;
 
@@ -236,24 +235,16 @@ export default ({ data }) => {
 
     const timeline = new TimelineMax();
 
-    timeline
-      .fromTo(
-        mainTitle,
-        1,
-        { autoAlpha: 0, scale: 2, x: "10%", y: "60%" },
-        { autoAlpha: 1, scale: 1, y: 0, x: 0, ease: Power4 }
-      )
-      .fromTo(
-        mainStatus,
-        1,
-        { autoAlpha: 0, scale: 2, x: "-10%", y: "60%" },
-        { autoAlpha: 1, scale: 1, y: 0, x: 0, ease: Power4 },
-        "-=0.75"
-      );
+    timeline.fromTo(
+      mainStatus,
+      1,
+      { autoAlpha: 0, scale: 2, x: "-10%", y: "60%" },
+      { autoAlpha: 1, scale: 1, y: 0, x: 0, ease: Power4 },
+      "-=0.75"
+    );
   }, []);
 
   const { frontmatter } = data.markdownRemark;
-  console.log(frontmatter);
   const currentPorjectId = data.markdownRemark.id;
   const { edges: allPagesData } = data.allMarkdownRemark;
   const nextNode = allPagesData.find(({ node }) => node.id == currentPorjectId);

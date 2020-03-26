@@ -25,15 +25,14 @@ const PreviewHighlightImage = styled.img`
 `;
 
 const HightlightImageDesc = styled.div`
-  transform: rotate(-90deg);
+  transform: rotate(-90deg) translate(100%, 0);
+  transform-origin: right bottom;
   overflow: visible;
   position: absolute;
-  right: -25px;
-  bottom: 30px;
+  right: 0;
+  bottom: 0;
   display: flex;
   @media (min-width: ${({ theme }) => theme.breakpoints.lg}) {
-    right: -40px;
-    bottom: 35px;
   }
   span,
   strong {
