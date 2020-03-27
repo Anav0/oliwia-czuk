@@ -103,7 +103,7 @@ export default () => {
     const { current: header } = headerRef;
     const image = document.querySelector(".landingImage");
 
-    let timeline = new TimelineMax({ repeat: 10 });
+    let timeline = new TimelineMax();
 
     timeline
       .fromTo(
