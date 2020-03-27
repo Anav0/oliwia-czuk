@@ -183,6 +183,30 @@ export const ProjectTemplate = ({ data }) => {
   } else {
     PickedLayout = PrevLayout;
   }
+  const mainTitleRef = useRef();
+  const mainDescRef = useRef();
+  const mainStatusRef = useRef();
+  useEffect(() => {
+    const { current: mainTitle } = mainTitleRef;
+    const { current: mainStatus } = mainStatusRef;
+
+    const timeline = new TimelineMax();
+
+    timeline
+      .fromTo(
+        mainTitle,
+        1,
+        { autoAlpha: 0, scale: 2 },
+        { autoAlpha: 1, scale: 1, ease: Power4 }
+      )
+      .fromTo(
+        mainStatus,
+        1,
+        { autoAlpha: 0, scale: 2, x: "-10%", y: "60%" },
+        { autoAlpha: 1, scale: 1, y: 0, x: 0, ease: Power4 },
+        "-=0.75"
+      );
+  }, []);
   return (
     <PickedLayout>
       {data.mainImage.childImageSharp ? (
@@ -205,13 +229,13 @@ export const ProjectTemplate = ({ data }) => {
 
             <Lines className="lines" number={25} />
           </MainImageWrapper>
-          <MainTitle>{data.title}</MainTitle>
-          <MainStatus>
+          <MainTitle ref={mainTitleRef}>{data.title}</MainTitle>
+          <MainStatus ref={mainStatusRef}>
             <MainStatusHeader>{statusTexts[data.status]}</MainStatusHeader>
             <MainStatusLocation>{data.location}</MainStatusLocation>
           </MainStatus>
         </MainWrapper>
-        <MainDescriptionWrapper>
+        <MainDescriptionWrapper ref={mainDescRef}>
           <MainDescription>{data.desc}</MainDescription>
         </MainDescriptionWrapper>
 
@@ -266,31 +290,6 @@ function getNextProjectData(currentProjectId, allMarkdownRemark) {
 }
 
 export default ({ data }) => {
-  const mainTitleRef = useRef();
-  const mainDescRef = useRef();
-  const mainStatusRef = useRef();
-  useEffect(() => {
-    const { current: mainTitle } = mainTitleRef;
-    const { current: mainStatus } = mainStatusRef;
-
-    const timeline = new TimelineMax();
-
-    timeline
-      .fromTo(
-        mainTitle,
-        1,
-        { autoAlpha: 0, scale: 2 },
-        { autoAlpha: 1, scale: 1, ease: Power4 }
-      )
-      .fromTo(
-        mainStatus,
-        1,
-        { autoAlpha: 0, scale: 2, x: "-10%", y: "60%" },
-        { autoAlpha: 1, scale: 1, y: 0, x: 0, ease: Power4 },
-        "-=0.75"
-      );
-  }, []);
-
   const { frontmatter } = data.markdownRemark;
   const nextProjectData = getNextProjectData(
     data.markdownRemark.id,

@@ -8,7 +8,7 @@ public_folder: /assets
 collections:
   - name: project
     label: Project
-    folder: project
+    folder: src/cms/project
     create: true
     fields:
       - {

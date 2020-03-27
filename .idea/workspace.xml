@@ -2,13 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="096ad424-dafb-414f-93e7-1eaa622c6c78" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gatsby-config.js" beforeDir="false" afterPath="$PROJECT_DIR$/gatsby-config.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/project/silesian-garden-1.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/project/silesian-garden.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/cms/cms.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/cms/cms.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/cms/projectPreview.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/dummyProjects.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pages/project.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/project.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -53,6 +48,7 @@
       <workItem from="1585255444467" duration="772000" />
       <workItem from="1585256637232" duration="6000" />
       <workItem from="1585256820660" duration="4000" />
+      <workItem from="1585306821771" duration="5000" />
     </task>
     <servers />
   </component>
