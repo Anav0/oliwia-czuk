@@ -2,9 +2,11 @@
 templateKey: project
 location: awdawd
 status: done
-title: awdadw
+title: Test3
 tags: 'awd awd awd '
-desc: awddwa
+desc: >-
+  igor to fajny gość igor to fajny gość igor to fajny gość igor to fajny gość
+  igor to fajny gość igor to fajny gość igor to fajny gość igor to fajny gość
 mainImage: /assets/landscape.jpg
 fullImage:
   - image: /assets/liana-mikah-iktdocshqqc-unsplash.jpg
