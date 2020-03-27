@@ -1,6 +1,9 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import styled from "styled-components";
 import ImageHightlight from "src/components/ImageHightlight";
+import { TweenMax, TimelineMax, Power4 } from "gsap";
+import * as ScrollMagic from "scrollmagic";
+import { ScrollMagicPluginGsap } from "scrollmagic-plugin-gsap";
 
 const HightlightsWrapper = styled.div`
   display: flex;
@@ -47,13 +50,51 @@ const HighlightsDesc = styled.p`
 `;
 
 const Hightlights = props => {
+  const secondImageRef = useRef();
+  const firstImageRef = useRef();
+  const wrapperRef = useRef();
+
+  ScrollMagicPluginGsap(ScrollMagic, TimelineMax);
+
+  function scaleAnimation(elements, duration, stagger, position = 0) {
+    return TweenMax.fromTo(
+      elements,
+      duration,
+      { scale: 1.25, autoAlpha: 0 },
+      { scale: 1, autoAlpha: 1, ease: Power4, stagger },
+      `-=${position}`
+    );
+  }
+  useEffect(() => {
+    if (window.innerWidth < 768) return;
+    const { current: firstImage } = firstImageRef;
+    const { current: secondImage } = secondImageRef;
+    const { current: wrapper } = wrapperRef;
+
+    let timeline = new TimelineMax();
+    let controller = new ScrollMagic.Controller();
+
+    timeline
+      .add(scaleAnimation(wrapper.children, 0.5, 0.05, 0.25))
+      .add(scaleAnimation(firstImage.children, 0.75, 0.2, 0.25))
+      .add(scaleAnimation(secondImage.children, 0.75, 0.2, 0.25));
+
+    new ScrollMagic.Scene({
+      triggerElement: wrapper,
+      offset: -300
+    })
+      .setTween(timeline)
+      .addTo(controller);
+  }, []);
+
   return (
-    <HightlightsWrapper className={props.className}>
+    <HightlightsWrapper ref={wrapperRef} className={props.className}>
       <ImageHightlight
         className="firstImage"
         fluid={props.firstImage}
         desc={props.firstImageDesc}
         number={props.countFrom}
+        ref={firstImageRef}
       />
       <HighlightsDesc>{props.desc}</HighlightsDesc>
       <ImageHightlight
@@ -61,6 +102,7 @@ const Hightlights = props => {
         fluid={props.secondImage}
         desc={props.secondImageDesc}
         number={props.countFrom + 1}
+        ref={secondImageRef}
       />
     </HightlightsWrapper>
   );

@@ -46,9 +46,9 @@ const HightlightImageDesc = styled.div`
   }
 `;
 
-const ImageHightlight = props => {
+const ImageHightlight = React.forwardRef((props, ref) => {
   return (
-    <ImageHightlightWrapper className={props.className}>
+    <ImageHightlightWrapper ref={ref} className={props.className}>
       {props.fluid.childImageSharp ? (
         <HighlightImage fluid={props.fluid.childImageSharp.fluid} />
       ) : (
@@ -60,6 +60,6 @@ const ImageHightlight = props => {
       </HightlightImageDesc>
     </ImageHightlightWrapper>
   );
-};
+});
 
 export default ImageHightlight;

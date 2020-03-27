@@ -9,7 +9,7 @@ import Lines from "src/components/Lines";
 import Hightlights from "src/components/Hightlights";
 import FullImage from "src/components/FullImage";
 import NextProject from "src/components/NextProject";
-import { TimelineMax, Power4 } from "gsap";
+import { TweenMax, TimelineMax, Power4 } from "gsap";
 import * as ScrollMagic from "scrollmagic";
 import { ScrollMagicPluginGsap } from "scrollmagic-plugin-gsap";
 
@@ -56,6 +56,15 @@ const MainImageWrapper = styled.div`
   @media (min-width: ${({ theme }) => theme.breakpoints.xl}) {
     height: 82%;
   }
+`;
+
+const MainImageOverlay = styled.div`
+  position: absolute;
+  left: 0;
+  top: 0%;
+  width: 100%;
+  height: 100%;
+  background-color: whitesmoke;
 `;
 
 const MainImage = styled(Img)`
@@ -173,6 +182,61 @@ const statusTexts = {
   done: "Can be seen in:"
 };
 
+function playEntryAnimation(mainTitle, mainStatus, mainImageWrapper) {
+  const entryTimeline = new TimelineMax({ delay: 1 });
+  const lines = mainImageWrapper.children[1].children;
+
+  entryTimeline
+    .fromTo(
+      mainImageWrapper,
+      1,
+      { autoAlpha: 0, scale: 1.2 },
+      { autoAlpha: 1, scale: 1, ease: Power4 }
+    )
+    .fromTo(
+      lines,
+      0.75,
+      { autoAlpha: 0, scale: 1.2 },
+      { autoAlpha: 1, scale: 1, ease: Power4, stagger: 0.05 },
+      "-=0.25"
+    )
+    .fromTo(
+      mainTitle,
+      1,
+      { autoAlpha: 0, scale: 2 },
+      { autoAlpha: 1, scale: 1, ease: Power4 },
+      "-=1"
+    )
+    .fromTo(
+      mainStatus,
+      1,
+      { autoAlpha: 0, scale: 2, x: "-10%", y: "60%" },
+      { autoAlpha: 1, scale: 1, y: 0, x: 0, ease: Power4 },
+      "-=1"
+    );
+}
+function scaleAnimation(element) {
+  return TweenMax.fromTo(
+    element,
+    1,
+    { scale: 1.25, autoAlpha: 0 },
+    { scale: 1, autoAlpha: 1 }
+  );
+}
+
+function setupScrollAnimation(mainDesc) {
+  let timeline = new TimelineMax();
+  let controller = new ScrollMagic.Controller();
+
+  timeline.add([scaleAnimation(mainDesc)]);
+
+  new ScrollMagic.Scene({
+    triggerElement: mainDesc
+  })
+    .setTween(timeline)
+    .addTo(controller);
+}
+
 export const ProjectTemplate = ({ data }) => {
   let contentToRender = [];
   let i = 0;
@@ -186,26 +250,19 @@ export const ProjectTemplate = ({ data }) => {
   const mainTitleRef = useRef();
   const mainDescRef = useRef();
   const mainStatusRef = useRef();
+  const mainImageWrapperRef = useRef();
+  ScrollMagicPluginGsap(ScrollMagic, TimelineMax);
+
   useEffect(() => {
     const { current: mainTitle } = mainTitleRef;
     const { current: mainStatus } = mainStatusRef;
+    const { current: mainImageWrapper } = mainImageWrapperRef;
+    const { current: mainDesc } = mainDescRef;
 
-    const timeline = new TimelineMax();
+    if (window.innerWidth < 768) return;
 
-    timeline
-      .fromTo(
-        mainTitle,
-        1,
-        { autoAlpha: 0, scale: 2 },
-        { autoAlpha: 1, scale: 1, ease: Power4 }
-      )
-      .fromTo(
-        mainStatus,
-        1,
-        { autoAlpha: 0, scale: 2, x: "-10%", y: "60%" },
-        { autoAlpha: 1, scale: 1, y: 0, x: 0, ease: Power4 },
-        "-=0.75"
-      );
+    playEntryAnimation(mainTitle, mainStatus, mainImageWrapper);
+    setupScrollAnimation(mainDesc);
   }, []);
   return (
     <PickedLayout>
@@ -220,7 +277,7 @@ export const ProjectTemplate = ({ data }) => {
       )}
       <ProjectWrapper>
         <MainWrapper>
-          <MainImageWrapper>
+          <MainImageWrapper ref={mainImageWrapperRef}>
             {data.mainImage.childImageSharp ? (
               <MainImage fluid={data.mainImage.childImageSharp.fluid} />
             ) : (
@@ -260,6 +317,7 @@ export const ProjectTemplate = ({ data }) => {
                   {...fullImage}
                   image={fullImage.image}
                   key={fullImage.desc + index}
+                  animateRight={index % 2 === 0}
                 />
               );
               j += 2;
