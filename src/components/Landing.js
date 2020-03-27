@@ -4,8 +4,6 @@ import flowerVideo from "src/video/flower.mp4";
 import Img from "gatsby-image";
 import { graphql, useStaticQuery } from "gatsby";
 import { TimelineMax, Power4, Power3 } from "gsap";
-import * as ScrollMagic from "scrollmagic";
-import { ScrollMagicPluginGsap } from "scrollmagic-plugin-gsap";
 
 const LandingWrapper = styled.div`
   position: relative;
@@ -95,29 +93,24 @@ const LandingVideo = styled.video`
 `;
 
 export default () => {
-  const wrapperRef = React.createRef();
   const videoRef = React.createRef();
   const videoWrapperRef = React.createRef();
   const headerRef = React.createRef();
 
   useEffect(() => {
-    const { current: wrapper } = wrapperRef;
     const { current: video } = videoRef;
     const { current: videoWrapper } = videoWrapperRef;
     const { current: header } = headerRef;
     const image = document.querySelector(".landingImage");
 
-    ScrollMagicPluginGsap(ScrollMagic, TimelineMax);
-
-    let timeline = new TimelineMax();
-    let controller = new ScrollMagic.Controller();
+    let timeline = new TimelineMax({ repeat: 10 });
 
     timeline
       .fromTo(
         videoWrapper,
-        1,
-        { translateY: "-100%" },
-        { translateY: "0", duration: 0.75, ease: "back.out(2)" }
+        1.25,
+        { y: `-${window.innerHeight}px` },
+        { y: 0, duration: 0.75, ease: "back.out(2)" }
       )
       .fromTo(
         videoWrapper,
@@ -158,12 +151,6 @@ export default () => {
         "-=0.5"
       )
       .fromTo(image, 1, { opacity: 0 }, { opacity: 1, ease: Power4 });
-
-    new ScrollMagic.Scene({
-      triggerElement: wrapper
-    })
-      .setTween(timeline)
-      .addTo(controller);
   }, []);
   const data = useStaticQuery(graphql`
     query {
@@ -178,7 +165,7 @@ export default () => {
     }
   `);
   return (
-    <LandingWrapper ref={wrapperRef}>
+    <LandingWrapper>
       <LandingHeader ref={headerRef}>
         Oliwia Czuk - Landscape Engineer
       </LandingHeader>
