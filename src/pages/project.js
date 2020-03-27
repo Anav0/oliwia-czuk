@@ -252,16 +252,16 @@ export const ProjectTemplate = ({ data }) => {
   );
 };
 
-function getNextProjectData(allMarkdownRemark) {
+function getNextProjectData(currentProjectId, allMarkdownRemark) {
   const { edges: allPagesData } = allMarkdownRemark;
   const nextNode = allPagesData.find(
-    ({ node }) => node.id == data.markdownRemark.id
+    ({ node }) => node.id === currentProjectId
   );
   if (nextNode.next)
-    return (nextProjectData = {
+    return {
       slug: nextNode.next.fields.slug,
       ...nextNode.next.frontmatter
-    });
+    };
   return undefined;
 }
 
@@ -292,7 +292,10 @@ export default ({ data }) => {
   }, []);
 
   const { frontmatter } = data.markdownRemark;
-  let nextProjectData = getNextProjectData(data.allMarkdownRemark);
+  const nextProjectData = getNextProjectData(
+    data.markdownRemark.id,
+    data.allMarkdownRemark
+  );
   return <ProjectTemplate data={{ ...frontmatter, nextProjectData }} />;
 };
 
