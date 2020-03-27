@@ -9,7 +9,7 @@ import Lines from "src/components/Lines";
 import Hightlights from "src/components/Hightlights";
 import FullImage from "src/components/FullImage";
 import NextProject from "src/components/NextProject";
-import { TimelineMax, Power4, Power3 } from "gsap";
+import { TimelineMax, Power4 } from "gsap";
 import * as ScrollMagic from "scrollmagic";
 import { ScrollMagicPluginGsap } from "scrollmagic-plugin-gsap";
 
@@ -168,21 +168,41 @@ const MainDescription = styled.p`
   }
 `;
 
-export const ProjectTemplate = ({ data }) => {
-  const statusTexts = {
-    "in progress": "Would be seen in:",
-    done: "Can be seen in:"
-  };
+const statusTexts = {
+  "in progress": "Would be seen in:",
+  done: "Can be seen in:"
+};
 
+export const ProjectTemplate = ({ data }) => {
   let contentToRender = [];
   let i = 0;
   let j = 1;
+  let PickedLayout = undefined;
+  if (data.mainImage.childImageSharp) {
+    PickedLayout = Layout;
+  } else {
+    PickedLayout = PrevLayout;
+  }
   return (
-    <PrevLayout>
+    <PickedLayout>
+      {data.mainImage.childImageSharp ? (
+        <SEO
+          title={data.title}
+          description={data.desc}
+          keywords={data.tags.split(" ")}
+        />
+      ) : (
+        ""
+      )}
       <ProjectWrapper>
         <MainWrapper>
           <MainImageWrapper>
-            <PreviewMainImage src={data.mainImage} />
+            {data.mainImage.childImageSharp ? (
+              <MainImage fluid={data.mainImage.childImageSharp.fluid} />
+            ) : (
+              <PreviewMainImage src={data.mainImage} />
+            )}
+
             <Lines className="lines" number={25} />
           </MainImageWrapper>
           <MainTitle>{data.title}</MainTitle>
@@ -195,35 +215,55 @@ export const ProjectTemplate = ({ data }) => {
           <MainDescription>{data.desc}</MainDescription>
         </MainDescriptionWrapper>
 
-        {data.hightlights.map((highlight, index) => {
-          contentToRender[i] = (
-            <Hightlights
-              className={"project-section"}
-              key={highlight.firstImageDesc + index}
-              {...highlight}
-              countFrom={index + 1}
-              prev={true}
-            />
-          );
-          i += 2;
-        })}
-        {data.fullImage.map((fullImage, index) => {
-          contentToRender[j] = (
-            <FullImage
-              className={"project-section"}
-              {...fullImage}
-              image={fullImage.image}
-              key={fullImage.desc + index}
-              prev={true}
-            />
-          );
-          j += 2;
-        })}
+        {data.hightlights
+          ? data.hightlights.map((highlight, index) => {
+              contentToRender[i] = (
+                <Hightlights
+                  className={"project-section"}
+                  key={highlight.firstImageDesc + index}
+                  {...highlight}
+                  countFrom={index + 1}
+                />
+              );
+              i += 2;
+            })
+          : ""}
+        {data.fullImage
+          ? data.fullImage.map((fullImage, index) => {
+              contentToRender[j] = (
+                <FullImage
+                  className={"project-section"}
+                  {...fullImage}
+                  image={fullImage.image}
+                  key={fullImage.desc + index}
+                />
+              );
+              j += 2;
+            })
+          : ""}
         {contentToRender}
+        {data.mainImage.childImageSharp && data.nextProjectData ? (
+          <NextProject {...data.nextProjectData} />
+        ) : (
+          ""
+        )}
       </ProjectWrapper>
-    </PrevLayout>
+    </PickedLayout>
   );
 };
+
+function getNextProjectData(allMarkdownRemark) {
+  const { edges: allPagesData } = allMarkdownRemark;
+  const nextNode = allPagesData.find(
+    ({ node }) => node.id == data.markdownRemark.id
+  );
+  if (nextNode.next)
+    return (nextProjectData = {
+      slug: nextNode.next.fields.slug,
+      ...nextNode.next.frontmatter
+    });
+  return undefined;
+}
 
 export default ({ data }) => {
   const mainTitleRef = useRef();
@@ -235,88 +275,25 @@ export default ({ data }) => {
 
     const timeline = new TimelineMax();
 
-    timeline.fromTo(
-      mainStatus,
-      1,
-      { autoAlpha: 0, scale: 2, x: "-10%", y: "60%" },
-      { autoAlpha: 1, scale: 1, y: 0, x: 0, ease: Power4 },
-      "-=0.75"
-    );
+    timeline
+      .fromTo(
+        mainTitle,
+        1,
+        { autoAlpha: 0, scale: 2 },
+        { autoAlpha: 1, scale: 1, ease: Power4 }
+      )
+      .fromTo(
+        mainStatus,
+        1,
+        { autoAlpha: 0, scale: 2, x: "-10%", y: "60%" },
+        { autoAlpha: 1, scale: 1, y: 0, x: 0, ease: Power4 },
+        "-=0.75"
+      );
   }, []);
 
   const { frontmatter } = data.markdownRemark;
-  const currentPorjectId = data.markdownRemark.id;
-  const { edges: allPagesData } = data.allMarkdownRemark;
-  const nextNode = allPagesData.find(({ node }) => node.id == currentPorjectId);
-  const statusTexts = {
-    "in progress": "Would be seen in:",
-    done: "Can be seen in:"
-  };
-  let nextProjectData = undefined;
-  if (nextNode.next)
-    nextProjectData = {
-      slug: nextNode.next.fields.slug,
-      ...nextNode.next.frontmatter
-    };
-
-  let contentToRender = [];
-  let i = 0;
-  let j = 1;
-  return (
-    <Layout>
-      <SEO
-        title={frontmatter.title}
-        description={frontmatter.desc}
-        keywords={frontmatter.tags.split(" ")}
-      />
-      <ProjectWrapper>
-        <MainWrapper>
-          <MainImageWrapper>
-            <MainImage fluid={frontmatter.mainImage.childImageSharp.fluid} />
-            <Lines className="lines" number={25} />
-          </MainImageWrapper>
-          <MainTitle ref={mainTitleRef}>{frontmatter.title}</MainTitle>
-          <MainStatus ref={mainStatusRef}>
-            <MainStatusHeader>
-              {statusTexts[frontmatter.status]}
-            </MainStatusHeader>
-            <MainStatusLocation>{frontmatter.location}</MainStatusLocation>
-          </MainStatus>
-        </MainWrapper>
-        <MainDescriptionWrapper>
-          <MainDescription ref={mainDescRef}>
-            {frontmatter.desc}
-          </MainDescription>
-        </MainDescriptionWrapper>
-
-        {frontmatter.hightlights.map((highlight, index) => {
-          contentToRender[i] = (
-            <Hightlights
-              className={"project-section"}
-              key={highlight.firstImageDesc + index}
-              {...highlight}
-              countFrom={index + 1}
-              prev={false}
-            />
-          );
-          i += 2;
-        })}
-        {frontmatter.fullImage.map((fullImage, index) => {
-          contentToRender[j] = (
-            <FullImage
-              className={"project-section"}
-              {...fullImage}
-              key={fullImage.desc + index}
-              prev={false}
-            />
-          );
-          j += 2;
-        })}
-        {contentToRender}
-        {nextProjectData ? <NextProject {...nextProjectData} /> : ""}
-      </ProjectWrapper>
-    </Layout>
-  );
+  let nextProjectData = getNextProjectData(data.allMarkdownRemark);
+  return <ProjectTemplate data={{ ...frontmatter, nextProjectData }} />;
 };
 
 export const pageQuery = graphql`

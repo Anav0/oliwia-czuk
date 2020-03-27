@@ -65,10 +65,10 @@ const FullImage = props => {
   return (
     <FullImageWrapper className={props.className}>
       <Overlay></Overlay>
-      {props.prev ? (
-        <PrevImage src={props.image} />
-      ) : (
+      {props.image.childImageSharp ? (
         <Image fluid={props.image.childImageSharp.fluid}></Image>
+      ) : (
+        <PrevImage src={props.image} />
       )}
 
       <ImageDesc>{props.desc}</ImageDesc>

@@ -58,7 +58,7 @@ module.exports = {
       resolve: `gatsby-source-filesystem`,
       options: {
         name: `markdown-pages`,
-        path: `${__dirname}/project`
+        path: `${__dirname}/src/cms/project`
       }
     },
 

@@ -2,15 +2,14 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="096ad424-dafb-414f-93e7-1eaa622c6c78" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/gatsby-config.js" beforeDir="false" afterPath="$PROJECT_DIR$/gatsby-config.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gatsby-node.js" beforeDir="false" afterPath="$PROJECT_DIR$/gatsby-node.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Projects/ProjectShowcase.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Projects/ProjectShowcase.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/project/silesian-garden-1.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project/silesian-garden.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/cms/cms.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/cms/cms.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/cms/projectPreview.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/dummyProjects.js" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pages/project.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/project.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/projects.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/projects.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/styles/fonts/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/styles/fonts/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/styles/global.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/styles/global.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -19,6 +18,9 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="PackageJsonUpdateNotifier">
+    <dismissed value="$PROJECT_DIR$/package.json" />
   </component>
   <component name="ProjectId" id="1ZUla4w5HhMInBHUXx1DLTstq8B" />
   <component name="ProjectViewState">
@@ -29,7 +31,12 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.path.for.package.eslint" value="project" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="nodejs_package_manager_path" value="npm" />
     <property name="prettierjs.PrettierConfiguration.Package" value="C:\Projects\oliwia-czuk\node_modules\prettier" />
+    <property name="settings.editor.selected.configurable" value="MTConfigurable" />
   </component>
   <component name="SvnConfiguration">
     <configuration />
@@ -42,10 +49,36 @@
       <option name="presentableId" value="Default" />
       <updated>1584901613403</updated>
       <workItem from="1584901617317" duration="22000" />
+      <workItem from="1585255174088" duration="262000" />
+      <workItem from="1585255444467" duration="772000" />
+      <workItem from="1585256637232" duration="6000" />
+      <workItem from="1585256820660" duration="4000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="878" y="180" key="#Plugins" timestamp="1585255435501">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="878" y="180" key="#Plugins/0.0.1920.1040@0.0.1920.1040" timestamp="1585255435501" />
+    <state x="740" y="275" key="FileChooserDialogImpl" timestamp="1585256641051">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="740" y="275" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1585256641051" />
+    <state x="461" y="162" key="SettingsEditor" timestamp="1585255720700">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="461" y="162" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1585255720700" />
+    <state x="646" y="236" width="627" height="568" key="find.popup" timestamp="1585255579169">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="646" y="236" width="627" height="568" key="find.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1585255579169" />
+    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup" timestamp="1585255679034">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1585255679034" />
   </component>
 </project>

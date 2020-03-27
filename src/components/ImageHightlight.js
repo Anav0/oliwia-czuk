@@ -49,10 +49,10 @@ const HightlightImageDesc = styled.div`
 const ImageHightlight = props => {
   return (
     <ImageHightlightWrapper className={props.className}>
-      {props.prev ? (
-        <PreviewHighlightImage src={props.fluid} />
+      {props.fluid.childImageSharp ? (
+        <HighlightImage fluid={props.fluid.childImageSharp.fluid} />
       ) : (
-        <HighlightImage fluid={props.fluid} />
+        <PreviewHighlightImage src={props.fluid} />
       )}
       <HightlightImageDesc>
         <strong>{props.number}</strong>
