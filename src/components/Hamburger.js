@@ -196,13 +196,22 @@ const Hamburger = () => {
             ...GatsbyImageSharpFluid
           }
         }
+      },
+      privacyImage: file(relativePath: { eq: "privacy-image.jpg" }) {
+        id
+        childImageSharp {
+          fluid(maxWidth: 1920) {
+            ...GatsbyImageSharpFluid
+          }
+        }
       }
     }
   `);
-  var menuItems = {
+  const menuItems = {
     home: { image: data.homeImage, link: "/" },
     projects: { image: data.projectImage, link: "projects" },
-    contact: { image: data.contactImage, link: "contact" }
+    contact: { image: data.contactImage, link: "contact" },
+    "privacy policy": { image: data.privacyImage, link: "privacy" }
   };
 
   const [isOpen, setIsOpen] = useState(false);

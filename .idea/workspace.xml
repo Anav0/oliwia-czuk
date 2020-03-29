@@ -2,14 +2,27 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="096ad424-dafb-414f-93e7-1eaa622c6c78" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/project.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/project.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gatsby-config.js" beforeDir="false" afterPath="$PROJECT_DIR$/gatsby-config.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/cms/cms.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/cms/cms.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/cms/pages/privacy.md" beforeDir="false" afterPath="$PROJECT_DIR$/src/cms/pages/privacy.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/cms/previews/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/cms/previews/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/cms/privacy/map-templatekey-privacy-body-privacy-policy-n-nlorem-ipsum-dolor-sit-amet-consectetur-adipiscing-elit-donec-in-dolor-nibh-fusce-vestibulum-in-elit-id-vestibulum-etiam-bibendum-pulvinar-interdum-aenean-imperdiet-nibh-id-sem-luctus-sed-v.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Hamburger.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Hamburger.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/privacy/privacy.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/admin/config.yml" beforeDir="false" afterPath="$PROJECT_DIR$/static/admin/config.yml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="JavaScript File" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -18,6 +31,9 @@
     <dismissed value="$PROJECT_DIR$/package.json" />
   </component>
   <component name="ProjectId" id="1ZUla4w5HhMInBHUXx1DLTstq8B" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showExcludedFiles" value="true" />
@@ -26,12 +42,40 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/images" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="prettierjs.PrettierConfiguration.Package" value="C:\Projects\oliwia-czuk\node_modules\prettier" />
-    <property name="settings.editor.selected.configurable" value="MTConfigurable" />
+    <property name="settings.editor.selected.configurable" value="editing.templates" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Projects\oliwia-czuk\src\pages" />
+      <recent name="C:\Projects\oliwia-czuk\src\cms\pages" />
+      <recent name="C:\Projects\oliwia-czuk\src\pages\privacy" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Projects\oliwia-czuk\src\images" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration name="dev" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
+      <package-json value="$PROJECT_DIR$/package.json" />
+      <command value="run" />
+      <scripts>
+        <script value="dev" />
+      </scripts>
+      <node-interpreter value="project" />
+      <envs />
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="npm.dev" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SvnConfiguration">
     <configuration />
@@ -49,6 +93,8 @@
       <workItem from="1585256637232" duration="6000" />
       <workItem from="1585256820660" duration="4000" />
       <workItem from="1585306821771" duration="5000" />
+      <workItem from="1585511384522" duration="1527000" />
+      <workItem from="1585513580227" duration="6003000" />
     </task>
     <servers />
   </component>
@@ -56,25 +102,45 @@
     <option name="version" value="1" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="878" y="180" key="#Plugins" timestamp="1585255435501">
+    <state x="878" y="180" key="#Plugins" timestamp="1585513700123">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="878" y="180" key="#Plugins/0.0.1920.1040@0.0.1920.1040" timestamp="1585255435501" />
+    <state x="878" y="180" key="#Plugins/0.0.1920.1040@0.0.1920.1040" timestamp="1585513700123" />
     <state x="740" y="275" key="FileChooserDialogImpl" timestamp="1585256641051">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="740" y="275" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1585256641051" />
-    <state x="461" y="162" key="SettingsEditor" timestamp="1585255720700">
+    <state width="1899" height="261" key="GridCell.Tab.0.bottom" timestamp="1585519645590">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="461" y="162" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1585255720700" />
-    <state x="646" y="236" width="627" height="568" key="find.popup" timestamp="1585255579169">
+    <state width="1899" height="261" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1585519645590" />
+    <state width="1899" height="261" key="GridCell.Tab.0.center" timestamp="1585519645590">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="646" y="236" width="627" height="568" key="find.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1585255579169" />
-    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup" timestamp="1585255679034">
+    <state width="1899" height="261" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1585519645590" />
+    <state width="1899" height="261" key="GridCell.Tab.0.left" timestamp="1585519645590">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1585255679034" />
+    <state width="1899" height="261" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1585519645590" />
+    <state width="1899" height="261" key="GridCell.Tab.0.right" timestamp="1585519645590">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1899" height="261" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1585519645590" />
+    <state x="461" y="162" key="SettingsEditor" timestamp="1585513726646">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="461" y="162" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1585513726646" />
+    <state x="646" y="236" width="627" height="568" key="find.popup" timestamp="1585519427959">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="646" y="236" width="627" height="568" key="find.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1585519427959" />
+    <state x="691" y="293" key="git4idea.merge.GitPullDialog" timestamp="1585514829628">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="691" y="293" key="git4idea.merge.GitPullDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1585514829628" />
+    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup" timestamp="1585518934842">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1585518934842" />
   </component>
 </project>

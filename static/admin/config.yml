@@ -43,3 +43,14 @@ collections:
           - { label: SecondImage, name: secondImage, widget: image }
           - { label: SecondImageDesc, name: secondImageDesc, widget: string }
           - { name: desc, label: Desc, widget: string }
+  - name: pages
+    label: Pages
+    files:
+      - file: src/cms/pages/privacy.md
+        label: Privacy
+        name: privacy
+        fields:
+          - {label: "Template Key", name: "templateKey", widget: "hidden", default: "privacy"}
+          - {label: "Path", name: "path", widget: "hidden", default: "/privacy"}
+          - {label: "Title", name: "title", widget: "string"}
+          - {label: "Body", name: "body", widget: "markdown"}

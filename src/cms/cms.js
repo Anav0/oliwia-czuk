@@ -1,6 +1,6 @@
 import React from "react";
 import CMS from "netlify-cms-app";
-import { ProjectPreview } from "./previews";
+import {PrivacyPreview, ProjectPreview} from "./previews";
 import { StyleSheetManager } from "styled-components";
 
 class CSSInjector extends React.Component {
@@ -36,4 +36,11 @@ CMS.registerPreviewTemplate("project", props => (
   <CSSInjector>
     <ProjectPreview {...props} />
   </CSSInjector>
+));
+
+//Used like
+CMS.registerPreviewTemplate("privacy", props => (
+    <CSSInjector>
+      <PrivacyPreview {...props} />
+    </CSSInjector>
 ));
