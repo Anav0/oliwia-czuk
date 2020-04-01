@@ -263,7 +263,7 @@ export const ProjectTemplate = ({ data }) => {
     const { current: mainImageWrapper } = mainImageWrapperRef;
     const { current: mainDesc } = mainDescRef;
 
-    if (window.innerWidth < 768) return;
+    if (window.innerWidth < 768 || !data.mainImage.childImageSharp) return;
 
     playEntryAnimation(mainTitle, mainStatus, mainImageWrapper);
     setupScrollAnimation(mainDesc);
