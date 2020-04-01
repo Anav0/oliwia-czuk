@@ -58,26 +58,6 @@ const MainImageWrapper = styled.div`
   }
 `;
 
-const MainImageOverlay = styled.div`
-  position: absolute;
-  left: 0;
-  top: 0%;
-  width: 100%;
-  height: 100%;
-  background-color: whitesmoke;
-`;
-
-const MainImage = styled(Img)`
-  width: 100%;
-  height: 100%;
-`;
-
-const PreviewMainImage = styled.img`
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-`;
-
 const MainTitle = styled.h1`
   font-weight: 700;
   position: absolute;
@@ -109,6 +89,17 @@ const MainTitle = styled.h1`
   @media (min-width: ${({ theme }) => theme.breakpoints.xl}) {
     right: 250px;
   }
+`;
+
+const MainImage = styled(Img)`
+  width: 100%;
+  height: 100%;
+`;
+
+const PreviewMainImage = styled.img`
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 `;
 
 const MainStatus = styled.div`
@@ -215,6 +206,7 @@ function playEntryAnimation(mainTitle, mainStatus, mainImageWrapper) {
       "-=1"
     );
 }
+
 function scaleAnimation(element) {
   return TweenMax.fromTo(
     element,
@@ -242,7 +234,7 @@ export const ProjectTemplate = ({ data }) => {
   let i = 0;
   let j = 1;
   let PickedLayout = undefined;
-  if (data.mainImage.childImageSharp) {
+  if (data.mainImage && data.mainImage.childImageSharp) {
     PickedLayout = Layout;
   } else {
     PickedLayout = PrevLayout;
@@ -251,6 +243,18 @@ export const ProjectTemplate = ({ data }) => {
   const mainDescRef = useRef();
   const mainStatusRef = useRef();
   const mainImageWrapperRef = useRef();
+
+  let {
+    title,
+    desc,
+    status,
+    tags,
+    mainImage,
+    location,
+    hightlights,
+    fullImage,
+    nextProjectData
+  } = data;
 
   useEffect(() => {
     ScrollMagicPluginGsap(ScrollMagic, TimelineMax);
@@ -266,38 +270,34 @@ export const ProjectTemplate = ({ data }) => {
   }, []);
   return (
     <PickedLayout>
-      {data.mainImage.childImageSharp ? (
-        <SEO
-          title={data.title}
-          description={data.desc}
-          keywords={data.tags.split(" ")}
-        />
+      {mainImage.childImageSharp ? (
+        <SEO title={title} description={desc} keywords={tags.split(" ")} />
       ) : (
         ""
       )}
       <ProjectWrapper>
         <MainWrapper>
           <MainImageWrapper ref={mainImageWrapperRef}>
-            {data.mainImage.childImageSharp ? (
-              <MainImage fluid={data.mainImage.childImageSharp.fluid} />
+            {mainImage.childImageSharp ? (
+              <MainImage fluid={mainImage.childImageSharp.fluid} />
             ) : (
-              <PreviewMainImage src={data.mainImage} />
+              <PreviewMainImage src={mainImage} />
             )}
 
             <Lines className="lines" number={25} />
           </MainImageWrapper>
-          <MainTitle ref={mainTitleRef}>{data.title}</MainTitle>
+          <MainTitle ref={mainTitleRef}>{title}</MainTitle>
           <MainStatus ref={mainStatusRef}>
-            <MainStatusHeader>{statusTexts[data.status]}</MainStatusHeader>
-            <MainStatusLocation>{data.location}</MainStatusLocation>
+            <MainStatusHeader>{statusTexts[status]}</MainStatusHeader>
+            <MainStatusLocation>{location}</MainStatusLocation>
           </MainStatus>
         </MainWrapper>
         <MainDescriptionWrapper ref={mainDescRef}>
-          <MainDescription>{data.desc}</MainDescription>
+          <MainDescription>{desc}</MainDescription>
         </MainDescriptionWrapper>
 
-        {data.hightlights
-          ? data.hightlights.map((highlight, index) => {
+        {hightlights
+          ? hightlights.map((highlight, index) => {
               contentToRender[i] = (
                 <Hightlights
                   className={"project-section"}
@@ -309,8 +309,8 @@ export const ProjectTemplate = ({ data }) => {
               i += 2;
             })
           : ""}
-        {data.fullImage
-          ? data.fullImage.map((fullImage, index) => {
+        {fullImage
+          ? fullImage.map((fullImage, index) => {
               contentToRender[j] = (
                 <FullImage
                   className={"project-section"}
@@ -324,8 +324,8 @@ export const ProjectTemplate = ({ data }) => {
             })
           : ""}
         {contentToRender}
-        {data.mainImage.childImageSharp && data.nextProjectData ? (
-          <NextProject {...data.nextProjectData} />
+        {mainImage.childImageSharp && nextProjectData ? (
+          <NextProject {...nextProjectData} />
         ) : (
           ""
         )}

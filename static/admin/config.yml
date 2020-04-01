@@ -21,7 +21,12 @@ collections:
       - { name: title, label: Title }
       - { name: tags, label: Tags, widget: string }
       - { name: desc, label: Desc, widget: string }
-      - { name: mainImage, label: MainImage, widget: image }
+      - {
+          name: mainImage,
+          label: MainImage,
+          widget: image,
+          default: ../assets/dummyProjectCover.jpg,
+        }
       - label: FullImage
         name: fullImage
         widget: list
