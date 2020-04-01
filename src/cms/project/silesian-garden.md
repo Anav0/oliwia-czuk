@@ -7,12 +7,12 @@ fullImage:
     desc: >-
       Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur
       commodo, diam sed varius ultrices, lacus massa feugiat
+templateKey: project
 date: 2020-03-21T17:31:26.460Z
-location: "Katowice, Poland"
+location: 'Gliwice, Poland'
 status: done
 title: Silesian Garden
 tags: silesia poland katowice garden renovation landscape greenery
-templateKey: project
 desc: >-
   Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur commodo,
   diam sed varius ultrices, lacus massa feugiat ligula, sed facilisis diam odio

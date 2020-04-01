@@ -11,12 +11,6 @@ collections:
     folder: src/cms/project
     create: true
     fields:
-      - {
-          label: "Template",
-          name: "templateKey",
-          widget: "hidden",
-          default: "project",
-        }
       - { name: location, label: Location, widget: string }
       - {
           name: status,
@@ -43,6 +37,12 @@ collections:
           - { label: SecondImage, name: secondImage, widget: image }
           - { label: SecondImageDesc, name: secondImageDesc, widget: string }
           - { name: desc, label: Desc, widget: string }
+      - {
+          label: "Template",
+          name: "templateKey",
+          widget: "hidden",
+          default: "project",
+        }
   - name: pages
     label: Pages
     files:
@@ -50,11 +50,11 @@ collections:
         label: Privacy
         name: privacy
         fields:
+          - { label: "Title", name: "title", widget: "string" }
+          - { label: "Body", name: "body", widget: "markdown" }
           - {
               label: "Template",
               name: "templateKey",
               widget: "hidden",
               default: "privacy",
             }
-          - { label: "Title", name: "title", widget: "string" }
-          - { label: "Body", name: "body", widget: "markdown" }
