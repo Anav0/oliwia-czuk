@@ -196,7 +196,7 @@ const Hamburger = () => {
             ...GatsbyImageSharpFluid
           }
         }
-      },
+      }
       privacyImage: file(relativePath: { eq: "privacy-image.jpg" }) {
         id
         childImageSharp {
@@ -210,7 +210,7 @@ const Hamburger = () => {
   const menuItems = {
     home: { image: data.homeImage, link: "/" },
     projects: { image: data.projectImage, link: "projects" },
-    contact: { image: data.contactImage, link: "contact" },
+    "hire me": { image: data.contactImage, link: "contact" },
     "privacy policy": { image: data.privacyImage, link: "privacy" }
   };
 

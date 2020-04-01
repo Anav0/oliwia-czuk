@@ -12,6 +12,7 @@ location: "Katowice, Poland"
 status: done
 title: Silesian Garden
 tags: silesia poland katowice garden renovation landscape greenery
+templateKey: project
 desc: >-
   Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur commodo,
   diam sed varius ultrices, lacus massa feugiat ligula, sed facilisis diam odio

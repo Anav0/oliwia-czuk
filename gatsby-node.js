@@ -16,7 +16,6 @@ const path = require(`path`);
 exports.createPages = ({ actions, graphql }) => {
   const { createPage } = actions;
 
-  const projectTemplate = path.resolve(`src/pages/project.js`);
   return graphql(`
     {
       allMarkdownRemark {
@@ -28,6 +27,7 @@ exports.createPages = ({ actions, graphql }) => {
             }
             frontmatter {
               title
+              templateKey
             }
           }
         }
@@ -41,9 +41,9 @@ exports.createPages = ({ actions, graphql }) => {
     return result.data.allMarkdownRemark.edges.forEach(({ node }) => {
       createPage({
         path: node.fields.slug,
-        component: projectTemplate,
+        component: path.resolve(`src/pages/${node.frontmatter.templateKey}.js`),
         context: {
-          path: node.fields.slug
+          slug: node.fields.slug
         }
       });
     });

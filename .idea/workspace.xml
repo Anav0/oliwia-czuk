@@ -3,14 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="096ad424-dafb-414f-93e7-1eaa622c6c78" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gatsby-config.js" beforeDir="false" afterPath="$PROJECT_DIR$/gatsby-config.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/cms/cms.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/cms/cms.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/cms/pages/privacy.md" beforeDir="false" afterPath="$PROJECT_DIR$/src/cms/pages/privacy.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/cms/previews/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/cms/previews/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/cms/privacy/map-templatekey-privacy-body-privacy-policy-n-nlorem-ipsum-dolor-sit-amet-consectetur-adipiscing-elit-donec-in-dolor-nibh-fusce-vestibulum-in-elit-id-vestibulum-etiam-bibendum-pulvinar-interdum-aenean-imperdiet-nibh-id-sem-luctus-sed-v.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Hamburger.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Hamburger.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/privacy/privacy.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/admin/config.yml" beforeDir="false" afterPath="$PROJECT_DIR$/static/admin/config.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/privacy.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/privacy.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -94,7 +87,8 @@
       <workItem from="1585256820660" duration="4000" />
       <workItem from="1585306821771" duration="5000" />
       <workItem from="1585511384522" duration="1527000" />
-      <workItem from="1585513580227" duration="6003000" />
+      <workItem from="1585513580227" duration="6337000" />
+      <workItem from="1585649658888" duration="5151000" />
     </task>
     <servers />
   </component>
@@ -110,37 +104,37 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="740" y="275" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1585256641051" />
-    <state width="1899" height="261" key="GridCell.Tab.0.bottom" timestamp="1585519645590">
+    <state width="1899" height="270" key="GridCell.Tab.0.bottom" timestamp="1585688900408">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1899" height="261" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1585519645590" />
-    <state width="1899" height="261" key="GridCell.Tab.0.center" timestamp="1585519645590">
+    <state width="1899" height="270" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1585688900408" />
+    <state width="1899" height="270" key="GridCell.Tab.0.center" timestamp="1585688900408">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1899" height="261" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1585519645590" />
-    <state width="1899" height="261" key="GridCell.Tab.0.left" timestamp="1585519645590">
+    <state width="1899" height="270" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1585688900408" />
+    <state width="1899" height="270" key="GridCell.Tab.0.left" timestamp="1585688900408">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1899" height="261" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1585519645590" />
-    <state width="1899" height="261" key="GridCell.Tab.0.right" timestamp="1585519645590">
+    <state width="1899" height="270" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1585688900408" />
+    <state width="1899" height="270" key="GridCell.Tab.0.right" timestamp="1585688900408">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1899" height="261" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1585519645590" />
+    <state width="1899" height="270" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1585688900408" />
     <state x="461" y="162" key="SettingsEditor" timestamp="1585513726646">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="461" y="162" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1585513726646" />
-    <state x="646" y="236" width="627" height="568" key="find.popup" timestamp="1585519427959">
+    <state x="646" y="236" width="627" height="568" key="find.popup" timestamp="1585649942332">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="646" y="236" width="627" height="568" key="find.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1585519427959" />
+    <state x="646" y="236" width="627" height="568" key="find.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1585649942332" />
     <state x="691" y="293" key="git4idea.merge.GitPullDialog" timestamp="1585514829628">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="691" y="293" key="git4idea.merge.GitPullDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1585514829628" />
-    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup" timestamp="1585518934842">
+    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup" timestamp="1585684508188">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1585518934842" />
+    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1585684508188" />
   </component>
 </project>

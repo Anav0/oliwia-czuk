@@ -54,8 +54,6 @@ const Hightlights = props => {
   const firstImageRef = useRef();
   const wrapperRef = useRef();
 
-  ScrollMagicPluginGsap(ScrollMagic, TimelineMax);
-
   function scaleAnimation(elements, duration, stagger, position = 0) {
     return TweenMax.fromTo(
       elements,
@@ -66,6 +64,8 @@ const Hightlights = props => {
     );
   }
   useEffect(() => {
+    ScrollMagicPluginGsap(ScrollMagic, TimelineMax);
+
     if (window.innerWidth < 768) return;
     const { current: firstImage } = firstImageRef;
     const { current: secondImage } = secondImageRef;

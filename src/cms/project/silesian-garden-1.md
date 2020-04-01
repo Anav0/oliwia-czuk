@@ -14,6 +14,7 @@ location: "Wroclav, Poland"
 status: in progress
 title: Wroclav Main Square
 tags: wroclav poland town square roses garden
+templateKey: project
 desc: >-
   Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur commodo,
   diam sed varius ultrices, lacus massa feugiat ligula, sed facilisis diam odio

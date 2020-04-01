@@ -70,7 +70,17 @@ function SEO({ description, lang, meta, keywords, title }) {
 SEO.defaultProps = {
   lang: `en`,
   meta: [],
-  keywords: []
+  keywords: [
+    "Landscape engineer",
+    "greenery",
+    "portfolio",
+    "poland",
+    "freelancer",
+    "opole",
+    "Landscape engineer opole",
+    "architekt krajobrazu",
+    "architekt krajobrazu opole"
+  ]
 };
 
 SEO.propTypes = {

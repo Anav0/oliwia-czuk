@@ -36,7 +36,12 @@ const RevealOverlay = styled.div`
   width: 100%;
   height: 100%;
   background: whitesmoke;
-  z-index: 7;
+  display: none;
+  z-index: -2;
+  @media (min-width: ${({ theme }) => theme.breakpoints.sm}) {
+    display: flex;
+    z-index: 7;
+  }
 `;
 const Image = styled(Img)`
   height: 100%;
@@ -77,10 +82,9 @@ const FullImage = props => {
   const revealOverlayRef = useRef();
   const imageDescRef = useRef();
 
-  ScrollMagicPluginGsap(ScrollMagic, TimelineMax);
-
   useEffect(() => {
     if (window.innerWidth < 768) return;
+    ScrollMagicPluginGsap(ScrollMagic, TimelineMax);
     const { current: wrapper } = wrapperRef;
     const { current: revealOverlay } = revealOverlayRef;
     const { current: imageDesc } = imageDescRef;
@@ -113,12 +117,7 @@ const FullImage = props => {
   return (
     <FullImageWrapper ref={wrapperRef} className={props.className}>
       <Overlay></Overlay>
-      {window.innerWidth >= 768 ? (
-        <RevealOverlay ref={revealOverlayRef}></RevealOverlay>
-      ) : (
-        ""
-      )}
-
+      <RevealOverlay ref={revealOverlayRef}></RevealOverlay>
       {props.image.childImageSharp ? (
         <Image fluid={props.image.childImageSharp.fluid}></Image>
       ) : (

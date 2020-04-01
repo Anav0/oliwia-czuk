@@ -12,7 +12,7 @@ collections:
     create: true
     fields:
       - {
-          label: "Template Key",
+          label: "Template",
           name: "templateKey",
           widget: "hidden",
           default: "project",
@@ -50,7 +50,11 @@ collections:
         label: Privacy
         name: privacy
         fields:
-          - {label: "Template Key", name: "templateKey", widget: "hidden", default: "privacy"}
-          - {label: "Path", name: "path", widget: "hidden", default: "/privacy"}
-          - {label: "Title", name: "title", widget: "string"}
-          - {label: "Body", name: "body", widget: "markdown"}
+          - {
+              label: "Template",
+              name: "templateKey",
+              widget: "hidden",
+              default: "privacy",
+            }
+          - { label: "Title", name: "title", widget: "string" }
+          - { label: "Body", name: "body", widget: "markdown" }

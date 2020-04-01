@@ -251,9 +251,9 @@ export const ProjectTemplate = ({ data }) => {
   const mainDescRef = useRef();
   const mainStatusRef = useRef();
   const mainImageWrapperRef = useRef();
-  ScrollMagicPluginGsap(ScrollMagic, TimelineMax);
 
   useEffect(() => {
+    ScrollMagicPluginGsap(ScrollMagic, TimelineMax);
     const { current: mainTitle } = mainTitleRef;
     const { current: mainStatus } = mainStatusRef;
     const { current: mainImageWrapper } = mainImageWrapperRef;
