@@ -348,6 +348,7 @@ function getNextProjectData(currentProjectId, allMarkdownRemark) {
 }
 
 export default ({ data }) => {
+  if (!data.markdownRemark) return <div />;
   const { frontmatter } = data.markdownRemark;
   const nextProjectData = getNextProjectData(
     data.markdownRemark.id,
