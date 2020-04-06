@@ -9,7 +9,7 @@ const NextProjectWrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: ${({ theme }) => theme.colors.darkerPink};
+  background-color: ${({ theme }) => theme.colors.darkPink};
   a {
     font-size: 2.5rem;
     font-family: "Advent Pro", sans-serif;
@@ -31,7 +31,7 @@ const NextProjectWrapper = styled.div`
   }
 `;
 
-const NextProject = props => {
+const NextProject = (props) => {
   return (
     <NextProjectWrapper>
       <AniLink paintDrip hex={colors.wheat} to={props.slug}>

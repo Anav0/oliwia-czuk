@@ -5,10 +5,10 @@ exports.onCreateWebpackConfig = ({ stage, loaders, actions }) => {
         rules: [
           {
             test: /scrollmagic/,
-            use: loaders.null()
-          }
-        ]
-      }
+            use: loaders.null(),
+          },
+        ],
+      },
     });
   }
 };
@@ -33,19 +33,25 @@ exports.createPages = ({ actions, graphql }) => {
         }
       }
     }
-  `).then(result => {
+  `).then((result) => {
     if (result.errors) {
       return Promise.reject(result.errors);
     }
 
+    const blackList = ["offer"];
     return result.data.allMarkdownRemark.edges.forEach(({ node }) => {
-      createPage({
-        path: node.fields.slug,
-        component: path.resolve(`src/pages/${node.frontmatter.templateKey}.js`),
-        context: {
-          slug: node.fields.slug
-        }
-      });
+      if (
+        !blackList.some((element) => element === node.frontmatter.templateKey)
+      )
+        createPage({
+          path: node.fields.slug,
+          component: path.resolve(
+            `src/pages/${node.frontmatter.templateKey}.js`
+          ),
+          context: {
+            slug: node.fields.slug,
+          },
+        });
     });
   });
 };
@@ -61,7 +67,7 @@ exports.onCreateNode = ({ node, getNode, actions }) => {
     createNodeField({
       node,
       name: `slug`,
-      value: slug
+      value: slug,
     });
   }
 };

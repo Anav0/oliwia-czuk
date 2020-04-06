@@ -2,5 +2,7 @@ export default {
   softBlack: "#3D3636",
   wheat: "#FFF3DB",
   pink: "#FFEDED",
-  darkerPink: "#FFCCCC"
+  darkPink: "#FFCCCC",
+  harshPink: "#ff9999",
+  white: "#FFFFFF",
 };

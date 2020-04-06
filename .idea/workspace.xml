@@ -3,7 +3,15 @@
   <component name="ChangeListManager">
     <list default="true" id="096ad424-dafb-414f-93e7-1eaa622c6c78" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/privacy.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/privacy.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gatsby-config.js" beforeDir="false" afterPath="$PROJECT_DIR$/gatsby-config.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gatsby-node.js" beforeDir="false" afterPath="$PROJECT_DIR$/gatsby-node.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/NextProject.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/NextProject.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Projects/Autoplay.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Projects/Autoplay.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/layout.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/layout.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/styles/colors.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/styles/colors.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/styles/global.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/styles/global.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/admin/config.yml" beforeDir="false" afterPath="$PROJECT_DIR$/static/admin/config.yml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -89,6 +97,8 @@
       <workItem from="1585511384522" duration="1527000" />
       <workItem from="1585513580227" duration="6337000" />
       <workItem from="1585649658888" duration="5151000" />
+      <workItem from="1586033843714" duration="64000" />
+      <workItem from="1586176081774" duration="23000" />
     </task>
     <servers />
   </component>

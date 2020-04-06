@@ -21,8 +21,8 @@ const AutoplayWrapper = styled.div`
     transition: 0.35s stroke-dashoffset;
     transform: rotate(-90deg);
     transform-origin: 50% 50%;
-    stroke: ${({ theme }) => theme.colors.darkerPink};
-    position: absolute;  
+    stroke: ${({ theme }) => theme.colors.darkPink};
+    position: absolute;
     left: 0;
     top: 0;
   }
@@ -70,7 +70,7 @@ export default class Autoplay extends Component {
       initialPercentage: props.initialPercentage || 0,
       totalTime: props.totalTime || 3000,
       isPlaying: true,
-      chunk: 0
+      chunk: 0,
     };
   }
 
@@ -89,13 +89,13 @@ export default class Autoplay extends Component {
     await this.setState({
       initialPercentage: this.props.initialPercentage || 0,
       totalTime: this.props.totalTime || 3000,
-      isPlaying: true
+      isPlaying: true,
     });
 
     await this.setState({
       chunk:
         ((100 - this.state.initialPercentage) / this.state.totalTime) * 1000,
-      timeLeft: this.state.totalTime / 1000
+      timeLeft: this.state.totalTime / 1000,
     });
 
     if (this.props.onRestart) this.props.onRestart();
@@ -114,7 +114,7 @@ export default class Autoplay extends Component {
         this.setProgress(newPercent, circle, circumference);
         return {
           initialPercentage: newPercent,
-          timeLeft: state.timeLeft - interval / 1000
+          timeLeft: state.timeLeft - interval / 1000,
         };
       });
       if (this.props.onTick) this.props.onTick(this.state.timeLeft);
@@ -153,11 +153,9 @@ export default class Autoplay extends Component {
     circle.style.strokeDashoffset = offset;
   }
 
-
   togglePlay() {
-
     this.setState({
-      isPlaying: !this.state.isPlaying
+      isPlaying: !this.state.isPlaying,
     });
   }
 

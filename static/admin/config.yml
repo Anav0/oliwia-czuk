@@ -48,6 +48,31 @@ collections:
           widget: "hidden",
           default: "project",
         }
+  - name: offer
+    label: Offer
+    folder: src/cms/offer
+    create: true
+    fields:
+      - { name: title, label: Title }
+      - { name: desc, label: Desc, widget: string }
+      - {
+          name: btnText,
+          label: BtnText,
+          widget: string,
+          default: Check out my projects,
+        }
+      - {
+          name: mainImage,
+          label: MainImage,
+          widget: image,
+          default: ../assets/dummyProjectCover.jpg,
+        }
+      - {
+          label: "Template",
+          name: "templateKey",
+          widget: "hidden",
+          default: "offer",
+        }
   - name: pages
     label: Pages
     files:

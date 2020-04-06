@@ -52,6 +52,10 @@ export default createGlobalStyle`
     .disactive {
       opacity: 0.55;
     }
+    .default-text-shadow{
+        text-shadow: 4px 4px 0px rgba(0, 0, 0, 0.05);
+
+    }
     .hidden{
         opacity: 0;
     }

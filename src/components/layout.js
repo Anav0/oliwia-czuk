@@ -9,13 +9,13 @@ import GlobalStyle from "src/styles/global";
 
 const global = {
   breakpoints,
-  colors
+  colors,
 };
 
 const MyGrid = styled.div`
   min-height: 100vh;
   .landing-logo {
-    width: 25px;
+    width: 35px;
     height: auto;
     position: fixed;
     left: 20px;
@@ -59,7 +59,7 @@ const Layout = ({ children }) => {
 };
 
 Layout.propTypes = {
-  children: PropTypes.node.isRequired
+  children: PropTypes.node.isRequired,
 };
 
 export default Layout;
