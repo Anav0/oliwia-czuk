@@ -11,6 +11,7 @@ import Offer, {
 import Flickity from "react-flickity-component";
 import Colors from "src/styles/colors";
 import AniLink from "gatsby-plugin-transition-link/AniLink";
+import CarouselProgress from "src/components/CarouselProgress";
 
 const OffersWrapper = styled.div`
   width: 100%;
@@ -75,14 +76,12 @@ const OfferHeader = styled.h1`
   color: transparent;
   @media (min-width: ${({ theme }) => theme.breakpoints.sm}) {
     position: absolute;
-    top: 70px;
+    top: 20px;
     left: 60px;
     font-size: 5.3rem;
   }
   @media (min-width: ${({ theme }) => theme.breakpoints["lg+"]}) {
     font-size: 6rem;
-    top: 20px;
-    left: 60px;
   }
   @media (min-width: ${({ theme }) => theme.breakpoints.xl}) {
     font-size: 8rem;
@@ -98,6 +97,7 @@ const OfferList = styled.ul`
   display: flex;
   flex-direction: column;
   margin-bottom: 5rem;
+
   .offer:first-child {
     margin-top: 15vh;
   }
@@ -106,6 +106,19 @@ const OfferList = styled.ul`
   }
   .carousel {
     cursor: grab;
+  }
+  .progress {
+    display: none;
+
+    @media (min-width: ${({ theme }) => theme.breakpoints.md}) {
+      display: flex;
+      width: 50% !important;
+      place-self: center;
+      margin-top: 5vh;
+    }
+    @media (min-width: ${({ theme }) => theme.breakpoints.xl}) {
+      width: 25% !important;
+    }
   }
   .carousel .flickity-viewport .flickity-slider .offer {
     width: 70%;
@@ -213,7 +226,7 @@ export default () => {
           </OfferIndex>
           <Flickity
             flickityRef={(c) => {
-              c.on("settle", () => {
+              c.on("change", () => {
                 const {
                   node: { frontmatter: selectedOffer },
                 } = destiledData[c.selectedIndex];
@@ -230,6 +243,11 @@ export default () => {
           >
             {offers}
           </Flickity>
+          <CarouselProgress
+            className="progress"
+            active={activeIndex + 1}
+            total={destiledData.length}
+          />
         </OfferList>
       ) : (
         <OfferList>{offers}</OfferList>
