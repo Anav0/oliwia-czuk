@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import Img from "gatsby-image";
+import AniLink from "gatsby-plugin-transition-link/AniLink";
 
 const OfferWrapper = styled.div`
   display: flex;
@@ -13,7 +14,7 @@ const OfferWrapper = styled.div`
   }
 `;
 
-const OfferIndex = styled.span`
+export const OfferIndex = styled.span`
   font-size: 8rem;
   position: absolute;
   transform-origin: bottom left;
@@ -25,6 +26,18 @@ const OfferIndex = styled.span`
     top: -65px;
     right: -45px;
   }
+  @media (min-width: ${({ theme }) => theme.breakpoints.md}) {
+    display: none;
+  }
+  @media (min-width: ${({ theme }) => theme.breakpoints.lg}) {
+    font-size: 10rem;
+  }
+  @media (min-width: ${({ theme }) => theme.breakpoints["lg+"]}) {
+    font-size: 15rem;
+  }
+  @media (min-width: ${({ theme }) => theme.breakpoints.xl}) {
+    font-size: 20rem;
+  }
 `;
 
 const OfferImage = styled(Img)`
@@ -35,9 +48,18 @@ const OfferImage = styled(Img)`
     width: 420px;
     height: 420px;
   }
+  @media (min-width: ${({ theme }) => theme.breakpoints.md}) {
+    width: 500px;
+    height: 500px;
+  }
+
+  @media (min-width: ${({ theme }) => theme.breakpoints.lg}) {
+    width: 566px;
+    height: 566px;
+  }
 `;
 
-const OfferDescWrapper = styled.div`
+export const OfferDescWrapper = styled.div`
   @media (min-width: ${({ theme }) => theme.breakpoints.sm}) {
     width: 65%;
     position: absolute;
@@ -45,9 +67,12 @@ const OfferDescWrapper = styled.div`
     top: 50%;
     transform: translate(50%, -50%);
   }
+  @media (min-width: ${({ theme }) => theme.breakpoints.md}) {
+    display: none;
+  }
 `;
 
-const OfferTitle = styled.h2`
+export const OfferTitle = styled.h2`
   font-size: 2rem;
   margin-top: 1.5rem;
   -webkit-text-stroke: 2px ${({ theme }) => theme.colors.white};
@@ -55,9 +80,12 @@ const OfferTitle = styled.h2`
   @media (min-width: ${({ theme }) => theme.breakpoints.sm}) {
     font-size: 3.8rem;
   }
+  @media (min-width: ${({ theme }) => theme.breakpoints.xl}) {
+    font-size: 4.5rem;
+  }
 `;
 
-const OfferDesc = styled.p`
+export const OfferDesc = styled.p`
   font-size: 1.25rem;
   margin-top: 1.5rem;
   font-weight: 500;
@@ -66,7 +94,7 @@ const OfferDesc = styled.p`
   }
 `;
 
-const OfferBtn = styled.button`
+export const OfferBtn = styled.button`
   font-size: 1.75rem;
   box-shadow: none;
   background: transparent;
@@ -90,16 +118,16 @@ export default (props) => {
     <OfferWrapper className="offer">
       <OfferImageIndex>
         <OfferImage fluid={props.mainImage.childImageSharp.fluid} />
-        {props.index > 9 ? (
-          <OfferIndex className="default-text-shadow">{props.index}</OfferIndex>
-        ) : (
-          <OfferIndex className="default-text-shadow">{`0${props.index}`}</OfferIndex>
-        )}
+        <OfferIndex className="default-text-shadow">
+          {props.index < 9 ? `0${props.index}` : props.index}
+        </OfferIndex>
       </OfferImageIndex>
       <OfferDescWrapper>
         <OfferTitle className="default-text-shadow">{props.title}</OfferTitle>
         <OfferDesc className="default-text-shadow">{props.desc}</OfferDesc>
-        <OfferBtn>{props.btnText}</OfferBtn>
+        <AniLink paintDrip hex={props.transitionColor} to={props.link}>
+          <OfferBtn>{props.btnText}</OfferBtn>
+        </AniLink>
       </OfferDescWrapper>
     </OfferWrapper>
   );
