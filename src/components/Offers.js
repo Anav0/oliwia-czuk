@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import { useStaticQuery } from "gatsby";
 import Offer, {
   OfferDescWrapper,
   OfferTitle,
@@ -143,33 +142,7 @@ const OfferList = styled.ul`
   }
 `;
 
-export default () => {
-  const data = useStaticQuery(graphql`
-    query {
-      allMarkdownRemark(
-        filter: { frontmatter: { templateKey: { eq: "offer" } } }
-      ) {
-        edges {
-          node {
-            id
-            frontmatter {
-              templateKey
-              title
-              desc
-              btnText
-              mainImage {
-                childImageSharp {
-                  fluid(maxWidth: 1920) {
-                    ...GatsbyImageSharpFluid
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
-    }
-  `);
+export default ({ data }) => {
   const destiledData = data.allMarkdownRemark.edges;
 
   let [innerWidth, setInnerWidth] = useState(0);

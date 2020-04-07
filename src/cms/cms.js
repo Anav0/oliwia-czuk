@@ -1,6 +1,6 @@
 import React from "react";
 import CMS from "netlify-cms-app";
-import {PrivacyPreview, ProjectPreview} from "./previews";
+import { PrivacyPreview, ProjectPreview, OfferPreview } from "./previews";
 import { StyleSheetManager } from "styled-components";
 
 class CSSInjector extends React.Component {
@@ -8,7 +8,7 @@ class CSSInjector extends React.Component {
     super(props);
 
     this.state = {
-      iframeRef: ""
+      iframeRef: "",
     };
   }
 
@@ -32,15 +32,21 @@ class CSSInjector extends React.Component {
 }
 
 //Used like
-CMS.registerPreviewTemplate("project", props => (
+//TODO: Make a loop
+CMS.registerPreviewTemplate("project", (props) => (
   <CSSInjector>
     <ProjectPreview {...props} />
   </CSSInjector>
 ));
 
-//Used like
-CMS.registerPreviewTemplate("privacy", props => (
-    <CSSInjector>
-      <PrivacyPreview {...props} />
-    </CSSInjector>
+CMS.registerPreviewTemplate("privacy", (props) => (
+  <CSSInjector>
+    <PrivacyPreview {...props} />
+  </CSSInjector>
+));
+
+CMS.registerPreviewTemplate("offer", (props) => (
+  <CSSInjector>
+    <OfferPreview {...props} />
+  </CSSInjector>
 ));

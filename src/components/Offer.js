@@ -11,6 +11,7 @@ const OfferWrapper = styled.div`
   position: relative;
   * {
     color: ${({ theme }) => theme.colors.white};
+    font-family: "Advent Pro", sans-serif;
   }
 `;
 
@@ -41,6 +42,26 @@ export const OfferIndex = styled.span`
 `;
 
 const OfferImage = styled(Img)`
+  width: 250px;
+  height: 250px;
+
+  @media (min-width: ${({ theme }) => theme.breakpoints.sm}) {
+    width: 420px;
+    height: 420px;
+  }
+  @media (min-width: ${({ theme }) => theme.breakpoints.md}) {
+    width: 500px;
+    height: 500px;
+  }
+
+  @media (min-width: ${({ theme }) => theme.breakpoints.lg}) {
+    width: 566px;
+    height: 566px;
+  }
+`;
+
+const PrevOfferImage = styled.img`
+  object-fit: cover;
   width: 250px;
   height: 250px;
 
@@ -117,7 +138,12 @@ export default (props) => {
   return (
     <OfferWrapper className="offer">
       <OfferImageIndex>
-        <OfferImage fluid={props.mainImage.childImageSharp.fluid} />
+        {props.mainImage.childImageSharp ? (
+          <OfferImage fluid={props.mainImage.childImageSharp.fluid} />
+        ) : (
+          <PrevOfferImage src={props.mainImage} />
+        )}
+
         <OfferIndex className="default-text-shadow">
           {props.index < 9 ? `0${props.index}` : props.index}
         </OfferIndex>
@@ -125,9 +151,13 @@ export default (props) => {
       <OfferDescWrapper>
         <OfferTitle className="default-text-shadow">{props.title}</OfferTitle>
         <OfferDesc className="default-text-shadow">{props.desc}</OfferDesc>
-        <AniLink paintDrip hex={props.transitionColor} to={props.link}>
+        {props.mainImage.childImageSharp ? (
+          <AniLink paintDrip hex={props.transitionColor} to={props.link}>
+            <OfferBtn>{props.btnText}</OfferBtn>
+          </AniLink>
+        ) : (
           <OfferBtn>{props.btnText}</OfferBtn>
-        </AniLink>
+        )}
       </OfferDescWrapper>
     </OfferWrapper>
   );
