@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import styled from "styled-components";
 import Offer, {
   OfferDescWrapper,
@@ -11,6 +11,10 @@ import Flickity from "react-flickity-component";
 import Colors from "src/styles/colors";
 import AniLink from "gatsby-plugin-transition-link/AniLink";
 import CarouselProgress from "src/components/CarouselProgress";
+import { TimelineMax, Power4 } from "gsap";
+import * as ScrollMagic from "scrollmagic";
+import { ScrollMagicPluginGsap } from "scrollmagic-plugin-gsap";
+import { scaleAnimation } from "src/animations";
 
 const OffersWrapper = styled.div`
   width: 100%;
@@ -27,6 +31,7 @@ const OffersWrapper = styled.div`
 
   * {
     font-family: "Advent Pro", sans-serif;
+    outline: none;
   }
 
   .activeWrapper {
@@ -76,7 +81,7 @@ const OfferHeader = styled.h1`
   @media (min-width: ${({ theme }) => theme.breakpoints.sm}) {
     position: absolute;
     top: 20px;
-    left: 60px;
+    left: 40px;
     font-size: 5.3rem;
   }
   @media (min-width: ${({ theme }) => theme.breakpoints["lg+"]}) {
@@ -100,12 +105,15 @@ const OfferList = styled.ul`
   .offer:first-child {
     margin-top: 15vh;
   }
+
   .offer {
     margin-top: 35vh;
   }
+
   .carousel {
     cursor: grab;
   }
+
   .progress {
     display: none;
 
@@ -113,12 +121,18 @@ const OfferList = styled.ul`
       display: flex;
       width: 50% !important;
       place-self: center;
+      margin-top: 2vh;
+    }
+
+    @media (min-width: ${({ theme }) => theme.breakpoints.lg}) {
       margin-top: 5vh;
     }
+
     @media (min-width: ${({ theme }) => theme.breakpoints.xl}) {
       width: 25% !important;
     }
   }
+
   .carousel .flickity-viewport .flickity-slider .offer {
     width: 70%;
     margin: 0;
@@ -131,8 +145,9 @@ const OfferList = styled.ul`
   }
 
   @media (min-width: ${({ theme }) => theme.breakpoints.sm}) {
-    margin-top: 20vh;
+    margin-top: 15vh;
   }
+
   @media (min-width: ${({ theme }) => theme.breakpoints.md}) {
     position: absolute;
     left: 50%;
@@ -158,11 +173,28 @@ export default ({ data }) => {
     freeScroll: false,
     initialIndex: activeIndex,
   };
+
+  const wrapperRef = useRef();
+  const headerRef = useRef();
+
   useEffect(() => {
     setInnerWidth(window.innerWidth);
     window.addEventListener("resize", () => {
       setInnerWidth(window.innerWidth);
     });
+
+    ScrollMagicPluginGsap(ScrollMagic, TimelineMax);
+    let timeline = new TimelineMax();
+    let controller = new ScrollMagic.Controller();
+    const { current: wrapper } = wrapperRef;
+
+    timeline.add(scaleAnimation(wrapper.children, 1, 0.5));
+
+    new ScrollMagic.Scene({
+      triggerElement: wrapper,
+    })
+      .setTween(timeline)
+      .addTo(controller);
   }, []);
   const offers = destiledData.map(({ node }, index) => (
     <Offer
@@ -175,8 +207,10 @@ export default ({ data }) => {
   ));
 
   return (
-    <OffersWrapper>
-      <OfferHeader className="default-text-shadow">My Offer</OfferHeader>
+    <OffersWrapper ref={wrapperRef}>
+      <OfferHeader ref={headerRef} className="default-text-shadow">
+        My Offer
+      </OfferHeader>
       {innerWidth >= 1024 ? (
         <OfferList>
           <OfferDescWrapper className="show activeWrapper">

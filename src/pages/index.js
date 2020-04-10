@@ -4,13 +4,20 @@ import Layout from "src/components/Layout";
 import Landing from "src/components/Landing";
 import Offers from "src/components/Offers";
 import { graphql } from "gatsby";
+import styled from "styled-components";
 
-const IndexPage = ({ data }) => {
+const OffersWrapper = styled.div`
+  margin-top: 25vh;
+`;
+
+const IndexPage = ({ location, data }) => {
   return (
-    <Layout>
+    <Layout location={location}>
       <SEO title="Home" keywords={[]} />
       <Landing />
-      <Offers data={data} />
+      <OffersWrapper>
+        <Offers data={data} />
+      </OffersWrapper>
     </Layout>
   );
 };

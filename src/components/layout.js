@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useRef, useState } from "react";
 import PropTypes from "prop-types";
 import styled, { ThemeProvider } from "styled-components";
 import breakpoints from "src/styles/breakpoints";
@@ -21,6 +21,7 @@ const MyGrid = styled.div`
     left: 20px;
     top: 30px;
     z-index: 10;
+    transition: opacity 0.25s ease-in-out;
     path {
       fill: ${({ theme }) => theme.colors.softBlack};
     }
@@ -45,13 +46,34 @@ const MyGrid = styled.div`
   }
 `;
 
-const Layout = ({ children }) => {
+const Layout = ({ location, children }) => {
+  const [scrollPercent, setScrollPercent] = useState(0);
+  useEffect(() => {
+    window.addEventListener("scroll", (e) => {
+      let h = document.documentElement,
+        b = document.body,
+        st = "scrollTop",
+        sh = "scrollHeight";
+
+      let percent =
+        ((h[st] || b[st]) / ((h[sh] || b[sh]) - h.clientHeight)) * 100;
+
+      setScrollPercent(percent);
+    });
+  }, []);
+
   return (
     <ThemeProvider theme={global}>
       <GlobalStyle />
       <MyGrid>
         <Hamburger />
-        <Logo className="landing-logo" />
+        <Logo
+          className={`landing-logo ${
+            scrollPercent < 95 || !location || location.pathname !== "/"
+              ? "show"
+              : "hidden"
+          }`}
+        />
         {children}
       </MyGrid>
     </ThemeProvider>

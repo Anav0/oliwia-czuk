@@ -12,6 +12,7 @@ import NextProject from "src/components/NextProject";
 import { TweenMax, TimelineMax, Power4 } from "gsap";
 import * as ScrollMagic from "scrollmagic";
 import { ScrollMagicPluginGsap } from "scrollmagic-plugin-gsap";
+import { scaleAnimation } from "src/animations";
 
 const ProjectWrapper = styled.div`
   height: 100%;
@@ -170,7 +171,7 @@ const MainDescription = styled.p`
 
 const statusTexts = {
   "in progress": "Would be seen in:",
-  done: "Can be seen in:"
+  done: "Can be seen in:",
 };
 
 function playEntryAnimation(mainTitle, mainStatus, mainImageWrapper) {
@@ -207,15 +208,6 @@ function playEntryAnimation(mainTitle, mainStatus, mainImageWrapper) {
     );
 }
 
-function scaleAnimation(element) {
-  return TweenMax.fromTo(
-    element,
-    1,
-    { scale: 1.25, autoAlpha: 0 },
-    { scale: 1, autoAlpha: 1 }
-  );
-}
-
 function setupScrollAnimation(mainDesc) {
   let timeline = new TimelineMax();
   let controller = new ScrollMagic.Controller();
@@ -223,7 +215,7 @@ function setupScrollAnimation(mainDesc) {
   timeline.add([scaleAnimation(mainDesc)]);
 
   new ScrollMagic.Scene({
-    triggerElement: mainDesc
+    triggerElement: mainDesc,
   })
     .setTween(timeline)
     .addTo(controller);
@@ -253,7 +245,7 @@ export const ProjectTemplate = ({ data }) => {
     location,
     hightlights,
     fullImage,
-    nextProjectData
+    nextProjectData,
   } = data;
 
   useEffect(() => {
@@ -342,7 +334,7 @@ function getNextProjectData(currentProjectId, allMarkdownRemark) {
   if (nextNode.next)
     return {
       slug: nextNode.next.fields.slug,
-      ...nextNode.next.frontmatter
+      ...nextNode.next.frontmatter,
     };
   return undefined;
 }

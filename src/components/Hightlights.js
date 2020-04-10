@@ -4,6 +4,7 @@ import ImageHightlight from "src/components/ImageHightlight";
 import { TweenMax, TimelineMax, Power4 } from "gsap";
 import * as ScrollMagic from "scrollmagic";
 import { ScrollMagicPluginGsap } from "scrollmagic-plugin-gsap";
+import { scaleAnimation } from "src/animations";
 
 const HightlightsWrapper = styled.div`
   display: flex;
@@ -49,20 +50,11 @@ const HighlightsDesc = styled.p`
   }
 `;
 
-const Hightlights = props => {
+const Hightlights = (props) => {
   const secondImageRef = useRef();
   const firstImageRef = useRef();
   const wrapperRef = useRef();
 
-  function scaleAnimation(elements, duration, stagger, position = 0) {
-    return TweenMax.fromTo(
-      elements,
-      duration,
-      { scale: 1.25, autoAlpha: 0 },
-      { scale: 1, autoAlpha: 1, ease: Power4, stagger },
-      `-=${position}`
-    );
-  }
   useEffect(() => {
     ScrollMagicPluginGsap(ScrollMagic, TimelineMax);
 
@@ -81,7 +73,7 @@ const Hightlights = props => {
 
     new ScrollMagic.Scene({
       triggerElement: wrapper,
-      offset: -300
+      offset: -300,
     })
       .setTween(timeline)
       .addTo(controller);
