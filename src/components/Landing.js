@@ -131,7 +131,7 @@ export default () => {
         {
           boxShadow: "0px 0px 50px rgba(0, 0, 0, 0.25)",
           borderWidth: window.innerWidth > 600 ? "10px" : "5px",
-          ease: Power4
+          ease: Power4,
         },
         "-=0.2"
       )
@@ -167,7 +167,7 @@ export default () => {
   return (
     <LandingWrapper>
       <LandingHeader ref={headerRef}>
-        Oliwia Czuk - Landscape Engineer
+        Oliwia Czuk - Inżynier Krajobrazu
       </LandingHeader>
       <LandingVideoWrapper ref={videoWrapperRef}>
         <LandingVideo

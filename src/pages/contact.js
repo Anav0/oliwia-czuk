@@ -222,49 +222,49 @@ export default class ContactPage extends React.Component {
     super(props);
     const initSteps = [
       {
-        question: "What's your name?",
+        question: "Jak się nazywasz?",
         anwser: "",
-        isValid: anwser => {
+        isValid: (anwser) => {
           if (anwser) return true;
-          else throw "Don't be shy";
-        }
+          else throw "Nie bądź nieśmiały";
+        },
       },
       {
-        question: "What's your email?",
+        question: "Jaki masz adres email?",
         anwser: "",
-        isValid: anwser => {
+        isValid: (anwser) => {
           if (
             /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(
               anwser
             )
           )
             return true;
-          else throw "Invalid email format";
-        }
+          else throw "Niepoprawny adres email";
+        },
       },
       {
-        question: "What type of project do you have in mind?",
+        question: "Jaki projekt chodzi ci po głowie?",
         anwser: "",
-        isValid: anwser => {
+        isValid: (anwser) => {
           if (anwser) return true;
-          else throw "Please tell me about your project";
-        }
+          else throw "Powiedz mi coś więcej na temat projektu";
+        },
       },
       {
-        question: "What budget you have in mind?",
+        question: "Jaki budżet został zaplanowany na to przedsięwzięcie?",
         anwser: "",
-        isValid: anwser => {
+        isValid: (anwser) => {
           if (anwser) return true;
-          else throw "Please tell me about your budget";
-        }
-      }
+          else throw "Jeśli nie wiesz jaki budżet jest w planach napisz 0";
+        },
+      },
     ];
     this.state = {
       isInputFocused: false,
       activeStep: 0,
       steps: initSteps,
       error: "",
-      isLoading: false
+      isLoading: false,
     };
   }
   componentDidMount() {
@@ -326,7 +326,7 @@ export default class ContactPage extends React.Component {
   next() {
     try {
       this.setState({
-        error: ""
+        error: "",
       });
       this.state.steps[this.state.activeStep].isValid(
         this.state.steps[this.state.activeStep].anwser
@@ -339,9 +339,9 @@ export default class ContactPage extends React.Component {
         onRepeat: () =>
           this.setState({
             activeStep: this.state.activeStep + 1,
-            error: ""
+            error: "",
           }),
-        yoyo: true
+        yoyo: true,
       }).fromTo(
         ".form-element",
         0.4,
@@ -351,7 +351,7 @@ export default class ContactPage extends React.Component {
     } catch (error) {
       console.error(error);
       this.setState({
-        error
+        error,
       });
     }
   }
@@ -364,9 +364,9 @@ export default class ContactPage extends React.Component {
       onRepeat: () =>
         this.setState({
           activeStep: this.state.activeStep - 1,
-          error: ""
+          error: "",
         }),
-      yoyo: true
+      yoyo: true,
     }).fromTo(
       ".form-element",
       0.4,
@@ -382,24 +382,24 @@ export default class ContactPage extends React.Component {
         to: `${process.env.GATSBY_RECIVING_EMAIL}`,
         subject: "Biznes - Oliwia Czuk",
         text: this.state.steps
-          .map(step => step.question + "\n" + step.anwser + "\n\n")
-          .join("")
+          .map((step) => step.question + "\n" + step.anwser + "\n\n")
+          .join(""),
       };
 
       try {
         this.setState({
           error: "",
-          isLoading: true
+          isLoading: true,
         });
         await axios.post(process.env.GATSBY_EMAIL_URL, dataToSend);
         this.playAfterSuccessAnimation();
       } catch (error) {
         this.setState({
-          error: "Something went wrong, please try sending message again"
+          error: "Coś poszło nie tak, spróbuj wysłać wiadomość ponownie",
         });
       } finally {
         this.setState({
-          isLoading: false
+          isLoading: false,
         });
       }
     }
@@ -408,9 +408,12 @@ export default class ContactPage extends React.Component {
   render() {
     return (
       <Layout>
-        <SEO title="Contact" keywords={["landscape", "contact", "greenery"]} />
+        <SEO
+          title="Kontakt"
+          keywords={["krajobraz", "kontakt", "przestrzeń zielona", "architekt"]}
+        />
         <FormWrapper>
-          <FormContent id="form-content" onSubmit={e => e.preventDefault()}>
+          <FormContent id="form-content" onSubmit={(e) => e.preventDefault()}>
             <FormHeader id="form-header" className="form-element">
               {this.state.steps[this.state.activeStep].question}
             </FormHeader>
@@ -420,28 +423,28 @@ export default class ContactPage extends React.Component {
               isFocused={this.state.isInputFocused}
             >
               <FormInput
-                onKeyDown={event => {
+                onKeyDown={(event) => {
                   if (event.key == "Enter") {
                     this.next();
                   }
                 }}
                 onFocus={() =>
                   this.setState({
-                    isInputFocused: true
+                    isInputFocused: true,
                   })
                 }
                 onBlur={() =>
                   this.setState({
-                    isInputFocused: false
+                    isInputFocused: false,
                   })
                 }
-                onChange={event => {
+                onChange={(event) => {
                   let changedSteps = [...this.state.steps];
                   let element = { ...this.state.steps[this.state.activeStep] };
                   element.anwser = event.target.value;
                   changedSteps[this.state.activeStep] = element;
                   this.setState({
-                    steps: changedSteps
+                    steps: changedSteps,
                   });
                 }}
                 value={this.state.steps[this.state.activeStep].anwser}
@@ -457,7 +460,7 @@ export default class ContactPage extends React.Component {
                   onClick={() => this.back()}
                 />
                 {this.state.activeStep === this.state.steps.length - 1 ? (
-                  <SubmitBtn>Submit</SubmitBtn>
+                  <SubmitBtn>Wyślij</SubmitBtn>
                 ) : null}
                 <RightArrow
                   className={
@@ -478,7 +481,7 @@ export default class ContactPage extends React.Component {
           <SuccessfullMessageContent id="postcard">
             <Postcard />
             <SuccessfullMessageText id="successfull-text">
-              Thanks! I will contact you as soon as possible.
+              Dziękuje! Skontaktuje się z tobą najszybciej jak to tylko możliwe.
             </SuccessfullMessageText>
           </SuccessfullMessageContent>
         </SuccessfullEmailWrapper>

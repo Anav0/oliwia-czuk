@@ -15,8 +15,8 @@ const ProjectsWrapper = styled.div`
 
 export default ({
   data: {
-    allMarkdownRemark: { edges }
-  }
+    allMarkdownRemark: { edges },
+  },
 }) => {
   const projects = edges.map(({ node }) => {
     return { ...node.frontmatter, id: node.id, path: node.fields.slug };
@@ -24,14 +24,15 @@ export default ({
   return (
     <Layout>
       <SEO
-        title="Projects"
+        title="Projekty"
         keywords={[
-          "projects",
+          "projekty",
           "freelancer",
-          "landscape",
-          "engineer",
-          "professional",
-          "renovation"
+          "krajobraz",
+          "inżynier",
+          "profesjonalista",
+          "renowacja",
+          "inwentaryzacja",
         ]}
       />
       <ProjectsWrapper>

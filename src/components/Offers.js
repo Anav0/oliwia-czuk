@@ -209,7 +209,7 @@ export default ({ data }) => {
   return (
     <OffersWrapper ref={wrapperRef}>
       <OfferHeader ref={headerRef} className="default-text-shadow">
-        My Offer
+        Usługi
       </OfferHeader>
       {innerWidth >= 1024 ? (
         <OfferList>

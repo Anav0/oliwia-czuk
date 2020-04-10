@@ -13,7 +13,7 @@ const OffersWrapper = styled.div`
 const IndexPage = ({ location, data }) => {
   return (
     <Layout location={location}>
-      <SEO title="Home" keywords={[]} />
+      <SEO title="Strona główna" keywords={[]} />
       <Landing />
       <OffersWrapper>
         <Offers data={data} />

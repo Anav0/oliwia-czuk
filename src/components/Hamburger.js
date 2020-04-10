@@ -108,7 +108,7 @@ const MenuCover = styled.div`
   top: 0;
   width: 100%;
   height: 100%;
-  background-color: ${props => props.bg};
+  background-color: ${(props) => props.bg};
   z-index: -1;
   opacity: 0;
 `;
@@ -208,10 +208,10 @@ const Hamburger = () => {
     }
   `);
   const menuItems = {
-    home: { image: data.homeImage, link: "/" },
-    projects: { image: data.projectImage, link: "projects" },
-    "hire me": { image: data.contactImage, link: "contact" },
-    "privacy policy": { image: data.privacyImage, link: "privacy" }
+    "strona główna": { image: data.homeImage, link: "/" },
+    projekty: { image: data.projectImage, link: "projects" },
+    współpraca: { image: data.contactImage, link: "contact" },
+    "polityka prywatności": { image: data.privacyImage, link: "privacy" },
   };
 
   const [isOpen, setIsOpen] = useState(false);
@@ -228,7 +228,7 @@ const Hamburger = () => {
       yoyo: true,
       onRepeat: () => {
         setDisplayedImage(menuItems[item].image.childImageSharp.fluid);
-      }
+      },
     }).fromTo(
       image,
       0.5,
