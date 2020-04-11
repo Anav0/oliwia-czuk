@@ -16,28 +16,11 @@ const LandingWrapper = styled.div`
 
   .landingImage {
     position: absolute !important;
-    width: 100%;
-    height: 100%;
-    top: 50%;
-    left: 42%;
-    transform: translate(-50%, -50%);
-
-    @media (min-width: ${({ theme }) => theme.breakpoints.md}) {
-      width: 75%;
-      left: 45%;
-      width: 60%;
-      top: 45%;
-    }
-    @media (min-width: ${({ theme }) => theme.breakpoints.lg}) {
-      width: 40%;
-      left: 46%;
-    }
-
-    @media (min-width: ${({ theme }) => theme.breakpoints.xl}) {
-      width: 50%;
-      left: 48%;
-      top: 50%;
-    }
+    width: 150%;
+    height: 120%;
+    bottom: -5%;
+    left: 55%;
+    transform: translateX(-50%);
   }
 `;
 
@@ -48,20 +31,22 @@ const LandingHeader = styled.h1`
   text-align: center;
   white-space: nowrap;
   position: absolute;
-  top: 48.5%;
-  left: -36%;
-  transform: translate(-50%, 0) rotate(-90deg);
-
+  top: 50%;
+  left: -10%;
+  transform: translateX(-50%) rotate(-90deg);
+  z-index: 4;
   @media (min-width: ${({ theme }) => theme.breakpoints.sm}) {
     font-size: 2rem;
   }
   @media (min-width: ${({ theme }) => theme.breakpoints.md}) {
-    left: 25%;
+    font-size: 2.5rem;
+    left: -15%;
   }
-
+  @media (min-width: ${({ theme }) => theme.breakpoints.lg}) {
+    font-size: 3rem;
+  }
   @media (min-width: ${({ theme }) => theme.breakpoints.xl}) {
     font-size: 3.5rem;
-    left: 28%;
   }
 `;
 
@@ -70,6 +55,8 @@ const LandingVideoWrapper = styled.div`
   width: 70%;
   max-width: 700px;
   background-color: white;
+  position: relative;
+  overflow: visible;
   border: 5px solid ${({ theme }) => theme.colors.pink};
   box-sizing: content-box;
   @media (min-width: ${({ theme }) => theme.breakpoints.sm}) {
@@ -78,7 +65,7 @@ const LandingVideoWrapper = styled.div`
 
   @media (min-width: ${({ theme }) => theme.breakpoints.md}) {
     width: 40%;
-    height: 85vh;
+    height: 75vh;
   }
 
   @media (min-width: ${({ theme }) => theme.breakpoints.xl}) {
@@ -166,10 +153,10 @@ export default () => {
   `);
   return (
     <LandingWrapper>
-      <LandingHeader ref={headerRef}>
-        Oliwia Czuk - Inżynier Krajobrazu
-      </LandingHeader>
       <LandingVideoWrapper ref={videoWrapperRef}>
+        <LandingHeader ref={headerRef}>
+          Oliwia Czuk - Inżynier Krajobrazu
+        </LandingHeader>
         <LandingVideo
           ref={videoRef}
           loop
@@ -177,8 +164,11 @@ export default () => {
           autoPlay
           src={flowerVideo}
         ></LandingVideo>
+        <Img
+          className="landingImage"
+          fluid={data.image.childImageSharp.fluid}
+        />
       </LandingVideoWrapper>
-      <Img className="landingImage" fluid={data.image.childImageSharp.fluid} />
     </LandingWrapper>
   );
 };

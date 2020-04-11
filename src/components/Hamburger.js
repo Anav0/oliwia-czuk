@@ -173,7 +173,7 @@ const covers = ["#FFEDED", "#FFFAFA", "#FFF3DB"];
 const Hamburger = () => {
   const data = useStaticQuery(graphql`
     query {
-      homeImage: file(relativePath: { eq: "home-image.png" }) {
+      homeImage: file(relativePath: { eq: "home-image.jpg" }) {
         id
         childImageSharp {
           fluid(maxWidth: 1920) {
