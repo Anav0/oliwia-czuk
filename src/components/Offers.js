@@ -21,11 +21,13 @@ const OffersWrapper = styled.div`
   height: 100%;
   min-height: 100vh;
   background-color: ${({ theme }) => theme.colors.pink};
-  position: relative;
   padding: 30px;
   overflow: hidden;
-
+  position: relative;
   @media (min-width: ${({ theme }) => theme.breakpoints.md}) {
+    position: fixed;
+    left: 0;
+    top: 0;
     padding: 0;
   }
 
@@ -157,7 +159,7 @@ const OfferList = styled.ul`
   }
 `;
 
-export default ({ data }) => {
+export default React.forwardRef(({ data }, ref) => {
   const destiledData = data.allMarkdownRemark.edges;
 
   let [innerWidth, setInnerWidth] = useState(0);
@@ -207,58 +209,60 @@ export default ({ data }) => {
   ));
 
   return (
-    <OffersWrapper ref={wrapperRef}>
-      <OfferHeader ref={headerRef} className="default-text-shadow">
-        Usługi
-      </OfferHeader>
-      {innerWidth >= 1024 ? (
-        <OfferList>
-          <OfferDescWrapper className="show activeWrapper">
-            <OfferTitle className="default-text-shadow">
-              {selectedOffer.title}
-            </OfferTitle>
-            <OfferDesc className="activeDesc default-text-shadow">
-              {selectedOffer.desc}
-            </OfferDesc>
-            <AniLink
-              paintDrip
-              hex={selectedOffer.transitionColor}
-              to={selectedOffer.link}
-            >
-              <OfferBtn>{selectedOffer.btnText}</OfferBtn>
-            </AniLink>
-          </OfferDescWrapper>
-          <OfferIndex className="default-text-shadow show activeIndex">
-            {activeIndex < 9 ? `0${activeIndex + 1}` : activeIndex + 1}
-          </OfferIndex>
-          <Flickity
-            flickityRef={(c) => {
-              c.on("change", () => {
-                const {
-                  node: { frontmatter: selectedOffer },
-                } = destiledData[c.selectedIndex];
-                setSelectedOffer({
-                  ...selectedOffer,
-                  transitionColor: Colors.darkPink,
-                  link: "projects",
+    <div  ref={ref}>
+      <OffersWrapper ref={wrapperRef}>
+        <OfferHeader ref={headerRef} className="default-text-shadow">
+          Usługi
+        </OfferHeader>
+        {innerWidth >= 1024 ? (
+          <OfferList>
+            <OfferDescWrapper className="show activeWrapper">
+              <OfferTitle className="default-text-shadow">
+                {selectedOffer.title}
+              </OfferTitle>
+              <OfferDesc className="activeDesc default-text-shadow">
+                {selectedOffer.desc}
+              </OfferDesc>
+              <AniLink
+                paintDrip
+                hex={selectedOffer.transitionColor}
+                to={selectedOffer.link}
+              >
+                <OfferBtn>{selectedOffer.btnText}</OfferBtn>
+              </AniLink>
+            </OfferDescWrapper>
+            <OfferIndex className="default-text-shadow show activeIndex">
+              {activeIndex < 9 ? `0${activeIndex + 1}` : activeIndex + 1}
+            </OfferIndex>
+            <Flickity
+              flickityRef={(c) => {
+                c.on("change", () => {
+                  const {
+                    node: { frontmatter: selectedOffer },
+                  } = destiledData[c.selectedIndex];
+                  setSelectedOffer({
+                    ...selectedOffer,
+                    transitionColor: Colors.darkPink,
+                    link: "projects",
+                  });
+                  setActiveIndex(c.selectedIndex);
                 });
-                setActiveIndex(c.selectedIndex);
-              });
-            }}
-            className={"carousel"}
-            options={flickityOptions}
-          >
-            {offers}
-          </Flickity>
-          <CarouselProgress
-            className="progress"
-            active={activeIndex + 1}
-            total={destiledData.length}
-          />
-        </OfferList>
-      ) : (
-        <OfferList>{offers}</OfferList>
-      )}
-    </OffersWrapper>
+              }}
+              className={"carousel"}
+              options={flickityOptions}
+            >
+              {offers}
+            </Flickity>
+            <CarouselProgress
+              className="progress"
+              active={activeIndex + 1}
+              total={destiledData.length}
+            />
+          </OfferList>
+        ) : (
+          <OfferList>{offers}</OfferList>
+        )}
+      </OffersWrapper>
+    </div>
   );
-};
+});

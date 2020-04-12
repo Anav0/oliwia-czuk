@@ -81,6 +81,7 @@ const PrevOfferImage = styled.img`
 `;
 
 export const OfferDescWrapper = styled.div`
+pointer-events: none;
   @media (min-width: ${({ theme }) => theme.breakpoints.sm}) {
     width: 65%;
     position: absolute;
@@ -124,7 +125,7 @@ export const OfferBtn = styled.button`
   color: ${({ theme }) => theme.colors.harshPink};
   cursor: pointer;
   margin-top: 1.5rem;
-
+pointer-events: all;
   @media (min-width: ${({ theme }) => theme.breakpoints.sm}) {
     font-size: 2rem;
   }
@@ -132,11 +133,12 @@ export const OfferBtn = styled.button`
 
 const OfferImageIndex = styled.div`
   position: relative;
+  pointer-events: none;
 `;
 
 export default (props) => {
   return (
-    <OfferWrapper className="offer">
+    <OfferWrapper id="offer" className="offer">
       <OfferImageIndex>
         {props.mainImage.childImageSharp ? (
           <OfferImage fluid={props.mainImage.childImageSharp.fluid} />

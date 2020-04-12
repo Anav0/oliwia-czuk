@@ -221,7 +221,7 @@ function setupScrollAnimation(mainDesc) {
     .addTo(controller);
 }
 
-export const ProjectTemplate = ({ data }) => {
+export const ProjectTemplate = ({ gatsbyLocation, data }) => {
   let contentToRender = [];
   let i = 0;
   let j = 1;
@@ -261,7 +261,7 @@ export const ProjectTemplate = ({ data }) => {
     setupScrollAnimation(mainDesc);
   }, []);
   return (
-    <PickedLayout>
+    <PickedLayout location={gatsbyLocation}>
       {mainImage.childImageSharp ? (
         <SEO title={title} description={desc} keywords={tags.split(" ")} />
       ) : (
@@ -339,14 +339,14 @@ function getNextProjectData(currentProjectId, allMarkdownRemark) {
   return undefined;
 }
 
-export default ({ data }) => {
+export default ({ location,data }) => {
   if (!data.markdownRemark) return <div />;
   const { frontmatter } = data.markdownRemark;
   const nextProjectData = getNextProjectData(
     data.markdownRemark.id,
     data.allMarkdownRemark
   );
-  return <ProjectTemplate data={{ ...frontmatter, nextProjectData }} />;
+  return <ProjectTemplate gatsbyLocation={location} data={{ ...frontmatter, nextProjectData }} />;
 };
 
 export const pageQuery = graphql`

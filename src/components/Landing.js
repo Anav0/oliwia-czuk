@@ -6,14 +6,17 @@ import { graphql, useStaticQuery } from "gatsby";
 import { TimelineMax, Power4, Power3 } from "gsap";
 
 const LandingWrapper = styled.div`
-  position: relative;
   width: 100%;
   height: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
   min-height: 100vh;
-
+  @media (min-width: ${({ theme }) => theme.breakpoints.md}) {
+    position: fixed;
+    left: 0;
+    top: 0;
+  }
   .landingImage {
     position: absolute !important;
     width: 150%;
@@ -79,7 +82,7 @@ const LandingVideo = styled.video`
   object-fit: cover;
 `;
 
-export default () => {
+export default React.forwardRef((props, ref) => {
   const videoRef = React.createRef();
   const videoWrapperRef = React.createRef();
   const headerRef = React.createRef();
@@ -152,7 +155,7 @@ export default () => {
     }
   `);
   return (
-    <LandingWrapper>
+    <LandingWrapper ref={ref}>
       <LandingVideoWrapper ref={videoWrapperRef}>
         <LandingHeader ref={headerRef}>
           Oliwia Czuk - Inżynier Krajobrazu
@@ -171,4 +174,4 @@ export default () => {
       </LandingVideoWrapper>
     </LandingWrapper>
   );
-};
+});

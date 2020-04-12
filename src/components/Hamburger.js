@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import { TimelineMax, Power4 } from "gsap";
 import Img from "gatsby-image";
-import { graphql, useStaticQuery, Link } from "gatsby";
+import { graphql, useStaticQuery } from "gatsby";
 import AniLink from "gatsby-plugin-transition-link/AniLink";
 
 const HamburgerWrapper = styled.div`
@@ -48,7 +48,6 @@ const HamburgerWrapper = styled.div`
     background-color: ${({ theme }) => theme.colors.softBlack};
   }
 `;
-
 const MenuWrapper = styled.div`
   position: fixed;
   left: 0;
@@ -64,7 +63,6 @@ const MenuWrapper = styled.div`
     display: flex;
   }
 `;
-
 const Menu = styled.div`
   width: 100%;
   height: 100%;
@@ -73,13 +71,13 @@ const Menu = styled.div`
   align-items: center;
   justify-content: space-evenly;
 `;
-
-const MenuItem = styled.h1`
+const MenuItem = styled.span`
   cursor: pointer;
   transition: opacity 0.25s ease-in-out;
   opacity: 0.55;
   text-transform: capitalize;
-
+  font-weight: 700;
+  
   a {
     text-decoration: none;
     color: inherit;
@@ -112,7 +110,6 @@ const MenuCover = styled.div`
   z-index: -1;
   opacity: 0;
 `;
-
 const MenuImagesWrapper = styled.div`
   height: 100%;
   width: 50%;
@@ -134,7 +131,6 @@ const MenuImagesWrapper = styled.div`
     transform: translate(-50%, -50%);
   }
 `;
-
 const MenuItems = styled.div`
   width: 100%;
   height: 80%;
@@ -170,7 +166,7 @@ function animateOut(menu, timeline, coverElements) {
 
 const covers = ["#FFEDED", "#FFFAFA", "#FFF3DB"];
 
-const Hamburger = () => {
+const Hamburger = ({location}) => {
   const data = useStaticQuery(graphql`
     query {
       homeImage: file(relativePath: { eq: "home-image.jpg" }) {
@@ -220,7 +216,6 @@ const Hamburger = () => {
   );
   const menuRef = React.createRef();
   const imageRef = React.createRef();
-
   function changeImage(item) {
     const { current: image } = imageRef;
     new TimelineMax({
@@ -244,12 +239,13 @@ const Hamburger = () => {
     if (!isOpen) animateIn(menu, menuTimeline, coverElements);
     else animateOut(menu, menuTimeline, coverElements);
   }
+
   return (
     <>
       <HamburgerWrapper
         onClick={() => toggleMenu()}
         className={isOpen ? "open" : ""}
-      ></HamburgerWrapper>
+      />
       {covers.map((color, i) => (
         <MenuCover className="menu-cover" key={color + i} bg={color} />
       ))}
@@ -260,6 +256,7 @@ const Hamburger = () => {
               <MenuItem
                 onMouseEnter={() => changeImage(item)}
                 key={item + index}
+                className={menuItems[item].link===location.pathname.replace(/\//g,"") ? "show" : ""}
               >
                 <AniLink paintDrip hex={covers[1]} to={menuItems[item].link}>
                   {item}

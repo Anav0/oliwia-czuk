@@ -91,7 +91,8 @@ const PrivacyTitle = styled.h1`
   }
 `;
 
-export const PrivacyTemplate = ({ title, content, contentComponent }) => {
+export const PrivacyTemplate = ({ location, title, content, contentComponent }) => {
+
   const PageContent = contentComponent || Content;
 
   let PickedLayout = null;
@@ -110,7 +111,7 @@ export const PrivacyTemplate = ({ title, content, contentComponent }) => {
     );
   }, []);
   return (
-    <PickedLayout>
+    <PickedLayout location={location}>
       <PrivacyWrapper>
         <PrivacyContent ref={privacyContentRef}>
           <PrivacyTitle>{title}</PrivacyTitle>
@@ -127,13 +128,14 @@ PrivacyTemplate.propTypes = {
   contentComponent: PropTypes.func
 };
 
-const PrivacyPage = ({ data }) => {
+const PrivacyPage = ({ location,data }) => {
   const { markdownRemark: post } = data;
   return (
     <PrivacyTemplate
       contentComponent={HTMLContent}
       title={post.frontmatter.title}
       content={post.html}
+      location={location}
     />
   );
 };

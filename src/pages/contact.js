@@ -407,7 +407,7 @@ export default class ContactPage extends React.Component {
 
   render() {
     return (
-      <Layout>
+      <Layout location={this.props.location}>
         <SEO
           title="Kontakt"
           keywords={["krajobraz", "kontakt", "przestrzeń zielona", "architekt"]}
@@ -448,7 +448,7 @@ export default class ContactPage extends React.Component {
                   });
                 }}
                 value={this.state.steps[this.state.activeStep].anwser}
-              ></FormInput>
+              />
             </FormInputWrapper>
             <ErrorMessage className={this.state.error ? "show" : ""}>
               {this.state.error}
