@@ -6,7 +6,7 @@ import Offer, {
   OfferDesc,
   OfferBtn,
   OfferIndex,
-} from "src/components/offer";
+} from "src/components/Offer";
 import Flickity from "react-flickity-component";
 import Colors from "src/styles/colors";
 import AniLink from "gatsby-plugin-transition-link/AniLink";
