@@ -1,14 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="096ad424-dafb-414f-93e7-1eaa622c6c78" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/FullImage.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/FullImage.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Hightlights.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Hightlights.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Offers.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Offers.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/project.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/project.js" afterDir="false" />
-    </list>
+    <list default="true" id="096ad424-dafb-414f-93e7-1eaa622c6c78" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -149,30 +142,30 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="740" y="275" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1585256641051" />
-    <state width="1899" height="223" key="GridCell.Tab.0.bottom" timestamp="1586789255186">
+    <state width="1899" height="315" key="GridCell.Tab.0.bottom" timestamp="1586793055603">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1899" height="223" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1586789255186" />
-    <state width="1899" height="223" key="GridCell.Tab.0.center" timestamp="1586789255186">
+    <state width="1899" height="315" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1586793055603" />
+    <state width="1899" height="315" key="GridCell.Tab.0.center" timestamp="1586793055603">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1899" height="223" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1586789255186" />
-    <state width="1899" height="223" key="GridCell.Tab.0.left" timestamp="1586789255186">
+    <state width="1899" height="315" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1586793055603" />
+    <state width="1899" height="315" key="GridCell.Tab.0.left" timestamp="1586793055603">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1899" height="223" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1586789255186" />
-    <state width="1899" height="223" key="GridCell.Tab.0.right" timestamp="1586789255186">
+    <state width="1899" height="315" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1586793055603" />
+    <state width="1899" height="315" key="GridCell.Tab.0.right" timestamp="1586793055603">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1899" height="223" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1586789255186" />
+    <state width="1899" height="315" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1586793055603" />
     <state x="461" y="162" key="SettingsEditor" timestamp="1586646944948">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="461" y="162" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1586646944948" />
-    <state x="443" y="128" width="1052" height="806" key="find.popup" timestamp="1586789005206">
+    <state x="443" y="128" width="1052" height="806" key="find.popup" timestamp="1586793003581">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="443" y="128" width="1052" height="806" key="find.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1586789005206" />
+    <state x="443" y="128" width="1052" height="806" key="find.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1586793003581" />
     <state x="691" y="293" key="git4idea.merge.GitPullDialog" timestamp="1585514829628">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>

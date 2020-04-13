@@ -10,7 +10,6 @@ const global = {
   breakpoints,
   colors,
 };
-
 const MyGrid = styled.div`
   min-height: 100vh;
   
