@@ -1,7 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="096ad424-dafb-414f-93e7-1eaa622c6c78" name="Default Changelist" comment="" />
+    <list default="true" id="096ad424-dafb-414f-93e7-1eaa622c6c78" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/FullImage.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/FullImage.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Hightlights.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Hightlights.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Offers.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Offers.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/project.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/project.js" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -63,16 +70,6 @@
       <envs />
       <method v="2" />
     </configuration>
-    <configuration name="deploy" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
-      <package-json value="$PROJECT_DIR$/package.json" />
-      <command value="run" />
-      <scripts>
-        <script value="deploy" />
-      </scripts>
-      <node-interpreter value="project" />
-      <envs />
-      <method v="2" />
-    </configuration>
     <configuration name="dev" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
       <package-json value="$PROJECT_DIR$/package.json" />
       <command value="run" />
@@ -95,9 +92,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="npm.deploy" />
-        <item itemvalue="npm.build" />
         <item itemvalue="npm.serve" />
+        <item itemvalue="npm.build" />
         <item itemvalue="npm.dev" />
       </list>
     </recent_temporary>
@@ -152,22 +148,22 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="740" y="275" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1585256641051" />
-    <state width="1899" height="563" key="GridCell.Tab.0.bottom" timestamp="1586789976767">
+    <state width="1899" height="223" key="GridCell.Tab.0.bottom" timestamp="1586789255186">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1899" height="563" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1586789976767" />
-    <state width="1899" height="563" key="GridCell.Tab.0.center" timestamp="1586789976767">
+    <state width="1899" height="223" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1586789255186" />
+    <state width="1899" height="223" key="GridCell.Tab.0.center" timestamp="1586789255186">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1899" height="563" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1586789976767" />
-    <state width="1899" height="563" key="GridCell.Tab.0.left" timestamp="1586789976767">
+    <state width="1899" height="223" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1586789255186" />
+    <state width="1899" height="223" key="GridCell.Tab.0.left" timestamp="1586789255186">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1899" height="563" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1586789976767" />
-    <state width="1899" height="563" key="GridCell.Tab.0.right" timestamp="1586789976767">
+    <state width="1899" height="223" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1586789255186" />
+    <state width="1899" height="223" key="GridCell.Tab.0.right" timestamp="1586789255186">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1899" height="563" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1586789976767" />
+    <state width="1899" height="223" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1586789255186" />
     <state x="461" y="162" key="SettingsEditor" timestamp="1586646944948">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -180,9 +176,9 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="691" y="293" key="git4idea.merge.GitPullDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1585514829628" />
-    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup" timestamp="1586789942944">
+    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup" timestamp="1586787835131">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1586789942944" />
+    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1586787835131" />
   </component>
 </project>
