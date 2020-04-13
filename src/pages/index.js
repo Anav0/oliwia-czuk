@@ -56,8 +56,8 @@ const IndexPage = ({ location, data }) => {
   const overlayRef = useRef();
   const cursorRef = useRef();
   const cursorAttr = useRef();
-  function moveCursor(cursor,e){
-    cursor.setAttribute("style",`top: ${e.clientY-cursor.clientWidth/2}px; left: ${e.clientX-cursor.clientWidth/2}px; ${cursorAttr.current}`)
+  function moveCursor(cursor,clientY,clientX){
+    cursor.setAttribute("style",`top: ${clientY-cursor.clientWidth/2}px; left: ${clientX-cursor.clientWidth/2}px; ${cursorAttr.current}`)
   }
   function changeCursorToSwipe(cursor){
     cursor.innerText = "swipe";
@@ -79,7 +79,10 @@ const IndexPage = ({ location, data }) => {
     offers.addEventListener("mouseenter",(e)=>changeCursorToSwipe(cursor))
     offers.addEventListener("mouseleave",(e)=>changeCursorToScroll(cursor))
     window.addEventListener("mousemove",(e)=>
-      moveCursor(cursor,e)
+      moveCursor(cursor,e.clientY,e.clientX)
+    )
+    window.addEventListener("touchmove",(e)=>
+        moveCursor(cursor,e.touches[0].clientY,e.touches[0].clientX)
     )
     let timeline = new TimelineMax();
     let controller = new ScrollMagic.Controller();
