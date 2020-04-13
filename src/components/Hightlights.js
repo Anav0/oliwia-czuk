@@ -56,7 +56,7 @@ const Hightlights = (props) => {
   const wrapperRef = useRef();
 
   useEffect(() => {
-    ScrollMagicPluginGsap(ScrollMagic, TimelineMax);
+    ScrollMagicPluginGsap(ScrollMagic, TweenMax, TimelineMax);
 
     if (window.innerWidth < 768) return;
     const { current: firstImage } = firstImageRef;

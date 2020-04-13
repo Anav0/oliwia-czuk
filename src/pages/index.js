@@ -4,7 +4,7 @@ import Layout from "src/components/Layout";
 import Landing from "src/components/Landing";
 import Offers from "src/components/Offers";
 import { graphql } from "gatsby";
-import { TimelineMax, Power4 } from "gsap";
+import { TimelineMax,TweenMax, Power4 } from "gsap";
 import * as ScrollMagic from "scrollmagic";
 import { ScrollMagicPluginGsap } from "scrollmagic-plugin-gsap";
 import styled from "styled-components";
@@ -56,6 +56,9 @@ const IndexPage = ({ location, data }) => {
   const overlayRef = useRef();
   const cursorRef = useRef();
   const cursorAttr = useRef();
+
+  let [innerWidth, setInnerWidth] = useState(0);
+
   function moveCursor(cursor,clientY,clientX){
     cursor.setAttribute("style",`top: ${clientY-cursor.clientWidth/2}px; left: ${clientX-cursor.clientWidth/2}px; ${cursorAttr.current}`)
   }
@@ -69,8 +72,13 @@ const IndexPage = ({ location, data }) => {
   }
 
   useEffect(() => {
-    if (window.innerWidth < 1024) return;
-    ScrollMagicPluginGsap(ScrollMagic, TimelineMax);
+    setInnerWidth(window.innerWidth);
+
+    window.addEventListener("resize", () => {
+      setInnerWidth(window.innerWidth);
+    });
+    if (innerWidth < 1024) return;
+    ScrollMagicPluginGsap(ScrollMagic, TweenMax, TimelineMax);
     const { current: wrapper } = wrapperRef;
     const { current: landing } = landingRef;
     const { current: offers } = offersRef;
@@ -84,6 +92,7 @@ const IndexPage = ({ location, data }) => {
     window.addEventListener("touchmove",(e)=>
         moveCursor(cursor,e.touches[0].clientY,e.touches[0].clientX)
     )
+
     let timeline = new TimelineMax();
     let controller = new ScrollMagic.Controller();
 
@@ -99,17 +108,17 @@ const IndexPage = ({ location, data }) => {
     })
       .setTween(timeline)
       .addTo(controller);
-  }, []);
+  }, [innerWidth]);
   return (
     <Layout location={location}>
       <SEO title="Strona główna" keywords={[]} />
       {
-        window.innerWidth > 768 ? (<Cursor ref={cursorRef}>
+        innerWidth > 768 ? (<Cursor ref={cursorRef}>
         scroll
         </Cursor>):""
       }
 
-      <ContentWrapper showCursor={window.innerWidth <= 768} ref={wrapperRef}>
+      <ContentWrapper showCursor={innerWidth <= 768} ref={wrapperRef}>
         <Overlay ref={overlayRef} />
         <Landing ref={landingRef} />
         <Offers ref={offersRef} data={data} />

@@ -11,7 +11,7 @@ import Flickity from "react-flickity-component";
 import Colors from "src/styles/colors";
 import AniLink from "gatsby-plugin-transition-link/AniLink";
 import CarouselProgress from "src/components/CarouselProgress";
-import { TimelineMax, Power4 } from "gsap";
+import { TimelineMax, TweenMax,Power4 } from "gsap";
 import * as ScrollMagic from "scrollmagic";
 import { ScrollMagicPluginGsap } from "scrollmagic-plugin-gsap";
 import { scaleAnimation } from "src/animations";
@@ -185,7 +185,7 @@ export default React.forwardRef(({ data }, ref) => {
       setInnerWidth(window.innerWidth);
     });
 
-    ScrollMagicPluginGsap(ScrollMagic, TimelineMax);
+    ScrollMagicPluginGsap(ScrollMagic,TweenMax, TimelineMax);
     let timeline = new TimelineMax();
     let controller = new ScrollMagic.Controller();
     const { current: wrapper } = wrapperRef;

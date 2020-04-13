@@ -249,7 +249,7 @@ export const ProjectTemplate = ({ gatsbyLocation, data }) => {
   } = data;
 
   useEffect(() => {
-    ScrollMagicPluginGsap(ScrollMagic, TimelineMax);
+    ScrollMagicPluginGsap(ScrollMagic,TweenMax, TimelineMax);
     const { current: mainTitle } = mainTitleRef;
     const { current: mainStatus } = mainStatusRef;
     const { current: mainImageWrapper } = mainImageWrapperRef;

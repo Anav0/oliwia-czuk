@@ -84,7 +84,7 @@ const FullImage = props => {
 
   useEffect(() => {
     if (window.innerWidth < 768) return;
-    ScrollMagicPluginGsap(ScrollMagic, TimelineMax);
+    ScrollMagicPluginGsap(ScrollMagic,TweenMax, TimelineMax);
     const { current: wrapper } = wrapperRef;
     const { current: revealOverlay } = revealOverlayRef;
     const { current: imageDesc } = imageDescRef;
