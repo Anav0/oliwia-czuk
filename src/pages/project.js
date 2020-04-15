@@ -1,18 +1,18 @@
-import React, { useEffect, useRef } from "react";
+import React, {useEffect, useRef} from "react";
 import SEO from "src/components/seo";
 import Layout from "src/components/Layout";
 import PrevLayout from "src/components/PrevLayout";
 import styled from "styled-components";
-import { graphql } from "gatsby";
+import {graphql} from "gatsby";
 import Img from "gatsby-image";
 import Lines from "src/components/Lines";
 import Hightlights from "src/components/Hightlights";
 import FullImage from "src/components/FullImage";
 import NextProject from "src/components/NextProject";
-import { TweenMax, TimelineMax, Power4 } from "gsap";
+import {Power4, TimelineMax, TweenMax} from "gsap";
 import * as ScrollMagic from "scrollmagic";
-import { ScrollMagicPluginGsap } from "scrollmagic-plugin-gsap";
-import { scaleAnimation } from "src/animations";
+import {ScrollMagicPluginGsap} from "scrollmagic-plugin-gsap";
+import {scaleAnimation} from "src/animations";
 
 const ProjectWrapper = styled.div`
   height: 100%;
@@ -351,7 +351,7 @@ export default ({ location,data }) => {
 
 export const pageQuery = graphql`
   query($path: String!) {
-    allMarkdownRemark {
+    allMarkdownRemark( filter: { frontmatter: { templateKey: { eq: "project" } } }) {
       edges {
         next {
           id
