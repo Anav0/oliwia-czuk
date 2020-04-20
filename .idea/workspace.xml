@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="096ad424-dafb-414f-93e7-1eaa622c6c78" name="Default Changelist" comment="" />
+    <list default="true" id="096ad424-dafb-414f-93e7-1eaa622c6c78" name="Default Changelist" comment="Fixed incorrect &quot;next project&quot; bug">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/index.js" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -32,7 +35,7 @@
     <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/images" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../dealer" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
@@ -52,7 +55,10 @@
       <recent name="C:\Projects\oliwia-czuk\src\images" />
     </key>
   </component>
-  <component name="RunManager" selected="npm.dev">
+  <component name="RunManager" selected="Node.js.test.js">
+    <configuration name="test.js" type="NodeJSConfigurationType" temporary="true" nameIsGenerated="true" path-to-js-file="$PROJECT_DIR$/test.js" working-dir="$PROJECT_DIR$">
+      <method v="2" />
+    </configuration>
     <configuration name="build" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
       <package-json value="$PROJECT_DIR$/package.json" />
       <command value="run" />
@@ -86,6 +92,7 @@
     <recent_temporary>
       <list>
         <item itemvalue="npm.dev" />
+        <item itemvalue="Node.js.test.js" />
         <item itemvalue="npm.build" />
         <item itemvalue="npm.serve" />
       </list>
@@ -119,17 +126,46 @@
       <workItem from="1586646773222" duration="403000" />
       <workItem from="1586686895265" duration="17228000" />
       <workItem from="1586790071449" duration="340000" />
+      <workItem from="1586793721798" duration="1078000" />
+      <workItem from="1586796267381" duration="153000" />
+      <workItem from="1586817911997" duration="57000" />
+      <workItem from="1586817976586" duration="123000" />
+      <workItem from="1586818652832" duration="5000" />
+      <workItem from="1586820230711" duration="14000" />
+      <workItem from="1586882161818" duration="22000" />
+      <workItem from="1586882192216" duration="39000" />
+      <workItem from="1586994094205" duration="922000" />
+      <workItem from="1587158131257" duration="120000" />
+      <workItem from="1587158265704" duration="21000" />
+      <workItem from="1587158296587" duration="676000" />
+      <workItem from="1587232560904" duration="109000" />
+      <workItem from="1587385227023" duration="303000" />
     </task>
+    <task id="LOCAL-00001" summary="Fixed incorrect &quot;next project&quot; bug">
+      <created>1586994388955</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1586994388955</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="2" />
   </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Fixed incorrect &quot;next project&quot; bug" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fixed incorrect &quot;next project&quot; bug" />
+    <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
+    <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
+    <option name="REARRANGE_BEFORE_PROJECT_COMMIT" value="true" />
+  </component>
   <component name="WindowStateProjectService">
-    <state x="878" y="180" key="#Plugins" timestamp="1585513700123">
+    <state x="464" y="197" key="#Plugins" timestamp="1587158286402">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="878" y="180" key="#Plugins/0.0.1920.1040@0.0.1920.1040" timestamp="1585513700123" />
+    <state x="464" y="197" key="#Plugins/0.0.1920.1040@0.0.1920.1040" timestamp="1587158286402" />
     <state x="640" y="256" key="#com.intellij.openapi.updateSettings.impl.PluginUpdateInfoDialog" timestamp="1586646568571">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -138,41 +174,49 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="690" y="267" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1586717367855" />
-    <state x="740" y="275" key="FileChooserDialogImpl" timestamp="1585256641051">
+    <state x="583" y="1" key="CommitChangelistDialog2" timestamp="1586994388506">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="740" y="275" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1585256641051" />
-    <state width="1899" height="315" key="GridCell.Tab.0.bottom" timestamp="1586793055603">
+    <state x="583" y="1" key="CommitChangelistDialog2/0.0.1920.1040@0.0.1920.1040" timestamp="1586994388506" />
+    <state x="740" y="275" key="FileChooserDialogImpl" timestamp="1587232668949">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1899" height="315" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1586793055603" />
-    <state width="1899" height="315" key="GridCell.Tab.0.center" timestamp="1586793055603">
+    <state x="740" y="275" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1587232668949" />
+    <state width="1899" height="306" key="GridCell.Tab.0.bottom" timestamp="1586995160308">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1899" height="315" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1586793055603" />
-    <state width="1899" height="315" key="GridCell.Tab.0.left" timestamp="1586793055603">
+    <state width="1899" height="306" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1586995160308" />
+    <state width="1899" height="306" key="GridCell.Tab.0.center" timestamp="1586995160308">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1899" height="315" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1586793055603" />
-    <state width="1899" height="315" key="GridCell.Tab.0.right" timestamp="1586793055603">
+    <state width="1899" height="306" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1586995160308" />
+    <state width="1899" height="306" key="GridCell.Tab.0.left" timestamp="1586995160307">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1899" height="315" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1586793055603" />
+    <state width="1899" height="306" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1586995160307" />
+    <state width="1899" height="306" key="GridCell.Tab.0.right" timestamp="1586995160308">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1899" height="306" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1586995160308" />
     <state x="461" y="162" key="SettingsEditor" timestamp="1586646944948">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="461" y="162" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1586646944948" />
-    <state x="443" y="128" width="1052" height="806" key="find.popup" timestamp="1586793003581">
+    <state x="552" y="249" key="Vcs.Push.Dialog.v2" timestamp="1586994424667">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="443" y="128" width="1052" height="806" key="find.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1586793003581" />
+    <state x="552" y="249" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1586994424667" />
+    <state x="443" y="128" width="1052" height="806" key="find.popup" timestamp="1586994235611">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="443" y="128" width="1052" height="806" key="find.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1586994235611" />
     <state x="691" y="293" key="git4idea.merge.GitPullDialog" timestamp="1585514829628">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="691" y="293" key="git4idea.merge.GitPullDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1585514829628" />
-    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup" timestamp="1586787835131">
+    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup" timestamp="1586994421646">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1586787835131" />
+    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1586994421646" />
   </component>
 </project>

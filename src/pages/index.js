@@ -41,7 +41,7 @@ const Cursor = styled.div`
   position:fixed;
   left:0;
   top:0;
-  transition-duration: 200ms;
+  transition-duration: ${(props)=>props.isChrome ? 0 : '250ms'};
   transition-timing-function: ease-out;
   z-index: 7;
   font-size:2rem;
@@ -109,11 +109,12 @@ const IndexPage = ({ location, data }) => {
       .setTween(timeline)
       .addTo(controller);
   }, [innerWidth]);
+
   return (
     <Layout location={location}>
       <SEO title="Strona główna" keywords={[]} />
       {
-        innerWidth > 768 ? (<Cursor ref={cursorRef}>
+        innerWidth > 768 ? (<Cursor isChrome={navigator.appVersion.indexOf("Chrome/") != -1} ref={cursorRef}>
         scroll
         </Cursor>):""
       }
