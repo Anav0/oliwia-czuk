@@ -72,14 +72,14 @@ const ProjectTitle = styled.span`
   &:nth-child(odd) {
     place-self: center;
     @media (min-width: ${({ theme }) => theme.breakpoints.sm}) {
-      place-self: end start;
+      place-self: flex-end;
     }
   }
 
   &:nth-child(even) {
     place-self: center;
     @media (min-width: ${({ theme }) => theme.breakpoints.sm}) {
-      place-self: start end;
+      place-self: flex-start;
     }
   }
 `;
